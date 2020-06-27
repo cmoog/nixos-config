@@ -1,63 +1,80 @@
-## .zshrc configuration
+# .zshrc configuration
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
 
-# Extension Marketplace cli env
-# source ~/coder/extension-marketplace/env.sh
-
-autoload -Uz compinit
-compinit
-
-# Coder Enterprise development cluster
-export NAMESPACE=charlie-remote-dev
-export PATH=$PATH:$HOME/coder/enterprise/devbin
-
-fpath+=$HOME/.zsh/pure
-fpath+=$HOME/.zsh/pure
-
-# General binary utils
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:/usr/local/bin
-
-# Rust and Cargo
-export PATH=$PATH:$HOME/.cargo/bin
-
-# Go config options
-export PATH=$PATH:$HOME/go
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOPATH
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-# nvm and node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Deno
-export DENO_INSTALL=$HOME/.deno
-export PATH=$DENO_INSTALL/bin:$PATH
-
-# Linuxbrew
-export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info${INFOPATH+:$INFOPATH}";
-
-# Theme
+# theme
 autoload -U promptinit; promptinit
-zstyle :prompt:pure:host color green
-zstyle :prompt:pure:user color green
+
+# change the path color
+zstyle :prompt:pure:path color '#79b8ff'
+zstyle ':prompt:pure:prompt:success' color '#79b8ff'
+zstyle ':prompt:pure:prompt:error' color '#eb0000'
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:git:arrow show yes
+zstyle :prompt:pure:git:action show yes
+
+zstyle :prompt:pure:git:dirty show yes
+zstyle :prompt:pure:host show yes
+
+PROMPT="$fg[cyan]%}$USER@%{$fg[blue]%}%m ${PROMPT}"
 prompt pure
 
-# Autocompletion
+# personal bin utils
+export PATH=$HOME/bin:$PATH
+
+# node
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+nvm use default > /dev/null
+
+# golang
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+# gomodules
+export GO111MODULE=on
+export GOPROXY=direct
+export GOSUMDB=off
+
+export GOROOT=/usr/local/opt/go/libexec
+
+# Python alias
+alias python="python3"
+alias python2="command python"
+
+# Rust and Cargo
+export PATH=$PATH:/Users/charlesmoog/.cargo/bin
+export PATH=$HOME/.cargo/bin:$PATH
+
+# autocompletions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export GPG_TTY=$(tty)
 
-# Kubectl
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/charlesmoog/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/charlesmoog/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/charlesmoog/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/charlesmoog/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Kubernetes CLI
 alias kub="command kubectl"
 alias kube="command kubectl"
 source <(kubectl completion zsh)
-complete -F __start_kubectl kub
 complete -F __start_kubectl kube
+complete -F __start_kubectl kub
+
+# Deno
+export DENO_INSTALL="/Users/charlesmoog/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# coder namespace
+export NAMESPACE=coder-charlie
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

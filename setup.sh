@@ -16,6 +16,7 @@ echo "-- Installing zsh pure theme"
 zsh_theme(){
   mkdir -p "$HOME/.zsh"
   git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.zsh/zsh-syntax-highlighting"
 }
 ls $HOME/.zsh/pure || zsh_theme
 
