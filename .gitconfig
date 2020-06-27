@@ -1,5 +1,41 @@
 [user]
     name = Charlie Moog
     email = moogcharlie@gmail.com
+    signingkey = 82154F63CB738D2F
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[commit]
+	gpgsign = true
+[credential]
+	helper = cache
+[core]
+	editor = vim
+[hub]
+	host = github.com
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
+
+[url "git@gh.coder-internal.com:"]
+	insteadOf = https://git.coder-internal.com/
+[url "git@gh.coder-internal.com:"]
+	insteadOf = https://gh.coder-internal.com/
+[alias]
+	find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+	cfb = !git commit -m \"$(echo $(git rev-parse --abbrev-ref HEAD) | rev | cut -d/ -f1 | rev |  tr \"-\" \" \" | sed \"s/.*/\\u&/\")\" && git commit --amend
+	ca  = commit --amend --verbose
+	ap = add -p
+	a = add -A
+	c  = commit --verbose
+	cax = commit --amend --no-edit 
+	cb = checkout -b
+    f = commit --fixup HEAD
+    rb = rebase --autostash --autosquash --interactive
+	d = diff
+    push-f = push --force-with-lease
+	s = status
+	last = log -1
+	rc = rebase --continue
+	releasenotes = log --no-merges --pretty=format:\"- %h %s\"
+	slog = shortlog -n --no-merges
+	m = checkout master
