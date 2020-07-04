@@ -6,6 +6,7 @@ inoremap jk <ESC>
 
 " syntax highlighting
 syntax on
+set bg=dark
 
 " allow scrolling with mouse
 :set mouse=a
@@ -13,15 +14,16 @@ syntax on
 " set line number option
 set number
 
-" for switching between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" switching between tabs
+nnoremap H gT
+nnoremap L gt
 
 set timeoutlen=1000
 set ttimeoutlen=0
 set visualbell
+
+set colorcolumn=120
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 "" ================= PLUGINS =================
 
@@ -40,7 +42,9 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 au filetype go inoremap <buffer> . .<C-x><C-o>
 
+noremap <C-t> :tabnew<CR>
 nnoremap <silent> <C-p> :FZF<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 Plugin 'junegunn/fzf'
 
 " status bar interface

@@ -5,6 +5,10 @@
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
 [commit]
 	gpgsign = true
 [credential]

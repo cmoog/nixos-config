@@ -34,7 +34,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
-export GOROOT=/usr/local/opt/go/libexec
+export GOROOT="$(brew --prefix golang)/libexec"
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
@@ -75,6 +75,10 @@ export DENO_INSTALL="/Users/charlesmoog/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # coder namespace
-export NAMESPACE=coder-charlie
+export NAMESPACE=coder-charlie7
+export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH=$PATH:$HOME/coder/enterprise/devbin
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
