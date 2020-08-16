@@ -15,10 +15,20 @@
 	helper = cache
 [core]
 	editor = vim
+	excludesfile = ~/.gitignore
+	pager = delta
+[delta]
+	plus-color = "#012800"
+	minus-color = "#340001"
+	syntax-theme = gruvbox
+	line-numbers = true
+	side-by-side = true
+[interactive]
+	diffFilter = delta --color-only
 [hub]
 	host = github.com
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+# [url "ssh://git@github.com/"]
+    # insteadOf = https://github.com/
 
 [url "git@gh.coder-internal.com:"]
 	insteadOf = https://git.coder-internal.com/
@@ -33,10 +43,11 @@
 	c  = commit --verbose
 	cax = commit --amend --no-edit 
 	cb = checkout -b
-    f = commit --fixup HEAD
-    rb = rebase --autostash --autosquash --interactive
+	# f = commit --fixup HEAD
+	f = "! git commit --fixup $(git log --pretty='%H' -1 --invert-grep --grep 'fixup! ')"
+	rb = rebase --autostash --autosquash --interactive
 	d = diff
-    push-f = push --force-with-lease
+	push-f = push --force-with-lease
 	s = status
 	last = log -1
 	rc = rebase --continue

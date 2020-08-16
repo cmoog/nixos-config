@@ -42,6 +42,7 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 au filetype go inoremap <buffer> . .<C-x><C-o>
 
+let g:fzf_preview_window = 'right:60%'
 noremap <C-t> :tabnew<CR>
 nnoremap <silent> <C-p> :FZF<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
