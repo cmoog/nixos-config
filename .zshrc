@@ -3,7 +3,8 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 export PATH=/usr/local/bin:$PATH
 
 # theme
-autoload -U promptinit; promptinit
+autoload -U promptinit
+promptinit
 
 # change the path color
 zstyle :prompt:pure:path color '#79b8ff'
@@ -27,23 +28,17 @@ export PATH=$HOME/bin:$PATH
 # node
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
-nvm use default > /dev/null
+nvm use default >/dev/null
 
 # golang
 export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
-
 export GOROOT="$(brew --prefix golang)/libexec"
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # gomodules
 export GO111MODULE=on
 export GOPROXY=direct
 export GOSUMDB=off
-
-export GOROOT=/usr/local/opt/go/libexec
 
 # Python alias
 alias python="python3"
@@ -75,10 +70,21 @@ export DENO_INSTALL="/Users/charlesmoog/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # coder namespace
-export NAMESPACE=coder-charlie7
+export NAMESPACE=coder-charlie
 export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH=$PATH:$HOME/coder/enterprise/devbin
+export PATH=$PATH:$HOME/coder/c/devbin
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+export PATH="$WASMTIME_HOME/bin:$PATH"
+
+# start fish subshell
+fish
