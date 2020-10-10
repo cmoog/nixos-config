@@ -10,6 +10,10 @@ set -x GO111MODULE on
 # Rust
 set -x PATH ~/.cargo/bin $PATH
 
+# wasmtime
+set -x WASMTIME_HOME ~/.wasmtime
+set -x PATH $WASMTIME_HOME/bin $PATH
+
 # for linux utils
 set -x PATH ~/.bin $PATH
 set -x PATH (brew --prefix)/opt/coreutils/libexec/gnubin $PATH
