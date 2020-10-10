@@ -14,6 +14,15 @@ set bg=dark
 " set line number option
 set number
 
+" set cursor styles during normal and insert modes on MacOS iTerm2
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" set cursor styles during normal and insert moddes NOT MacOS + iTerm2 
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul
+
 " switching between tabs
 nnoremap H gT
 nnoremap L gt
