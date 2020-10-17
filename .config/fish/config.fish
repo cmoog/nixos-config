@@ -24,9 +24,15 @@ set -x PATH (brew --prefix)/opt/make/libexec/gnubin $PATH
 abbr g 'git'
 abbr kube 'kubectl'
 abbr kub 'kubectl'
+abbr c 'clear'
+abbr v 'vim'
 
 # personal bin utils
 set -x PATH ~/bin $PATH
-
 set -x EDITOR vim
+
+# fzf configuration
+# respect .gitignore
+set -x FZF_DEFAULT_COMMAND fd --type f
+set -x FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 

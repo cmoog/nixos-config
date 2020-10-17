@@ -19,6 +19,10 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+" use system clipboard
+set clipboard=unnamed
+
+
 " set cursor styles during normal and insert moddes NOT MacOS + iTerm2 
 :autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
@@ -51,6 +55,8 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 au filetype go inoremap <buffer> . .<C-x><C-o>
 
+Plugin 'rust-lang/rust.vim'
+
 let g:fzf_preview_window = 'right:60%'
 noremap <C-t> :tabnew<CR>
 nnoremap <silent> <C-p> :FZF<CR>
@@ -63,7 +69,6 @@ let g:airline_theme = 'gruvbox'
 " Plugin 'valloric/youcompleteme'
 
 Plugin 'airblade/vim-gitgutter'
-set updatetime=1000 " for gitgutter configuration
 
 Plugin 'morhetz/gruvbox'
 autocmd vimenter * colorscheme gruvbox
