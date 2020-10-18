@@ -1,20 +1,19 @@
+set -gx EDITOR vim
 
 # for Coder dev deployments 
 set -x NAMESPACE coder-charlie
 
 ## Golang
-set -x GOPATH ~/go
-set -x PATH $GOPATH/bin $PATH
-set -x GO111MODULE on
+set -gx GOPATH ~/go
+set -gx GO111MODULE on
 
-# Rust
-set -x PATH ~/.cargo/bin $PATH
+for p in $GOPATH/bin ~/.cargo/bin $WASMTIME_HOME/bin ~/.bin ~/bin
+  if test -d $p
+    set -gx PATH $p $PATH;
+  end
+end
 
-# wasmtime
 set -x WASMTIME_HOME ~/.wasmtime
-set -x PATH $WASMTIME_HOME/bin $PATH
-
-set -x PATH ~/.bin $PATH
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
@@ -29,10 +28,6 @@ abbr kube 'kubectl'
 abbr kub 'kubectl'
 abbr c 'clear'
 abbr v 'vim'
-
-# personal bin utils
-set -x PATH ~/bin $PATH
-set -x EDITOR vim
 
 # fzf configuration
 # respect .gitignore
