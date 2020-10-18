@@ -14,11 +14,14 @@ set -x PATH ~/.cargo/bin $PATH
 set -x WASMTIME_HOME ~/.wasmtime
 set -x PATH $WASMTIME_HOME/bin $PATH
 
-# for linux utils
 set -x PATH ~/.bin $PATH
-set -x PATH (brew --prefix)/opt/coreutils/libexec/gnubin $PATH
-set -x PATH (brew --prefix)/opt/findutils/libexec/gnubin $PATH
-set -x PATH (brew --prefix)/opt/make/libexec/gnubin $PATH
+
+if [ (uname) = "Darwin" ]
+  # for Linux utils
+  set -x PATH (brew --prefix)/opt/coreutils/libexec/gnubin $PATH
+  set -x PATH (brew --prefix)/opt/findutils/libexec/gnubin $PATH
+  set -x PATH (brew --prefix)/opt/make/libexec/gnubin $PATH
+end
 
 # convenience abbreviations
 abbr g 'git'
