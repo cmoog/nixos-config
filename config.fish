@@ -28,6 +28,8 @@ abbr kube 'kubectl'
 abbr kub 'kubectl'
 abbr c 'clear'
 abbr v 'vim'
+abbr ls 'exa'
+abbr lss 'ls'
 
 # fzf configuration
 # respect .gitignore
