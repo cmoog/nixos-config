@@ -22,7 +22,6 @@ let &t_EI = "\<Esc>[2 q"
 " use system clipboard
 set clipboard=unnamed
 
-
 " set cursor styles during normal and insert moddes NOT MacOS + iTerm2 
 :autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
@@ -37,8 +36,6 @@ set visualbell
 
 set colorcolumn=120
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-"" ================= PLUGINS =================
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -71,6 +68,8 @@ let g:airline_theme = 'gruvbox'
 Plugin 'airblade/vim-gitgutter'
 
 Plugin 'morhetz/gruvbox'
+set bg=dark
+let g:gruvbox_contrast_dark = "hard" " soft, medium, hard
 autocmd vimenter * colorscheme gruvbox
 
 " for showing a different cursor in insert mode
@@ -80,4 +79,3 @@ autocmd InsertLeave * set nocul
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" ============== PLUGIN CONFIG =================
