@@ -14,6 +14,9 @@ set bg=dark
 " set line number option
 set number
 
+" tab size
+set ts=4 sw=4
+
 " set cursor styles during normal and insert modes
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"

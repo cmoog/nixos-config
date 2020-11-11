@@ -7,13 +7,13 @@ set -x NAMESPACE coder-charlie
 set -gx GOPATH ~/go
 set -gx GO111MODULE on
 
-for p in $GOPATH/bin ~/.cargo/bin $WASMTIME_HOME/bin ~/.bin ~/bin
+set -x WASMTIME_HOME ~/.wasmtime
+
+for p in $GOPATH/bin ~/.cargo/bin $WASMTIME_HOME/bin ~/.bin ~/bin ~/bin/google-cloud-sdk/bin
   if test -d $p
     set -gx PATH $p $PATH;
   end
 end
-
-set -x WASMTIME_HOME ~/.wasmtime
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
