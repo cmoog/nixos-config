@@ -14,6 +14,7 @@ install() {
   local src="$(pwd)/$1"
   local dst=${2:-"$HOME/$1"}
   info "linking $src to $dst"
+  mkdir -p "$(dirname "$dst")"
   ln -sf $src $dst
 }
 
