@@ -3,32 +3,32 @@ FROM archlinux/base
 SHELL ["/bin/bash", "-c"]
 
 RUN pacman --noconfirm -Syu \
-    base \
-    base-devel \
-    bash-completion \
-    docker \
-    gcc \
-    git \
-    github-cli \
-    go \
-    htop \
-    inetutils \
-    jq \
-    libxkbfile \
-    man \
-    net-tools \
-    nodejs \
-    npm \
-    openssh \
-    python \
-    rsync \
-    shellcheck \
-    vim \
-    wget \
-    yarn \
-    zip \
-    fish \
-    exa
+  base \
+  base-devel \
+  bash-completion \
+  docker \
+  gcc \
+  git \
+  github-cli \
+  go \
+  htop \
+  inetutils \
+  jq \
+  libxkbfile \
+  man \
+  net-tools \
+  nodejs \
+  npm \
+  openssh \
+  python \
+  rsync \
+  shellcheck \
+  vim \
+  wget \
+  yarn \
+  zip \
+  fish \
+  exa
 
 # allow passwordless sudo from all users
 RUN echo "root ALL=(ALL) ALL" > /etc/sudoers
@@ -52,7 +52,7 @@ RUN gcloud components install beta
 
 # install kubectl
 RUN curl -L http://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
-	&& chmod +x /usr/local/bin/kubectl
+  && chmod +x /usr/local/bin/kubectl
 
 # install helm
 RUN mkdir -p /tmp/helm && \
@@ -73,9 +73,7 @@ WORKDIR ${HOME}
 
 # copy dotfiles
 COPY . ${HOME}/dotfiles
+RUN sudo chown -R ${user}:${user} ${HOME}/dotfiles
 RUN sh ${HOME}/dotfiles/install.sh
-
-# set ownership of the home dir
-RUN sudo chown -R ${user}:${user} ${HOME}
 
 ENTRYPOINT [ "fish", "-l" ]
