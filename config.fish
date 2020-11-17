@@ -20,6 +20,7 @@ if [ (uname) = "Darwin" ]
   set -x PATH (brew --prefix)/opt/coreutils/libexec/gnubin $PATH
   set -x PATH (brew --prefix)/opt/findutils/libexec/gnubin $PATH
   set -x PATH (brew --prefix)/opt/make/libexec/gnubin $PATH
+  set -x PATH (brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
 end
 
 # convenience abbreviations
