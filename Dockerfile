@@ -71,9 +71,4 @@ ENV HOME /home/${user}
 ENV USER=${user}
 WORKDIR ${HOME}
 
-# copy dotfiles
-COPY . ${HOME}/dotfiles
-RUN sudo chown -R ${user}:${user} ${HOME}/dotfiles
-RUN sh ${HOME}/dotfiles/install.sh
-
 ENTRYPOINT [ "fish", "-l" ]

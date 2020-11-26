@@ -12,7 +12,7 @@
 [commit]
 	gpgsign = true
 [credential]
-	helper = cache
+	helper = osxkeychain
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
