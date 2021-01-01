@@ -15,7 +15,7 @@ install() {
   local dst=${2:-"$HOME/$1"}
   info "linking $src to $dst"
   mkdir -p "$(dirname "$dst")"
-  ln -sf $src $dst
+  ln -sf "$src" "$dst"
 }
 
 gitstall() {

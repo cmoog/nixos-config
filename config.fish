@@ -40,3 +40,25 @@ set -x FZF_DEFAULT_COMMAND fd --type f
 set -x FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 
 set -gx GPG_TTY (tty)
+
+# quickly navigate to the root of a git project
+function r;
+  cd (git rev-parse --show-toplevel)
+end
+
+# commit a branch and create then open a pull-request to master
+function cpr;
+  git c
+
+  set -x branch (git rev-parse --abbrev-ref HEAD)
+  git push || git push --set-upstream origin "$branch"
+
+  gh pr create --fill
+  gh pr view --web
+end
+
+# create then open a pull-request to master
+function pr;
+  gh pr create --fill
+  gh pr view --web
+end
