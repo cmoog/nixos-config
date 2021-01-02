@@ -31,8 +31,14 @@ abbr kube 'kubectl'
 abbr kub 'kubectl'
 abbr c 'clear'
 abbr v 'vim'
+
+# prefer "exa" to "ls"
 abbr ls 'exa'
 abbr lss 'ls'
+
+# lazygit and lazydocker
+abbr lg 'lazygit'
+abbr ld 'lazydocker'
 
 # fzf configuration
 # respect .gitignore
