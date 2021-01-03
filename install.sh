@@ -33,6 +33,12 @@ install fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 install .gitconfig
 install .vimrc
 
+if [ "$(uname)" = "Darwin" ]; then
+  install lazygit_config.yml "$HOME/Library/Application Support/jesseduffield/lazygit/config.yml"
+else
+  install lazygit_config.yml ~/.config/jesseduffield/lazygit/config.yml
+fi
+
 gitstall https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 info "Installing vim plugins"

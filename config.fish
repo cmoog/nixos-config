@@ -57,7 +57,7 @@ function cpr;
   git c
 
   set -x branch (git rev-parse --abbrev-ref HEAD)
-  git push || git push --set-upstream origin "$branch"
+  git push; or git push --set-upstream origin "$branch"
 
   gh pr create --fill
   gh pr view --web
