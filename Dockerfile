@@ -1,5 +1,7 @@
 FROM archlinux/base
 
+LABEL org.opencontainers.image.source https://github.com/cmoog/dotfiles
+
 SHELL ["/bin/bash", "-c"]
 
 RUN pacman --noconfirm -Syu \
@@ -68,4 +70,3 @@ RUN brew install \
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 
 ENTRYPOINT [ "fish", "-l" ]
-
