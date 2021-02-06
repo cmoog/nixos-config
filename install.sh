@@ -30,6 +30,7 @@ warn "Linking files"
 
 install config.fish ~/.config/fish/config.fish
 install fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+install dev_instance.fish ~/.config/fish/functions/dev.fish
 install .gitconfig
 install .vimrc
 

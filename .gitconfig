@@ -5,6 +5,10 @@
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+[pull]
+	rebase = true
+[fetch]
+	prune = true
 [diff]
 	tool = vimdiff
 [difftool]
@@ -44,3 +48,4 @@
 	releasenotes = log --no-merges --pretty=format:\"- %h %s\"
 	slog = shortlog -n --no-merges
 	m = checkout master
+	sm = submodule update --init --recursive
