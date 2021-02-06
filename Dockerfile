@@ -1,36 +1,29 @@
-FROM archlinux/base
+FROM ubuntu:20.04
 
 LABEL org.opencontainers.image.source https://github.com/cmoog/dotfiles
 
 SHELL ["/bin/bash", "-c"]
 
-RUN pacman --noconfirm -Syu \
-  base \
-  base-devel \
-  bash-completion \
-  docker \
-  gcc \
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+  bash \
+  build-essential \
+  ca-certificates \
+  curl \
+  docker.io \
   git \
-  github-cli \
-  go \
   htop \
-  inetutils \
   jq \
-  libxkbfile \
+  locales \
   man \
-  net-tools \
-  nodejs \
-  npm \
-  openssh \
-  python \
-  rsync \
-  shellcheck \
+  python3 \
+  python3-pip \
+  sudo \
+  systemd \
+  unzip \
   vim \
   wget \
-  yarn \
   zip \
-  fish \
-  exa
+  && rm -rf /var/lib/apt/lists/*
 
 # allow passwordless sudo from all users
 RUN echo "root ALL=(ALL) ALL" > /etc/sudoers
@@ -61,10 +54,15 @@ ENV PATH /home/linuxbrew/.linuxbrew/bin:${PATH}
 
 # install Homebrew packages
 RUN brew install \
-  kubernetes-cli \
+  exa \
+  fish \
+  gh \
+  go \
   helm \
+  jesseduffield/lazydocker/lazydocker \
   jesseduffield/lazygit/lazygit \
-  jesseduffield/lazydocker/lazydocker
+  kubernetes-cli \
+  node
 
 # install rustc, cargo, etc.
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
