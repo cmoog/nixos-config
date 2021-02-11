@@ -39,6 +39,10 @@ RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tm
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 RUN gcloud components install beta
 
+# install deno
+RUN curl -fsSL https://deno.land/x/install/install.sh \
+  | DENO_INSTALL=/usr/local sh
+
 # add custom user
 ARG user=charlie
 RUN useradd -mUs /usr/bin/fish ${user}
@@ -66,5 +70,6 @@ RUN brew install \
 
 # install rustc, cargo, etc.
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH ${HOME}/.cargo/bin:${PATH}
 
 ENTRYPOINT [ "fish", "-l" ]

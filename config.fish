@@ -9,7 +9,7 @@ set -gx GO111MODULE on
 
 set -x WASMTIME_HOME ~/.wasmtime
 
-for p in $GOPATH/bin ~/.cargo/bin $WASMTIME_HOME/bin ~/.bin ~/bin ~/bin/google-cloud-sdk/bin
+for p in $GOPATH/bin ~/.cargo/bin $WASMTIME_HOME/bin ~/.bin ~/bin
   if test -d $p
     set -gx PATH $p $PATH;
   end
@@ -23,6 +23,7 @@ if [ (uname) = "Darwin" ]
   set -x PATH (brew --prefix)/opt/gnu-tar/libexec/gnubin $PATH
   set -x PATH (brew --prefix)/opt/gnu-sed/libexec/gnubin $PATH
   set -x PATH (brew --prefix)/opt/gawk/libexec/gnubin $PATH
+  source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 end
 
 # convenience abbreviations
