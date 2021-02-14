@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1
 
 info() {
   echo "-- $@"
@@ -38,6 +38,7 @@ if [ "$(uname)" = "Darwin" ]; then
   install lazygit_config.yml "$HOME/Library/Application Support/jesseduffield/lazygit/config.yml"
 else
   install lazygit_config.yml ~/.config/jesseduffield/lazygit/config.yml
+  install code.py ~/bin/code.py
 fi
 
 gitstall https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
