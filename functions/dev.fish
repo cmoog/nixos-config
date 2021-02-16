@@ -11,12 +11,14 @@ function dev
       set cmd "start"
     case stop
       set cmd "stop"
+    case open
+      code --remote "ssh-remote+dev" /home/charlie/code
     case "" "status"
       gcloud compute instances list \
         --account $account
       return 0
     case "-h" "--help"
-      set_color yellow; echo "dev (status, start, stop)"
+      set_color yellow; echo "dev (status, start, stop, open)"
       set_color normal
       return 0
     case '*'

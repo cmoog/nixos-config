@@ -29,8 +29,8 @@ gitstall() {
 warn "Linking files"
 
 install config.fish ~/.config/fish/config.fish
-install fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
-install dev_instance.fish ~/.config/fish/functions/dev.fish
+install functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+install functions/dev.fish ~/.config/fish/functions/dev.fish
 install .gitconfig
 install .vimrc
 
@@ -38,7 +38,7 @@ if [ "$(uname)" = "Darwin" ]; then
   install lazygit_config.yml "$HOME/Library/Application Support/jesseduffield/lazygit/config.yml"
 else
   install lazygit_config.yml ~/.config/jesseduffield/lazygit/config.yml
-  install code.py ~/bin/code.py
+  install functions/code.py ~/bin/code.py
 fi
 
 gitstall https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

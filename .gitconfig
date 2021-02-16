@@ -1,7 +1,6 @@
 [user]
 	name = Charlie Moog
 	email = moogcharlie@gmail.com
-	signingkey = 82154F63CB738D2F
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
@@ -13,10 +12,6 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
-[commit]
-	gpgsign = true
-[credential]
-	helper = osxkeychain
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore

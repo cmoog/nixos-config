@@ -26,7 +26,6 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # allow passwordless sudo from all users
-RUN echo "root ALL=(ALL) ALL" > /etc/sudoers
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
 
 # download gcloud package
