@@ -1,37 +1,39 @@
-set -x EDITOR vim
+set --export EDITOR vim
 
 # for Coder dev deployments 
-set -x NAMESPACE coder-charlie
+set --export NAMESPACE coder-charlie
 
 ## Golang
-set -x GOPATH ~/go
-set -x GO111MODULE on
+set --export GOPATH ~/go
+set --export GO111MODULE on
 
-set -x WASMTIME_HOME ~/.wasmtime
+set --export WASMTIME_HOME ~/.wasmtime
 
 function path;
   for p in $argv;
     if test -d $p
       and not contains $p $PATH
-      set -x PATH $p $PATH;
+      set --export PATH $p $PATH;
     end
   end
 end
 
-path $GOPATH/bin
-path ~/.cargo/bin
-path $WASMTIME_HOME/bin
-path ~/.bin
-path ~/bin
+path \
+  $GOPATH/bin \
+  ~/.cargo/bin \
+  $WASMTIME_HOME/bin \
+  ~/.bin \
+  ~/bin
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
-  path (brew --prefix)/opt/coreutils/libexec/gnubin
-  path (brew --prefix)/opt/findutils/libexec/gnubin
-  path (brew --prefix)/opt/make/libexec/gnubin
-  path (brew --prefix)/opt/gnu-tar/libexec/gnubin
-  path (brew --prefix)/opt/gnu-sed/libexec/gnubin
-  path (brew --prefix)/opt/gawk/libexec/gnubin
+  set --local brew_prefix (brew --prefix)
+  path $brew_prefix/opt/coreutils/libexec/gnubin \
+    $brew_prefix/opt/findutils/libexec/gnubin \
+    $brew_prefix/opt/make/libexec/gnubin \
+    $brew_prefix/opt/gnu-tar/libexec/gnubin \
+    $brew_prefix/opt/gnu-sed/libexec/gnubin \
+    $brew_prefix/opt/gawk/libexec/gnubin
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 else
   path (brew --prefix)/bin
@@ -59,10 +61,10 @@ abbr ld 'lazydocker'
 
 # fzf configuration
 # respect .gitignore
-set -x FZF_DEFAULT_COMMAND fd --type f
-set -x FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
+set --export FZF_DEFAULT_COMMAND fd --type f
+set --export FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 
-set -x GPG_TTY (tty)
+set --export GPG_TTY (tty)
 
 # quickly navigate to the root of a git project
 function r;
@@ -73,7 +75,7 @@ end
 function cpr;
   git c
 
-  set -x branch (git rev-parse --abbrev-ref HEAD)
+  set --export branch (git rev-parse --abbrev-ref HEAD)
   git push; or git push --set-upstream origin "$branch"
 
   gh pr create --fill

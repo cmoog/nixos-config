@@ -3,17 +3,18 @@
 cd "$(dirname "$0")" || exit 1
 
 info() {
-  echo "-- $@"
+  echo "$(tput setaf 6)-- $*$(tput sgr0)"
 }
 
 warn() {
-  echo "$(tput setaf 1)-- $@$(tput sgr0)"
+  echo "$(tput setaf 3)-- $*$(tput sgr0)"
 }
 
 install() {
-  local src="$(pwd)/$1"
+  local src
+  src="$(pwd)/$1"
   local dst=${2:-"$HOME/$1"}
-  info "linking $src to $dst"
+  info "linking $src -> $dst"
   mkdir -p "$(dirname "$dst")"
   ln -sf "$src" "$dst"
 }
@@ -26,7 +27,7 @@ gitstall() {
   info "cloning $1 to $2"
 }
 
-warn "Linking files"
+warn "linking files"
 
 install config.fish ~/.config/fish/config.fish
 install functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
