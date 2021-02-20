@@ -23,7 +23,8 @@ path \
   ~/.cargo/bin \
   $WASMTIME_HOME/bin \
   ~/.bin \
-  ~/bin
+  ~/bin \
+  ~/.deno/bin
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
