@@ -13,6 +13,7 @@ function dev
       set cmd "stop"
     case open
       code --remote "ssh-remote+dev" /home/charlie/code
+      return 0
     case "" "status"
       gcloud compute instances list \
         --account $account
