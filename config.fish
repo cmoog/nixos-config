@@ -1,8 +1,5 @@
 set --export EDITOR vim
 
-# for Coder dev deployments 
-set --export NAMESPACE coder-charlie
-
 ## Golang
 set --export GOPATH ~/go
 set --export GO111MODULE on
@@ -24,7 +21,6 @@ path \
   $WASMTIME_HOME/bin \
   ~/.bin \
   ~/bin \
-  ~/.deno/bin
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
@@ -36,9 +32,13 @@ if [ (uname) = "Darwin" ]
     $brew_prefix/opt/gnu-sed/libexec/gnubin \
     $brew_prefix/opt/gawk/libexec/gnubin
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+  set --export SSH_AUTH_SOCK ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 else
-  path (brew --prefix)/bin
-  if not type --no-functions --quiet code
+  path \
+    /home/linuxbrew/.linuxbrew/bin \
+    /usr/local/gcloud/google-cloud-sdk/bin \
+    ~/.deno/bin
+  if not type --no-functions -q code
     alias code="$HOME/bin/code.py"
   end
 end
