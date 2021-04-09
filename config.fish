@@ -21,6 +21,7 @@ path \
   $WASMTIME_HOME/bin \
   ~/.bin \
   ~/bin \
+  ~/.deno/bin
 
 if [ (uname) = "Darwin" ]
   # for Linux utils
@@ -36,8 +37,7 @@ if [ (uname) = "Darwin" ]
 else
   path \
     /home/linuxbrew/.linuxbrew/bin \
-    /usr/local/gcloud/google-cloud-sdk/bin \
-    ~/.deno/bin
+    /usr/local/gcloud/google-cloud-sdk/bin
   if not type --no-functions -q code
     alias code="$HOME/bin/code.py"
   end
