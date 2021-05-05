@@ -63,8 +63,8 @@ RUN brew install \
   gh \
   go \
   helm \
-  jesseduffield/lazydocker/lazydocker \
-  jesseduffield/lazygit/lazygit \
+  lazydocker \
+  lazygit \
   kubernetes-cli \
   node
 
