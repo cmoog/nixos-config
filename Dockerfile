@@ -15,7 +15,6 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
   jq \
   locales \
   man \
-  mosh \
   python3 \
   python3-pip \
   sudo \
@@ -45,7 +44,7 @@ RUN curl -fsSL https://deno.land/x/install/install.sh \
 
 # add custom user
 ARG user=charlie
-RUN useradd -mUs /usr/bin/fish ${user}
+RUN useradd -mUs /bin/bash ${user}
 USER $user
 
 ENV HOME /home/${user}
@@ -67,6 +66,9 @@ RUN brew install \
   lazygit \
   kubernetes-cli \
   node
+
+# change default shell to fish
+RUN sudo chsh ${user} --shell $(which fish)
 
 # install rustc, cargo, etc.
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
