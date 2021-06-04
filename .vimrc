@@ -12,6 +12,7 @@ set clipboard=unnamed " use system clipboard
 set timeoutlen=1000
 set ttimeoutlen=0
 set visualbell
+set encoding=utf-8
 
 " set cursor styles during normal and insert modes
 let &t_SI = "\<Esc>[6 q"

@@ -31,7 +31,6 @@ warn "linking files"
 
 install config.fish ~/.config/fish/config.fish
 install functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
-install functions/dev.fish ~/.config/fish/functions/dev.fish
 install .gitconfig
 install .vimrc
 
@@ -45,4 +44,5 @@ fi
 gitstall https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 info "Installing vim plugins"
-vim +PluginInstall +qall
+echo "" | vim +PluginInstall +qall
+
