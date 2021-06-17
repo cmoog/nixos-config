@@ -58,11 +58,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'morhetz/gruvbox'
 Plugin 'ycm-core/YouCompleteMe'
 
-
 call vundle#end()
 
 set bg=dark
 let g:gruvbox_contrast_dark = "hard" " soft, medium, hard
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
-

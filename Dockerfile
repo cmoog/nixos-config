@@ -18,7 +18,6 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
   python3 \
   python3-pip \
   sudo \
-  systemd \
   unzip \
   vim \
   wget \
@@ -27,16 +26,6 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 
 # allow passwordless sudo from all users
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
-
-# download gcloud package
-RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz \
-  && mkdir -p /usr/local/gcloud \
-  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
-  && /usr/local/gcloud/google-cloud-sdk/install.sh
-
-# adding the package path to local
-ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
-RUN gcloud components install beta
 
 # install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh \
@@ -62,6 +51,7 @@ RUN brew install \
   gh \
   go \
   helm \
+  rustup-init \
   lazydocker \
   lazygit \
   kubernetes-cli \
@@ -71,7 +61,7 @@ RUN brew install \
 RUN sudo chsh ${user} --shell $(which fish)
 
 # install rustc, cargo, etc.
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN rustup-init -y
 ENV PATH ${HOME}/.cargo/bin:${PATH}
 
 ENTRYPOINT [ "fish", "-l" ]

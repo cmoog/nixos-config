@@ -25,7 +25,6 @@
 [interactive]
 	diffFilter = delta --color-only
 [alias]
-	cfb = !git commit -m \"$(echo $(git rev-parse --abbrev-ref HEAD) | rev | cut -d/ -f1 | rev |  tr \"-\" \" \" | sed \"s/.*/\\u&/\")\" && git commit --amend
 	ca  = commit --amend --verbose
 	ap = add -p
 	a = add -A
@@ -35,11 +34,10 @@
 	f = "! git commit --fixup $(git log --pretty='%H' -1 --invert-grep --grep 'fixup! ')"
 	rb = rebase --autostash --autosquash --interactive
 	d = diff
-	push-f = push --force-with-lease
+	pushf = push --force-with-lease
 	s = status
 	last = log -1
 	rc = rebase --continue
 	releasenotes = log --no-merges --pretty=format:\"- %h %s\"
-	slog = shortlog -n --no-merges
 	m = checkout master
 	sm = submodule update --init --recursive
