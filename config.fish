@@ -47,19 +47,19 @@ end
 functions --erase path
 
 # convenience abbreviations
-abbr g 'git'
-abbr kube 'kubectl'
-abbr kub 'kubectl'
-abbr c 'clear'
-abbr v 'vim'
+abbr --add --global g 'git'
+abbr --add --global kube 'kubectl'
+abbr --add --global kub 'kubectl'
 
 # prefer "exa" to "ls"
-abbr ls 'exa'
-abbr lss 'ls'
+if type -q exa
+  abbr --add --global ls 'exa'
+  abbr --add --global lss 'ls'
+end
 
 # lazygit and lazydocker
-abbr lg 'lazygit'
-abbr ld 'lazydocker'
+abbr --add --global lg 'lazygit'
+abbr --add --global ld 'lazydocker'
 
 # fzf configuration
 # respect .gitignore
@@ -71,17 +71,6 @@ set --export GPG_TTY (tty)
 # quickly navigate to the root of a git project
 function r;
   cd (git rev-parse --show-toplevel)
-end
-
-# commit a branch and create then open a pull-request to master
-function cpr;
-  git c
-
-  set --export branch (git rev-parse --abbrev-ref HEAD)
-  git push; or git push --set-upstream origin "$branch"
-
-  gh pr create --fill
-  gh pr view --web
 end
 
 # create then open a pull-request to master
