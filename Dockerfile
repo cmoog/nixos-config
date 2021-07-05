@@ -27,10 +27,6 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 # allow passwordless sudo from all users
 RUN echo "ALL ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
 
-# install deno
-RUN curl -fsSL https://deno.land/x/install/install.sh \
-  | DENO_INSTALL=/usr/local sh
-
 # add custom user
 ARG user=charlie
 RUN useradd -mUs /bin/bash ${user}
@@ -63,5 +59,9 @@ RUN sudo chsh ${user} --shell $(which fish)
 # install rustc, cargo, etc.
 RUN rustup-init -y
 ENV PATH ${HOME}/.cargo/bin:${PATH}
+
+# install deno
+RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+ENV PATH ${HOME}/.deno/bin:${PATH}
 
 ENTRYPOINT [ "fish", "-l" ]
