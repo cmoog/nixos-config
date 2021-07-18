@@ -1,11 +1,10 @@
 set --export EDITOR vim
 
-## Golang
+# Golang
 set --export GOPATH ~/go
 set --export GO111MODULE on
 
-set --export WASMTIME_HOME ~/.wasmtime
-
+# helper function for appending to $PATH
 function path;
   for p in $argv;
     if test -d $p
@@ -18,13 +17,12 @@ end
 path \
   $GOPATH/bin \
   ~/.cargo/bin \
-  $WASMTIME_HOME/bin \
   ~/.bin \
   ~/bin \
   ~/.deno/bin
 
 if [ (uname) = "Darwin" ]
-  # for Linux utils
+  # use GNU/Linux utils on macOS
   set --local brew_prefix (brew --prefix)
   path $brew_prefix/opt/coreutils/libexec/gnubin \
     $brew_prefix/opt/findutils/libexec/gnubin \
@@ -51,7 +49,7 @@ abbr --add --global g 'git'
 abbr --add --global kube 'kubectl'
 abbr --add --global kub 'kubectl'
 
-# prefer "exa" to "ls"
+# prefer "exa" to "ls" when available
 if type -q exa
   abbr --add --global ls 'exa'
   abbr --add --global lss 'ls'
@@ -70,10 +68,14 @@ set --export GPG_TTY (tty)
 
 # quickly navigate to the root of a git project
 function r;
-  cd (git rev-parse --show-toplevel)
+  set --local gitroot (git rev-parse --show-toplevel)
+  if [ "$gitroot"  = "" ]
+    return -1
+  end
+  cd "$gitroot"
 end
 
-# create then open a pull-request to master
+# create then open a pull request to the default branch
 function pr;
   gh pr create --fill
   gh pr view --web

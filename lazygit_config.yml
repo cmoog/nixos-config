@@ -1,5 +1,7 @@
 os:
   openCommand: 'code -rg {{filename}}'
+gui:
+  showCommandLog: false
 customCommands:
   - key: f
     command: git f
