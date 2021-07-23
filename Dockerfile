@@ -51,7 +51,8 @@ RUN brew install \
   lazydocker \
   lazygit \
   kubernetes-cli \
-  node
+  node \
+  nvim
 
 # change default shell to fish
 RUN sudo chsh ${user} --shell $(which fish)

@@ -33,6 +33,7 @@ install config.fish ~/.config/fish/config.fish
 install functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 install .gitconfig
 install .vimrc
+install init.vim ~/.config/nvim/init.vim
 
 if [ "$(uname)" = "Darwin" ]; then
   install lazygit_config.yml "$HOME/Library/Application Support/jesseduffield/lazygit/config.yml"
@@ -45,5 +46,12 @@ info "downloading vim-plug for vim"
 curl -fLso ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+info "downloading vim-plug for neovim"
+curl -fLso "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 info "installing vim plugins"
 echo "" | vim +PlugInstall +qall
+
+info "installing neovim plugins"
+echo "" | nvim +PlugInstall +qall
