@@ -49,7 +49,7 @@ last = log -1
 rc = rebase --continue
 releasenotes = log --no-merges --pretty=format:\"- %h %s\"
 m = """! \
-		if git rev-parse --verify master >/dev/null 2>/dev/null; \
-		then git checkout master; else git checkout main; fi \
-		"""
+	if git rev-parse --verify master >/dev/null 2>/dev/null; \
+	then git checkout master; else git checkout main; fi \
+	"""
 sm = submodule update --init --recursive

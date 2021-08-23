@@ -33,6 +33,7 @@ install config.fish ~/.config/fish/config.fish
 install functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 install .gitconfig
 install .vimrc
+install alacritty.yml ~/.config/alacritty/alacritty.yml
 install init.vim ~/.config/nvim/init.vim
 
 if [ "$(uname)" = "Darwin" ]; then

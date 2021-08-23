@@ -32,7 +32,6 @@ if [ (uname) = "Darwin" ]
     $brew_prefix/opt/gawk/libexec/gnubin \
     $brew_prefix/opt/curl/bin
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
-  set --export SSH_AUTH_SOCK ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 else
   path \
     /home/linuxbrew/.linuxbrew/bin \
@@ -69,7 +68,7 @@ set --export GPG_TTY (tty)
 # quickly navigate to the root of a git project
 function r;
   set --local gitroot (git rev-parse --show-toplevel)
-  if [ "$gitroot"  = "" ]
+  if [ "$gitroot" = "" ]
     return -1
   end
   cd "$gitroot"
