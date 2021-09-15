@@ -36,9 +36,6 @@ else
   path \
     /home/linuxbrew/.linuxbrew/bin \
     /usr/local/gcloud/google-cloud-sdk/bin
-  if not type --no-functions -q code
-    alias code="$HOME/bin/code.py"
-  end
 end
 
 functions --erase path

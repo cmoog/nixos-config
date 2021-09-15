@@ -40,7 +40,7 @@ if [ "$(uname)" = "Darwin" ]; then
   install lazygit_config.yml "$HOME/Library/Application Support/jesseduffield/lazygit/config.yml"
 else
   install lazygit_config.yml ~/.config/jesseduffield/lazygit/config.yml
-  install functions/code.py ~/bin/code.py
+  install functions/code.py ~/bin/codessh
 fi
 
 info "downloading vim-plug for vim"

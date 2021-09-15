@@ -31,6 +31,8 @@ set tabstop=2
 set timeoutlen=1000
 set ttimeoutlen=0
 set visualbell
+set colorcolumn=80
+set backspace=indent,eol,start
 
 " set cursor styles during normal and insert modes
 let &t_SI = "\<Esc>[6 q"
