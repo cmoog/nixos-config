@@ -4,17 +4,7 @@ set --export EDITOR vim
 set --export GOPATH ~/go
 set --export GO111MODULE on
 
-# helper function for appending to $PATH
-function path;
-  for p in $argv;
-    if test -d $p
-      and not contains $p $PATH
-      set --export PATH $p $PATH;
-    end
-  end
-end
-
-path \
+fish_add_path \
   $GOPATH/bin \
   ~/.cargo/bin \
   ~/.bin \
@@ -24,7 +14,7 @@ path \
 if [ (uname) = "Darwin" ]
   # use GNU/Linux utils on macOS
   set --local brew_prefix (brew --prefix)
-  path $brew_prefix/opt/coreutils/libexec/gnubin \
+  fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin \
     $brew_prefix/opt/findutils/libexec/gnubin \
     $brew_prefix/opt/make/libexec/gnubin \
     $brew_prefix/opt/gnu-tar/libexec/gnubin \
@@ -33,12 +23,10 @@ if [ (uname) = "Darwin" ]
     $brew_prefix/opt/curl/bin
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 else
-  path \
+  fish_add_path \
     /home/linuxbrew/.linuxbrew/bin \
     /usr/local/gcloud/google-cloud-sdk/bin
 end
-
-functions --erase path
 
 # convenience abbreviations
 abbr --add --global g 'git'
@@ -63,7 +51,7 @@ set --export FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 set --export GPG_TTY (tty)
 
 # quickly navigate to the root of a git project
-function r;
+function groot;
   set --local gitroot (git rev-parse --show-toplevel)
   if [ "$gitroot" = "" ]
     return -1
