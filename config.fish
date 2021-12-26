@@ -50,6 +50,11 @@ set --export FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 
 set --export GPG_TTY (tty)
 
+# zoxide is a smarter cd command
+if type -q zoxide
+  zoxide init fish | source
+end
+
 # quickly navigate to the root of a git project
 function groot;
   set --local gitroot (git rev-parse --show-toplevel)
