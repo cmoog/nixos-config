@@ -21,6 +21,7 @@ if [ (uname) = "Darwin" ]
     $brew_prefix/opt/gnu-sed/libexec/gnubin \
     $brew_prefix/opt/gawk/libexec/gnubin \
     $brew_prefix/opt/curl/bin
+  alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
   set --export SSH_AUTH_SOCK ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 else
