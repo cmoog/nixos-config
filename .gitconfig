@@ -2,42 +2,37 @@
 name = Charlie Moog
 email = moogcharlie@gmail.com
 
-[merge]
-tool = vimdiff
-conflictstyle = diff3
+[core]
+editor = vim
+excludesfile = ~/.gitignore
+pager = delta
 
-[pull]
-rebase = true
+[merge]
+conflictstyle = diff3
 
 [fetch]
 prune = true
 
 [diff]
-tool = vimdiff
+colorMoved = default
 
 [difftool]
 prompt = false
-
-[core]
-editor = vim
-excludesfile = ~/.gitignore
-pager = delta
 
 [delta]
 plus-style = syntax "#012800"
 minus-style = normal "#340001"
 line-numbers = true
 side-by-side = true
+navigate = true
 
 [interactive]
 diffFilter = delta --color-only
 
 [alias]
 ca = commit --amend --verbose
-ap = add -p
 a = add -A
 c = commit --verbose
-cax = commit --amend --no-edit
 cb = checkout -b
 f = "! git commit --fixup $(git log --pretty='%H' -1 --invert-grep --grep 'fixup! ')"
 rb = rebase --autostash --autosquash --interactive
@@ -45,7 +40,6 @@ d = diff
 pushf = push --force-with-lease
 s = status
 last = log -1
-rc = rebase --continue
 releasenotes = log --no-merges --pretty=format:\"- %h %s\"
 m = """! \
 	if git rev-parse --verify master >/dev/null 2>/dev/null; \
