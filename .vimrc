@@ -52,17 +52,16 @@ noremap <C-t> :tabnew<CR>
 nnoremap <silent> <C-p> :FZF<CR>
 
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'cespare/vim-toml'
-Plug 'dag/vim-fish'
-Plug 'dense-analysis/ale'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf'
-Plug 'morhetz/gruvbox'
-Plug 'preservim/nerdtree'
-Plug 'rust-lang/rust.vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
+	Plug 'airblade/vim-gitgutter'
+	Plug 'cespare/vim-toml'
+	Plug 'dag/vim-fish'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'junegunn/fzf'
+	Plug 'morhetz/gruvbox'
+	Plug 'preservim/nerdtree'
+	Plug 'rust-lang/rust.vim'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " Start NERDTree when Vim is started without file arguments.
@@ -81,37 +80,3 @@ set bg=dark
 let g:gruvbox_contrast_dark='hard' " soft, medium, hard
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
-
-" cycle through autocomplete menu with tab
-inoremap <silent><expr><TAB>
-	\ pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:ale_linters_explicit = 1
-let g:ale_completion_autoimport = 1
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_sign_column_always = 1
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_set_balloons = 1
-let g:ale_rust_rustfmt_options = '--edition 2018'
-
-let g:ale_linters = {
-	\ 'rust': ['analyzer'],
-	\ 'go': ['gopls'],
-	\ 'typescript': ['eslint', 'tsserver'],
-	\ 'javascript': ['eslint', 'tsserver'],
-	\ 'typescriptreact': ['eslint', 'tsserver'],
-	\ 'javascriptreact': ['eslint', 'tsserver'],
-	\ 'python': ['pyright']
-	\}
-
-let g:ale_fixers = {
-	\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-	\ 'rust': ['rustfmt'],
-	\ 'go': ['gofmt'],
-	\ 'json': ['prettier'],
-	\ 'typescript': ['prettier', 'eslint'],
-	\ 'javascript': ['prettier', 'eslint'],
-	\ 'typescriptreact': ['prettier', 'eslint'],
-	\ 'javascriptreact': ['prettier', 'eslint']
-	\ }
