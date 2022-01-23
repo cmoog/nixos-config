@@ -13,10 +13,8 @@ window:
   dynamic_padding: true
 
 font:
-  # normal:
-    # family: Monoid
-    # style: Retina
-
+  normal:
+    family: JetBrains Mono
   bold:
     style: Bold
 
@@ -43,8 +41,6 @@ selection:
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
-
-live_config_reload: true
 
 # Roughly the GitHub Dark theme
 colors:

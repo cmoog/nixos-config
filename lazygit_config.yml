@@ -1,11 +1,9 @@
-os:
-  openCommand: 'code -rg {{filename}}'
 gui:
   showCommandLog: false
 customCommands:
   - key: f
     command: git f
     subprocess: true
-    loadingText: fixup applying...
+    loadingText: applying fixup...
     description: '"git f", fixup previous commit'
     context: files
