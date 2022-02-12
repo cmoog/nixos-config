@@ -3,7 +3,6 @@ name = Charlie Moog
 email = moogcharlie@gmail.com
 
 [core]
-editor = vim
 excludesfile = ~/.gitignore
 pager = delta
 
