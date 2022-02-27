@@ -7,7 +7,7 @@ inoremap jk <ESC>
 syntax enable
 set autoindent
 set clipboard=unnamed
-set cmdheight=2
+set cmdheight=1
 set conceallevel=0
 set cursorline
 set encoding=utf-8
@@ -31,17 +31,12 @@ set tabstop=2
 set timeoutlen=1000
 set ttimeoutlen=0
 set visualbell
-set colorcolumn=100
 set backspace=indent,eol,start
 
 " set cursor styles during normal and insert modes
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
-
-" set cursor styles during normal and insert modes NOT MacOS + iTerm2
-autocmd InsertEnter * set cul
-autocmd InsertLeave * set nocul
 
 " switching between tabs
 nnoremap H gT
@@ -67,3 +62,16 @@ set bg=dark
 let g:gruvbox_contrast_dark='hard' " soft, medium, hard
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
+
+lua <<EOF
+  require('nvim-autopairs').setup{}
+  require('nvim-treesitter.configs').setup({
+    highlight = {
+      enable = true,
+      disable = { "vim" },
+    },
+    indent = {
+      enable = true
+    },
+  })
+EOF

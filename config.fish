@@ -1,15 +1,15 @@
 set fish_greeting ""
-set --export EDITOR nvim
+set --export EDITOR vim
 
 # Go toolchain configuration
 set --export GOPATH ~/go
 set --export GO111MODULE on
 
 fish_add_path \
+  ~/bin \
+  ~/.bin \
   $GOPATH/bin \
   ~/.cargo/bin \
-  ~/.bin \
-  ~/bin \
   ~/.deno/bin
 
 # fzf configuration
@@ -17,17 +17,10 @@ fish_add_path \
 set --export FZF_DEFAULT_COMMAND fd --type f
 set --export FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
 
-set --export GPG_TTY (tty)
-
 # convenience abbreviations
 abbr --add --global g 'git'
 abbr --add --global kube 'kubectl'
 abbr --add --global kub 'kubectl'
-
-# alias to quickly enter a nix-shell during dev
-abbr --add --global ns 'nix-shell'
-
-# TUIs for git and docker
 abbr --add --global lg 'lazygit'
 abbr --add --global ld 'lazydocker'
 
@@ -41,9 +34,7 @@ if [ (uname) = "Darwin" ]
   # use GNU/Linux utils on macOS
   set --local brew_prefix (brew --prefix)
   fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin \
-    $brew_prefix/opt/make/libexec/gnubin \
     $brew_prefix/opt/gnu-tar/libexec/gnubin \
-    $brew_prefix/opt/gnu-sed/libexec/gnubin \
     $brew_prefix/opt/curl/bin
 
   # alias Tailscale CLI

@@ -25,21 +25,16 @@
     vimAlias = true;
     extraConfig = builtins.readFile ../init.vim;
     plugins = with pkgs.vimPlugins; [
-      auto-pairs
       fzf-vim
       gruvbox
       lsp-colors-nvim
       nerdtree
+      nvim-autopairs
       nvim-lspconfig
-      nvim-treesitter
-      rust-vim
       vim-airline
-      vim-airline-themes
-      vim-fish
       vim-gitgutter
-      vim-go
-      vim-nix
-      vim-toml
+      (nvim-treesitter.withPlugins
+        (plugins: pkgs.unstable.tree-sitter.allGrammars))
     ];
   };
 
