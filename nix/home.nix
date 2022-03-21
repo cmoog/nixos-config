@@ -38,22 +38,24 @@
     ];
   };
 
+  programs.direnv.enable = true;
   programs.bat.enable = true;
   programs.fzf.enable = true;
+
   home.packages = with pkgs; [
     aws
     bottom
-    cue
+    unstable.cue
     delta
     dolt
     exa
     fd
     gcc
     gh
-    go_1_17
+    unstable.go_1_18
     google-cloud-sdk
     gopls
-    ipfs
+    unstable.ipfs
     jetbrains-mono
     jq
     kubectl
@@ -63,9 +65,7 @@
     pandoc
     ripgrep
     rnix-lsp
-    rust-analyzer
     unzip
-    wasmtime
     youtube-dl
     zoxide
   ];
