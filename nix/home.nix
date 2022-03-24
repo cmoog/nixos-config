@@ -34,7 +34,7 @@
       vim-airline
       vim-gitgutter
       (nvim-treesitter.withPlugins
-        (plugins: pkgs.unstable.tree-sitter.allGrammars))
+        (plugins: pkgs.tree-sitter.allGrammars))
     ];
   };
 
@@ -70,6 +70,5 @@
     zoxide
   ];
 
-  # don't change
-  home.stateVersion = "21.05";
+  home.stateVersion = "21.11";
 }
