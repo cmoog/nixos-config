@@ -1,4 +1,4 @@
-"" init.vim configuration
+" init.vim configuration
 
 " normal mode keymaps
 inoremap jj <ESC>
@@ -17,7 +17,7 @@ set filetype=on
 set mouse=a
 set nocompatible
 set noshowmode
-set nowrap
+set wrap
 set number
 set ruler
 set shiftwidth=2
@@ -30,8 +30,17 @@ set t_Co=256
 set tabstop=2
 set timeoutlen=1000
 set ttimeoutlen=0
-set visualbell
 set backspace=indent,eol,start
+
+" up/down navigation mapped to lines as *displayed*
+noremap <silent> k gk
+noremap <silent> j gj
+
+" wrap after col 100 for these file extensions
+au BufRead,BufNewFile *.md,*.txt,*.tex,*.cls setlocal textwidth=100
+set formatoptions+=t
+set formatoptions-=l
+set linebreak
 
 " set cursor styles during normal and insert modes
 let &t_SI = "\<Esc>[6 q"

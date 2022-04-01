@@ -45,17 +45,15 @@
   home.packages = with pkgs; [
     aws
     bottom
-    unstable.cue
     delta
     dolt
     exa
     fd
+    flyctl
     gcc
     gh
-    unstable.go_1_18
     google-cloud-sdk
     gopls
-    unstable.ipfs
     jetbrains-mono
     jq
     kubectl
@@ -65,6 +63,10 @@
     pandoc
     ripgrep
     rnix-lsp
+    texlab
+    unstable.cue
+    unstable.go_1_18
+    unstable.ipfs
     unzip
     youtube-dl
     zoxide
