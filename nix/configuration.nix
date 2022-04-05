@@ -69,6 +69,7 @@
 
   users.users.charlie = {
     name = "charlie";
+    shell = pkgs.fish;
     isNormalUser = true;
     hashedPassword = "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";

@@ -69,8 +69,8 @@ nnoremap <C-b> :NERDTreeMirror<CR>:NERDTreeToggle<CR>
 " color scheme
 set bg=dark
 let g:gruvbox_contrast_dark='hard' " soft, medium, hard
-colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
+colorscheme gruvbox
 
 lua <<EOF
   require('nvim-autopairs').setup{}
