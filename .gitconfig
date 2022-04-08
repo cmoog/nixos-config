@@ -2,9 +2,18 @@
 name = Charlie Moog
 email = moogcharlie@gmail.com
 
+# stored in secure enclave w/ auth required
+signingKey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGxStcvVFF2s/4GFuLj8ehTzzD1B8Ct9Ntds1G1WONyEUShl8oHoZiByjObeX2wyfJx3ZpzhJ/A7Wa73bTL85Yk= ecdsa-sha2-nistp256
+
 [core]
 excludesfile = ~/.gitignore
 pager = delta
+
+[gpg]
+format = ssh
+
+[commit]
+gpgsign = true
 
 [merge]
 conflictstyle = diff3

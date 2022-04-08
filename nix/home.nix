@@ -65,6 +65,7 @@
     rnix-lsp
     texlab
     unstable.cue
+    unstable.git
     unstable.go_1_18
     unstable.ipfs
     unzip
