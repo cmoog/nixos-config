@@ -15,6 +15,9 @@ format = ssh
 [commit]
 gpgsign = true
 
+[tag]
+gpgsign = true
+
 [merge]
 conflictstyle = diff3
 
