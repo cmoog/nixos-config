@@ -88,9 +88,6 @@
 
   services.tailscale.enable = true;
   services.tailscale.port = 41641;
-  # these might be needed for tailscale exit node, but I haven't gotten them working yet
-  # boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
-  # boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;
 
   # firewall
   networking.firewall.enable = true;

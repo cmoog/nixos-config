@@ -7,7 +7,6 @@ set --export GO111MODULE on
 
 fish_add_path \
   ~/bin \
-  ~/.bin \
   $GOPATH/bin \
   ~/.cargo/bin \
   ~/.deno/bin

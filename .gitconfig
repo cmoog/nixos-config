@@ -21,18 +21,10 @@ gpgsign = true
 [merge]
 conflictstyle = diff3
 
-[fetch]
-prune = true
-
 [diff]
 colorMoved = default
 
-[difftool]
-prompt = false
-
 [delta]
-plus-style = syntax "#012800"
-minus-style = normal "#340001"
 line-numbers = true
 side-by-side = true
 navigate = true

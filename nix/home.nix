@@ -47,6 +47,7 @@
     bottom
     delta
     dolt
+    duf
     exa
     fd
     flyctl
@@ -63,6 +64,7 @@
     pandoc
     ripgrep
     rnix-lsp
+    sd
     texlab
     unstable.cue
     unstable.git
