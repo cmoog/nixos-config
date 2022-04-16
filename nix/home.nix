@@ -23,6 +23,7 @@
   programs.neovim = {
     enable = true;
     vimAlias = true;
+    package = pkgs.neovim-nightly;
     extraConfig = builtins.readFile ../init.vim;
     plugins = with pkgs.vimPlugins; [
       fzf-vim
@@ -31,6 +32,7 @@
       nerdtree
       nvim-autopairs
       nvim-lspconfig
+      toggleterm-nvim
       vim-airline
       vim-gitgutter
       (nvim-treesitter.withPlugins

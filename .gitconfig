@@ -26,7 +26,6 @@ colorMoved = default
 
 [delta]
 line-numbers = true
-side-by-side = true
 navigate = true
 
 [interactive]

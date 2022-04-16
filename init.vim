@@ -42,18 +42,9 @@ set formatoptions+=t
 set formatoptions-=l
 set linebreak
 
-" set cursor styles during normal and insert modes
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
-
 " switching between tabs
 nnoremap H gT
 nnoremap L gt
-
-noremap <C-t> :tabnew<CR>
-" fzf file search
-nnoremap <silent> <C-p> :FZF<CR>
 
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
@@ -73,10 +64,38 @@ let g:airline_theme = 'gruvbox'
 colorscheme gruvbox
 
 lua <<EOF
+  -- fzf file search
+  vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>:FZF<CR>", { noremap = true, silent = true })
+
+  -- new tabs
+  vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>:tabnew<CR>", { noremap = true, silent = true })
+
+  require('toggleterm').setup{
+    size = 20,
+    open_mapping = [[<C-j>]],
+  }
+  local Terminal  = require('toggleterm.terminal').Terminal
+
+  -- <C-\> for a floating terminal
+  local floating = Terminal:new({ direction = "float", hidden = true })
+  function _floating_toggle()
+    floating:toggle()
+  end
+  vim.api.nvim_set_keymap("n", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("t", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
+
+  -- <C-g> for a lazygit floating terminal
+  local lazygit = Terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
+  function _lazygit_toggle()
+    lazygit:toggle()
+  end
+  vim.api.nvim_set_keymap("n", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("t", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+
   require('nvim-autopairs').setup{}
   require('nvim-treesitter.configs').setup({
     highlight = {
-      enable = true,
+      enable = true
     },
     indent = {
       enable = true

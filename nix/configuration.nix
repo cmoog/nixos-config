@@ -42,14 +42,13 @@
   environment.systemPackages = with pkgs; [
     age
     alacritty
-    unstable.deno
+    deno
     firefox
     fish
     git
     go
     google-chrome
     htop
-    neovim
     python310
     tailscale
     vim
