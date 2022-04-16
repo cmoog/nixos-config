@@ -5,38 +5,47 @@
   imports = [ ./hardware-configuration.nix ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "charlie-nuc";
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   time.timeZone = "America/Chicago";
 
-  networking.useDHCP = false;
-  networking.interfaces.enp5s0.useDHCP = true;
-  networking.wireless.enable = false;
+  networking = {
+    hostName = "charlie-nuc";
 
-  networking.interfaces.eno1.useDHCP = false;
-  networking.interfaces.eno1.ipv4.addresses = [{
-    # static local IP for connecting directly to macbook over USB LAN
-    # make sure to set macbook LAN interface to 192.168.99.x/24
-    address = "192.168.99.20";
-    prefixLength = 24;
-  }];
+    useDHCP = false;
+    wireless.enable = false;
+    interfaces = {
+      enp5s0.useDHCP = true;
+      eno1.useDHCP = false;
 
-  # do not sleep after inactivity
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
+      eno1.ipv4.addresses = [{
+        # static local IP for connecting directly to macbook over USB LAN
+        # make sure to set macbook LAN interface to 192.168.99.x/24
+        address = "192.168.99.20";
+        prefixLength = 24;
+      }];
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+    };
+
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [ 41641 ];
+    };
+  };
+
+  systemd.targets = {
+    # do not sleep after inactivity
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
 
   virtualisation.docker.enable = true;
-  programs.fish.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -44,7 +53,6 @@
     alacritty
     deno
     firefox
-    fish
     git
     go
     google-chrome
@@ -78,22 +86,30 @@
     ];
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
+  programs = {
+    fish.enable = true;
   };
 
-  services.tailscale.enable = true;
-  services.tailscale.port = 41641;
+  services = {
+    xserver = {
+      enable = true;
+      # enable the GNOME desktop environment
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
 
-  # firewall
-  networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  networking.firewall.allowedUDPPorts = [ 41641 ];
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
+      passwordAuthentication = false;
+    };
 
-  # don't change
+    tailscale = {
+      enable = true;
+      port = 41641;
+    };
+  };
+
   system.stateVersion = "21.11";
 }
 
