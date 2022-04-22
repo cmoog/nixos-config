@@ -12,6 +12,9 @@
   outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, neovim-nightly-overlay }:
     let
       system = "x86_64-linux";
+      overlay-san-francisco-font = final: prev: {
+        san-francisco-font = prev.callPackage ./nix/san-francisco-font.nix { };
+      };
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;
@@ -24,7 +27,7 @@
         {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable neovim-nightly-overlay.overlay ]; })
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable neovim-nightly-overlay.overlay overlay-san-francisco-font ]; })
             ./nix/configuration.nix
             home-manager.nixosModule
             {

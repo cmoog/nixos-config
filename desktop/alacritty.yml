@@ -12,9 +12,6 @@ window:
     lines: 35
   dynamic_padding: true
 
-key_bindings:
-  - { key: T, mods: Command, action: CreateNewWindow }
-
 font:
   normal:
     family: JetBrains Mono

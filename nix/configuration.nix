@@ -10,6 +10,13 @@
     efi.canTouchEfiVariables = true;
   };
 
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
+
   time.timeZone = "America/Chicago";
 
   networking = {
@@ -48,6 +55,11 @@
   virtualisation.docker.enable = true;
   nixpkgs.config.allowUnfree = true;
 
+  fonts.fonts = with pkgs; [
+    jetbrains-mono
+    san-francisco-font
+  ];
+
   environment.systemPackages = with pkgs; [
     age
     alacritty
@@ -56,12 +68,21 @@
     git
     go
     google-chrome
-    htop
+    neofetch
     python310
     tailscale
     vim
     vscode
     wget
+
+    # gui apps
+    blueman
+    gnome.gnome-disk-utility
+    gnome.nautilus
+    mpv
+    networkmanagerapplet
+    open-sans
+    # pavucontrol
   ];
 
   nix = {
@@ -88,14 +109,27 @@
 
   programs = {
     fish.enable = true;
+    sway = {
+      enable = true;
+      extraPackages = with pkgs; [ waybar wofi ];
+      extraSessionCommands = ''
+        eval $(ssh-agent)
+        export SSH_AUTH_SOCK
+      '';
+    };
   };
 
   services = {
+    blueman.enable = true;
+
     xserver = {
       enable = true;
-      # enable the GNOME desktop environment
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          wayland = true;
+        };
+      };
     };
 
     openssh = {

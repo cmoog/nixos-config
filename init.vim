@@ -43,8 +43,8 @@ set formatoptions-=l
 set linebreak
 
 " switching between tabs
-nnoremap H gT
-nnoremap L gt
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -67,7 +67,7 @@ lua <<EOF
   vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>:tabnew<CR>", { noremap = true, silent = true })
 
   require('toggleterm').setup{
-    size = 20,
+    size = 15,
     open_mapping = [[<C-j>]],
   }
   local Terminal  = require('toggleterm.terminal').Terminal

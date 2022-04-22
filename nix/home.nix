@@ -6,12 +6,11 @@
     homeDirectory = "/home/charlie";
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   xdg.configFile = {
-    "alacritty/alacritty.yml".text = builtins.readFile ../alacritty.yml;
+    "alacritty/alacritty.yml".text = builtins.readFile ../desktop/alacritty.yml;
     "git/config".text = builtins.readFile ../.gitconfig;
     "lazygit/config.yml".text = builtins.readFile ../lazygit_config.yml;
+    "sway/config".text = builtins.readFile ../desktop/sway.config;
   };
 
   programs = {
@@ -62,7 +61,6 @@
     gh
     google-cloud-sdk
     gopls
-    jetbrains-mono
     jq
     kubectl
     lazydocker
@@ -80,9 +78,6 @@
     unzip
     youtube-dl
     zoxide
-
-    gnome.gnome-tweaks
-    open-sans
   ];
 
   home.stateVersion = "21.11";
