@@ -7,20 +7,21 @@
   };
 
   xdg.configFile = {
-    "alacritty/alacritty.yml".text = builtins.readFile ../desktop/alacritty.yml;
-    "git/config".text = builtins.readFile ../.gitconfig;
-    "lazygit/config.yml".text = builtins.readFile ../lazygit_config.yml;
-    "sway/config".text = builtins.readFile ../desktop/sway.config;
+    # this should be in gui.nix, but alacritty only looks for config paths under ~/...
+    "alacritty/alacritty.yml".text = builtins.readFile ./desktop/alacritty.yml;
+    "git/config".text = builtins.readFile ./server/.gitconfig;
+    "lazygit/config.yml".text = builtins.readFile ./server/lazygit_config.yml;
   };
 
   programs = {
     home-manager.enable = true;
     fish = {
       enable = true;
-      interactiveShellInit = builtins.readFile ../config.fish;
-      shellInit = builtins.readFile ../config.fish;
+      interactiveShellInit = builtins.readFile ./server/config.fish;
+      shellInit = builtins.readFile ./server/config.fish;
       functions = {
-        fish_prompt = builtins.readFile ../fish_prompt.fish;
+        fish_prompt = builtins.readFile ./server/fish_prompt.fish;
+        gui = "exec sway";
       };
     };
 
@@ -28,7 +29,7 @@
       enable = true;
       vimAlias = true;
       package = pkgs.neovim-nightly;
-      extraConfig = builtins.readFile ../init.vim;
+      extraConfig = builtins.readFile ./server/init.vim;
       plugins = with pkgs.vimPlugins; [
         fzf-vim
         gruvbox
@@ -39,8 +40,7 @@
         toggleterm-nvim
         vim-airline
         vim-gitgutter
-        (nvim-treesitter.withPlugins
-          (plugins: pkgs.tree-sitter.allGrammars))
+        (nvim-treesitter.withPlugins (plugins: [ ]))
       ];
     };
 
@@ -70,6 +70,7 @@
     ripgrep
     rnix-lsp
     sd
+    tectonic
     texlab
     unstable.cue
     unstable.git
@@ -80,5 +81,5 @@
     zoxide
   ];
 
-  home.stateVersion = "21.11";
+  home.stateVersion = "21.05";
 }

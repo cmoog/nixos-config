@@ -55,4 +55,3 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
   };
 }
-
