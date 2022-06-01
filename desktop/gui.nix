@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     alacritty
+    electrum
     firefox
     gnome.gnome-disk-utility
     gnome.nautilus

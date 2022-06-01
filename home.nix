@@ -13,6 +13,13 @@
     "lazygit/config.yml".text = builtins.readFile ./server/lazygit_config.yml;
   };
 
+  home.file = {
+    ".gitignore".text = ''
+      /.vscode
+      /.direnv
+    '';
+  };
+
   programs = {
     home-manager.enable = true;
     fish = {
@@ -21,7 +28,6 @@
       shellInit = builtins.readFile ./server/config.fish;
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
-        gui = "exec sway";
       };
     };
 
@@ -73,7 +79,6 @@
     tectonic
     texlab
     unstable.cue
-    unstable.git
     unstable.go_1_18
     unstable.ipfs
     unzip
