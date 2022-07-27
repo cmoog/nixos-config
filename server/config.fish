@@ -23,12 +23,6 @@ abbr --add --global kub 'kubectl'
 abbr --add --global lg 'lazygit'
 abbr --add --global ld 'lazydocker'
 
-# prefer "exa" to "ls" when available
-if type -q exa
-  abbr --add --global ls 'exa'
-  abbr --add --global lss 'ls'
-end
-
 if [ (uname) = "Darwin" ]
   # use GNU/Linux utils on macOS
   set --local brew_prefix (brew --prefix)
@@ -41,11 +35,6 @@ if [ (uname) = "Darwin" ]
 
   # use Secretive for SSH authentication with the secure enclave
   set --export SSH_AUTH_SOCK ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-end
-
-# zoxide is a smarter cd command
-if type -q zoxide
-  zoxide init fish | source
 end
 
 # quickly navigate to the root of a git project

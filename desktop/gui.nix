@@ -20,11 +20,7 @@
     vscode
   ];
 
-  fonts.fonts = with pkgs; [
-    font-awesome
-    jetbrains-mono
-    san-francisco-font
-  ];
+  fonts.fonts = with pkgs; [ font-awesome jetbrains-mono san-francisco-font ];
 
   programs = { };
 }

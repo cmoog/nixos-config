@@ -1,5 +1,15 @@
 { config, pkgs, ... }:
-
+let
+  toggleterm = pkgs.vimUtils.buildVimPlugin {
+    name = "toggleterm.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "akinsho";
+      repo = "toggleterm.nvim";
+      rev = "cd12ed737d3de2757a540ddf4962a6de05881127";
+      sha256 = "p/ZwqfGIOAWEHpC56jSU/MnNIpNDW4PpYBkr5Os8XQw=";
+    };
+  };
+in
 {
   home = {
     username = "charlie";
@@ -43,7 +53,12 @@
         nerdtree
         nvim-autopairs
         nvim-lspconfig
-        toggleterm-nvim
+
+        # use the nixpkgs version once they update to remove
+        # the use of a deprecated neovim api
+        # toggleterm-nvim
+        toggleterm
+
         vim-airline
         vim-gitgutter
         (nvim-treesitter.withPlugins (plugins: [ ]))
@@ -53,6 +68,14 @@
     direnv.enable = true;
     bat.enable = true;
     fzf.enable = true;
+    exa = {
+      enable = true;
+      enableAliases = true;
+    };
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
   };
 
   home.packages = with pkgs; [
@@ -61,7 +84,6 @@
     delta
     dolt
     duf
-    exa
     fd
     gcc
     gh
@@ -83,7 +105,6 @@
     unstable.ipfs
     unzip
     youtube-dl
-    zoxide
   ];
 
   home.stateVersion = "21.05";

@@ -21,6 +21,9 @@ gpgsign = true
 [merge]
 conflictstyle = diff3
 
+[push]
+autoSetupRemote = true
+
 [diff]
 colorMoved = default
 

@@ -16,7 +16,7 @@
     hostName = "charlie-nuc";
 
     useDHCP = false;
-    wireless.enable = false;
+    networkmanager.enable = true;
     interfaces = {
       enp5s0.useDHCP = true;
       eno1.useDHCP = false;
@@ -73,7 +73,8 @@
     name = "charlie";
     shell = pkgs.fish;
     isNormalUser = true;
-    hashedPassword = "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
+    hashedPassword =
+      "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
     extraGroups = [ "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
@@ -82,9 +83,7 @@
     ];
   };
 
-  programs = {
-    fish.enable = true;
-  };
+  programs = { fish.enable = true; };
 
   services = {
     openssh = {
