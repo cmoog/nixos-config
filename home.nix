@@ -27,6 +27,7 @@ in
     ".gitignore".text = ''
       /.vscode
       /.direnv
+      /result
     '';
   };
 
@@ -93,6 +94,7 @@ in
     kubectl
     lazydocker
     lazygit
+    monero-cli
     nixpkgs-fmt
     pandoc
     ripgrep

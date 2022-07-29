@@ -21,12 +21,23 @@
           config.allowUnfree = true;
         };
       };
+      overlays = [ overlay neovim-nightly-overlay.overlay ];
       overlay-module = ({ config, pkgs, ... }: {
-        nixpkgs.overlays = [ overlay neovim-nightly-overlay.overlay ];
+        nixpkgs.overlays = overlays;
       });
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      homeConfigurations.charlie = home-manager.lib.homeManagerConfiguration rec {
+        inherit system;
+        stateVersion = configuration.home.stateVersion;
+        username = configuration.home.username;
+        homeDirectory = configuration.home.homeDirectory;
+        configuration = import ./home.nix rec {
+          pkgs = import nixpkgs { inherit system overlays; };
+          config = pkgs.config;
+        };
+      };
       nixosConfigurations.charlie-nuc = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [

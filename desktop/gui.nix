@@ -14,6 +14,7 @@
     gnome.gnome-disk-utility
     gnome.nautilus
     google-chrome
+    monero-gui
     mpv
     signal-desktop
     tor-browser-bundle-bin
