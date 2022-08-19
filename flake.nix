@@ -25,14 +25,13 @@
       overlay-module = ({ config, pkgs, ... }: {
         nixpkgs.overlays = overlays;
       });
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      formatter.${system} = pkgs.nixpkgs-fmt;
       homeConfigurations.charlie = home-manager.lib.homeManagerConfiguration rec {
         inherit system;
-        stateVersion = configuration.home.stateVersion;
-        username = configuration.home.username;
-        homeDirectory = configuration.home.homeDirectory;
+        inherit (configuration.home) stateVersion username homeDirectory;
         configuration = import ./home.nix rec {
           pkgs = import nixpkgs { inherit system overlays; };
           config = pkgs.config;

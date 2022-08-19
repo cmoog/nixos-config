@@ -2,7 +2,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./desktop/gui.nix ./hardware-configuration.nix ];
+  imports = [
+    ./desktop/gui.nix
+    ./server/metrics.nix
+    ./server/gitbrowser.nix
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -31,10 +36,10 @@
     };
 
     firewall = {
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ 41641 ];
-      checkReversePath = "loose";
       enable = true;
+      allowedTCPPorts = [ 22 80 ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      checkReversePath = "loose";
     };
   };
 
@@ -83,7 +88,9 @@
     ];
   };
 
-  programs = { fish.enable = true; };
+  programs = {
+    fish.enable = true;
+  };
 
   services = {
     openssh = {
@@ -95,6 +102,20 @@
     tailscale = {
       enable = true;
       port = 41641;
+    };
+
+    nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      virtualHosts."_" = {
+        default = true;
+        extraConfig = ''
+          add_header content-type text/plain;
+        '';
+        locations."/" = {
+          return = "200 'hello from ${config.networking.hostName}'";
+        };
+      };
     };
   };
 

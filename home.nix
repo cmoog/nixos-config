@@ -102,8 +102,7 @@ in
     sd
     tectonic
     texlab
-    unstable.cue
-    unstable.go_1_18
+    unstable.go
     unstable.ipfs
     unzip
     youtube-dl
