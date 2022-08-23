@@ -14,12 +14,7 @@
     let
       system = "x86_64-linux";
       overlay = final: prev: {
-        san-francisco-font =
-          prev.callPackage ./desktop/san-francisco-font.nix { };
-        unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        unstable = import nixpkgs-unstable { inherit system; };
       };
       overlays = [ overlay neovim-nightly-overlay.overlay ];
       overlay-module = ({ config, pkgs, ... }: {

@@ -7,24 +7,24 @@
     gnome.dconf-editor
     gnomeExtensions.gtile
   ];
-  programs = { };
 
-  services.gnome.core-utilities.enable = false;
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager = {
-      gdm = {
-        enable = true;
-        autoSuspend = false;
-        wayland = false;
+  services = {
+    gnome.core-utilities.enable = false;
+    xserver = {
+      enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          autoSuspend = false;
+          wayland = false;
+        };
+        sessionCommands = ''
+          dconf load / << EOF
+            ${builtins.readFile ./dconf.ini}
+          EOF
+        '';
       };
     };
   };
-
-  services.xserver.displayManager.sessionCommands = ''
-    dconf load / << EOF
-      ${builtins.readFile ./dconf.ini}
-    EOF
-  '';
 }
