@@ -21,7 +21,7 @@
     hostName = "charlie-nuc";
 
     useDHCP = false;
-    networkmanager.enable = true;
+    networkmanager.enable = false;
     interfaces = {
       enp5s0.useDHCP = true;
       eno1.useDHCP = false;

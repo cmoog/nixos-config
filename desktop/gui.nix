@@ -17,7 +17,7 @@
     monero-gui
     mpv
     signal-desktop
-    tor-browser-bundle-bin
+    unstable.tor-browser-bundle-bin
     vscode
   ];
 

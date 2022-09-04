@@ -1,15 +1,4 @@
 { config, pkgs, ... }:
-let
-  toggleterm = pkgs.vimUtils.buildVimPlugin {
-    name = "toggleterm.nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "akinsho";
-      repo = "toggleterm.nvim";
-      rev = "cd12ed737d3de2757a540ddf4962a6de05881127";
-      sha256 = "p/ZwqfGIOAWEHpC56jSU/MnNIpNDW4PpYBkr5Os8XQw=";
-    };
-  };
-in
 {
   home = {
     username = "charlie";
@@ -75,22 +64,17 @@ in
       vimAlias = true;
       package = pkgs.neovim-nightly;
       extraConfig = builtins.readFile ./server/init.vim;
-      plugins = with pkgs.vimPlugins; [
+      plugins = with pkgs.unstable.vimPlugins; [
         fzf-vim
         gruvbox
         lsp-colors-nvim
         nerdtree
         nvim-autopairs
         nvim-lspconfig
-
-        # use the nixpkgs version once they update to remove
-        # the use of a deprecated neovim api
-        # toggleterm-nvim
-        toggleterm
-
+        toggleterm-nvim
         vim-airline
         vim-gitgutter
-        (nvim-treesitter.withPlugins (plugins: [ ]))
+        (nvim-treesitter.withPlugins (plugins: pkgs.unstable.tree-sitter.allGrammars))
       ];
     };
 
@@ -136,7 +120,6 @@ in
     jq
     kubectl
     lazydocker
-    lazygit
     monero-cli
     nixpkgs-fmt
     pandoc
