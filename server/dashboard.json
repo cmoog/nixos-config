@@ -24,7 +24,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11074,
   "graphTooltip": 1,
-  "iteration": 1662339257280,
+  "iteration": 1662579106475,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -50,7 +50,10 @@
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
-                "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "red", "value": 80 }
+                ]
               },
               "unit": "short"
             },
@@ -94,7 +97,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         { "color": "rgba(237, 129, 40, 0.89)", "value": 70 },
                         { "color": "rgba(245, 54, 54, 0.9)", "value": 85 }
                       ]
@@ -115,7 +118,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         { "color": "rgba(237, 129, 40, 0.89)", "value": 70 },
                         { "color": "rgba(245, 54, 54, 0.9)", "value": 85 }
                       ]
@@ -136,7 +139,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         { "color": "rgba(237, 129, 40, 0.89)", "value": 70 },
                         { "color": "rgba(245, 54, 54, 0.9)", "value": 85 }
                       ]
@@ -157,7 +160,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         {
                           "color": "rgba(237, 129, 40, 0.89)",
                           "value": 10485760
@@ -181,7 +184,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         {
                           "color": "rgba(237, 129, 40, 0.89)",
                           "value": 10485760
@@ -205,7 +208,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         {
                           "color": "rgba(237, 129, 40, 0.89)",
                           "value": 30485760
@@ -232,7 +235,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         {
                           "color": "rgba(237, 129, 40, 0.89)",
                           "value": 30485760
@@ -259,7 +262,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         { "color": "rgba(237, 129, 40, 0.89)", "value": 1000 },
                         { "color": "rgba(245, 54, 54, 0.9)", "value": 1500 }
                       ]
@@ -279,7 +282,7 @@
                     "value": {
                       "mode": "absolute",
                       "steps": [
-                        { "color": "rgba(50, 172, 45, 0.97)" },
+                        { "color": "rgba(50, 172, 45, 0.97)", "value": null },
                         { "color": "rgba(237, 129, 40, 0.89)", "value": 5000 },
                         { "color": "rgba(245, 54, 54, 0.9)", "value": 20000 }
                       ]
@@ -303,7 +306,7 @@
             "showHeader": true,
             "sortBy": [{ "desc": true, "displayName": "Value #L" }]
           },
-          "pluginVersion": "8.5.9",
+          "pluginVersion": "8.5.11",
           "targets": [
             {
               "datasource": {
@@ -482,7 +485,10 @@
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
-                "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "red", "value": 80 }
+                ]
               },
               "unit": "short"
             },
@@ -692,7 +698,10 @@
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
-                "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "red", "value": 80 }
+                ]
               },
               "unit": "bytes"
             },
@@ -798,7 +807,10 @@
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
-                "steps": [{ "color": "green" }, { "color": "red", "value": 80 }]
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "red", "value": 80 }
+                ]
               },
               "unit": "bytes"
             },
@@ -1223,26 +1235,32 @@
       "pluginVersion": "8.5.9",
       "targets": [
         {
-          "expr": "increase(node_network_receive_bytes_total{instance=~\"$node\",device=~\"$device\"}[60m])",
-          "interval": "60m",
+          "datasource": { "type": "prometheus", "uid": "P1809F7CD0C75ACF3" },
+          "editorMode": "code",
+          "expr": "increase(node_network_receive_bytes_total{instance=~\"$node\",device=~\"$device\"}[15m])",
+          "interval": "15m",
           "intervalFactor": 1,
           "legendFormat": "{{device}}_receive",
           "metric": "",
+          "range": true,
           "refId": "A",
           "step": 600,
           "target": ""
         },
         {
-          "expr": "increase(node_network_transmit_bytes_total{instance=~\"$node\",device=~\"$device\"}[60m])",
+          "datasource": { "type": "prometheus", "uid": "P1809F7CD0C75ACF3" },
+          "editorMode": "code",
+          "expr": "increase(node_network_transmit_bytes_total{instance=~\"$node\",device=~\"$device\"}[15m])",
           "hide": false,
-          "interval": "60m",
+          "interval": "15m",
           "intervalFactor": 1,
           "legendFormat": "{{device}}_transmit",
+          "range": true,
           "refId": "B",
           "step": 600
         }
       ],
-      "title": "Internet traffic per hour $device",
+      "title": "Network traffic per 15min",
       "type": "timeseries"
     },
     {
@@ -1502,7 +1520,7 @@
           "refId": "G"
         }
       ],
-      "title": "Memory Basic",
+      "title": "Memory",
       "type": "timeseries"
     },
     {
@@ -1605,7 +1623,7 @@
           "step": 240
         }
       ],
-      "title": "CPU% Basic",
+      "title": "CPU %",
       "type": "timeseries"
     },
     {
@@ -1680,7 +1698,7 @@
           "step": 4
         }
       ],
-      "title": "Network bandwidth usage per second $device",
+      "title": "Network bandwidth usage per second",
       "type": "timeseries"
     },
     {
@@ -2307,7 +2325,7 @@
           "refId": "D"
         }
       ],
-      "title": "Disk R/W Time(Reference: less than 100ms)(beta)",
+      "title": "Disk R/W Time",
       "type": "timeseries"
     },
     {
@@ -2862,6 +2880,6 @@
   "timezone": "browser",
   "title": "Node Exporter for Prometheus Dashboard",
   "uid": "xfpJB9FGz",
-  "version": 20,
+  "version": 21,
   "weekStart": ""
 }

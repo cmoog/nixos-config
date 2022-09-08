@@ -14,7 +14,6 @@
     home-manager.enable = true;
     fish = {
       enable = true;
-      interactiveShellInit = builtins.readFile ./server/config.fish;
       shellInit = builtins.readFile ./server/config.fish;
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
@@ -80,7 +79,14 @@
 
     direnv.enable = true;
     bat.enable = true;
-    fzf.enable = true;
+
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+      # respects .gitignore
+      defaultCommand = "fd --type=f";
+      fileWidgetCommand = "fd --type=f";
+    };
     exa = {
       enable = true;
       enableAliases = true;

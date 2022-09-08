@@ -11,11 +11,6 @@ fish_add_path \
   ~/.cargo/bin \
   ~/.deno/bin
 
-# fzf configuration
-# respect .gitignore
-set --export FZF_DEFAULT_COMMAND fd --type f
-set --export FZF_CTRL_T_COMMAND '$FZF_DEFAULT_COMMAND'
-
 # convenience abbreviations
 abbr --add --global g 'git'
 abbr --add --global kube 'kubectl'

@@ -2,7 +2,6 @@
 # import this into configuration.nix to enable a nixos desktop workflow
 
 {
-  # imports = [ ./sway.nix ];
   imports = [ ./gnome.nix ];
 
   nixpkgs.config.allowUnfree = true;
