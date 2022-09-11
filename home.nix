@@ -22,6 +22,7 @@
 
     git = {
       enable = true;
+      lfs.enable = true;
       delta.enable = true; # diff viewer
       userName = "Charlie Moog";
       userEmail = "moogcharlie@gmail.com";
