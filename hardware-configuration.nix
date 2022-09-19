@@ -20,13 +20,6 @@
       fsType = "ext4";
     };
 
-  fileSystems."/nix/store" =
-    {
-      device = "/nix/store";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/3A26-174B";
@@ -44,7 +37,7 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.vethc173dcf.useDHCP = lib.mkDefault true;
+  # networking.interfaces.vethb75113c.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp6s0.useDHCP = lib.mkDefault true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

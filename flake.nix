@@ -13,11 +13,11 @@
     { self, nixpkgs, home-manager, nixpkgs-unstable, neovim-nightly-overlay }:
     let
       system = "x86_64-linux";
-      overlay = final: prev: rec {
+      overlay = final: prev: {
         unstable = import nixpkgs-unstable { inherit system; };
         # force home-manager programs.lazygit to use unstable lazygit
         # (home-manager overlays don't work)
-        lazygit = unstable.lazygit;
+        lazygit = final.unstable.lazygit;
       };
       overlays = [ overlay neovim-nightly-overlay.overlay ];
       overlay-module = ({ config, pkgs, ... }: {

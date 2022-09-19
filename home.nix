@@ -23,7 +23,13 @@
     git = {
       enable = true;
       lfs.enable = true;
-      delta.enable = true; # diff viewer
+      delta = {
+        enable = true;
+        options = {
+          line-numbers = true;
+          navigate = true;
+        };
+      };
       userName = "Charlie Moog";
       userEmail = "moogcharlie@gmail.com";
       extraConfig = {
@@ -33,10 +39,6 @@
         commit.gpgsign = true;
         tag.gpgsign = true;
         diff.colorMoved = "default";
-        delta = {
-          line-numbers = true;
-          navigate = true;
-        };
       };
       ignores = [ "result" "/.vscode" "/.direnv" ];
       aliases = {
@@ -95,6 +97,10 @@
     zoxide = {
       enable = true;
       enableFishIntegration = true;
+    };
+    gitui = {
+      enable = true;
+      keyConfig = ./server/gitui_key_bindings.ron;
     };
     lazygit = {
       enable = true;

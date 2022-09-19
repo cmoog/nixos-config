@@ -6,7 +6,7 @@
     ./desktop/gui.nix
     ./server/metrics.nix
     ./server/gitbrowser.nix
-    ./server/ipfs.nix
+    # ./server/ipfs.nix
     ./hardware-configuration.nix
   ];
 

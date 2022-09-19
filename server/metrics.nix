@@ -38,6 +38,7 @@
   services.prometheus = {
     enable = true;
     port = 9001;
+    listenAddress = "127.0.0.1";
 
     scrapeConfigs = [{
       job_name = "node-exporter";
@@ -51,6 +52,7 @@
         enable = true;
         enabledCollectors = [ "systemd" ];
         port = 9002;
+        listenAddress = "127.0.0.1";
       };
     };
   };
