@@ -1,12 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  services.nginx.virtualHosts."dash.*" = {
-    locations."/" = {
-      proxyPass = "http://localhost:${toString config.services.grafana.port}";
-      proxyWebsockets = true;
-    };
-  };
   services.grafana = {
     enable = true;
     port = 2342;

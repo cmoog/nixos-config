@@ -3,10 +3,10 @@
 
 {
   imports = [
-    ./desktop/gui.nix
-    ./server/metrics.nix
+    # ./desktop/gui.nix
     ./server/gitbrowser.nix
-    # ./server/ipfs.nix
+    ./server/metrics.nix
+    ./server/nginx.nix
     ./hardware-configuration.nix
   ];
 
@@ -38,7 +38,7 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 80 ];
+      allowedTCPPorts = [ 22 80 443 ];
       allowedUDPPorts = [ config.services.tailscale.port ];
       checkReversePath = "loose";
     };
@@ -103,20 +103,6 @@
     tailscale = {
       enable = true;
       port = 41641;
-    };
-
-    nginx = {
-      enable = true;
-      recommendedProxySettings = true;
-      virtualHosts."_" = {
-        default = true;
-        extraConfig = ''
-          add_header content-type text/plain;
-        '';
-        locations."/" = {
-          return = "200 'hello from ${config.networking.hostName}'";
-        };
-      };
     };
   };
 

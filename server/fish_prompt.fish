@@ -73,11 +73,12 @@ set -l git_orange "#e25a38"
 set prompt_git (fish_git_prompt | string trim -c ' ()')
 test -n "$prompt_git"
 and _nim_prompt_wrapper $git_orange "" $prompt_git
+and _nim_prompt_wrapper $git_orange "" (git rev-parse --short HEAD)
 
 # nix shell
 if [ "$IN_NIX_SHELL" != "" ]
   set -l nix_purple "#7e7eff"
-  _nim_prompt_wrapper $nix_purple "" $IN_NIX_SHELL
+  _nim_prompt_wrapper $nix_purple "" nix
 end
 
 # New line
