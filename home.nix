@@ -123,8 +123,9 @@
   };
 
   home.packages = with pkgs; [
-    aws
+    awscli2
     bottom
+    unstable.deno
     dolt
     duf
     fd
