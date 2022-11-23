@@ -2,14 +2,13 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
-    { self, nixpkgs, home-manager, nixpkgs-unstable, neovim-nightly-overlay }:
+    { self, nixpkgs, home-manager, nixpkgs-unstable }:
     let
       system = "x86_64-linux";
       overlay = final: prev: {
@@ -18,7 +17,7 @@
         # (home-manager overlays don't work)
         lazygit = final.unstable.lazygit;
       };
-      overlays = [ overlay neovim-nightly-overlay.overlay ];
+      overlays = [ overlay ];
       overlay-module = ({ config, pkgs, ... }: {
         nixpkgs.overlays = overlays;
       });

@@ -64,9 +64,8 @@
     neovim = {
       enable = true;
       vimAlias = true;
-      package = pkgs.neovim-nightly;
       extraConfig = builtins.readFile ./server/init.vim;
-      plugins = with pkgs.unstable.vimPlugins; [
+      plugins = with pkgs.vimPlugins; [
         fzf-vim
         gruvbox
         lsp-colors-nvim
@@ -76,7 +75,7 @@
         toggleterm-nvim
         vim-airline
         vim-gitgutter
-        (nvim-treesitter.withPlugins (plugins: pkgs.unstable.tree-sitter.allGrammars))
+        (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
       ];
     };
 
