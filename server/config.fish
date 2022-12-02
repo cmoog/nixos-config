@@ -47,3 +47,8 @@ function pr;
   gh pr create --fill
   gh pr view --web
 end
+
+function bg;
+  set --local t $(date -d "now" +"%Y-%m-%d-%H-%M-%S")
+  nohup $argv > $t.out 2> $t.err < /dev/null &
+end
