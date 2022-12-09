@@ -3,16 +3,26 @@
 {
   services.grafana = {
     enable = true;
-    port = 2342;
-    addr = "localhost";
 
-    users.allowSignUp = false;
-    users.allowOrgCreate = false;
-    auth.anonymous.enable = false;
+    settings = {
+      users.allow_sign_up = false;
+      users.allow_org_create = false;
+      "auth.anonymous".enabled = false;
+      server = {
+        http_port = 2342;
+        http_addr = "localhost";
+      };
+    };
 
     provision = {
       enable = true;
-      datasources = [
+      dashboards.settings.providers = [{
+        name = "Metrics";
+        type = "file";
+        disableDeletion = true;
+        options.path = ./dashboard.json;
+      }];
+      datasources.settings.datasources = [
         {
           name = "prometheus";
           isDefault = true;
@@ -20,12 +30,6 @@
           url = "http://localhost:${toString config.services.prometheus.port}";
         }
       ];
-      dashboards = [{
-        name = "Metrics";
-        type = "file";
-        disableDeletion = true;
-        options.path = ./dashboard.json;
-      }];
     };
   };
 

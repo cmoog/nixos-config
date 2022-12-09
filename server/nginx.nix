@@ -1,13 +1,15 @@
 { pkgs, config, ... }:
-let proxyConf = (port: {
-  addSSL = true;
-  sslCertificateKey = "/etc/ssl/certs/_wildcard.nuc.cmoog.io-key.pem";
-  sslCertificate = "/etc/ssl/certs/_wildcard.nuc.cmoog.io.pem";
-  locations."/" = {
-    proxyPass = "http://localhost:${port}";
-    proxyWebsockets = true;
-  };
-}); in
+let
+  proxyConf = (port: {
+    addSSL = true;
+    sslCertificateKey = "/etc/ssl/certs/_wildcard.nuc.cmoog.io-key.pem";
+    sslCertificate = "/etc/ssl/certs/_wildcard.nuc.cmoog.io.pem";
+    locations."/" = {
+      proxyPass = "http://localhost:${port}";
+      proxyWebsockets = true;
+    };
+  });
+in
 {
   services.nginx = {
     enable = true;
@@ -21,9 +23,7 @@ let proxyConf = (port: {
         return = "200 'hello from ${config.networking.hostName}'";
       };
     };
-    virtualHosts."dtable.*" = proxyConf "3200";
-    virtualHosts."engine.*" = proxyConf "3201";
     virtualHosts."git.*" = proxyConf "8999";
-    virtualHosts."dash.*" = proxyConf (toString config.services.grafana.port);
+    virtualHosts."dash.*" = proxyConf (toString config.services.grafana.settings.server.http_port);
   };
 }

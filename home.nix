@@ -124,7 +124,6 @@
   home.packages = with pkgs; [
     awscli2
     bottom
-    unstable.deno
     dolt
     duf
     fd
@@ -135,12 +134,14 @@
     lazydocker
     monero-cli
     nixpkgs-fmt
+    nodePackages.wrangler
     pandoc
     ripgrep
     rnix-lsp
     sd
     tectonic
     texlab
+    unstable.deno
     unstable.go
     unstable.ipfs
     unzip
