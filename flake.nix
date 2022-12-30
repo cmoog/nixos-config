@@ -12,7 +12,10 @@
     let
       system = "x86_64-linux";
       overlay = final: prev: {
-        unstable = import nixpkgs-unstable { inherit system; };
+        unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
         # force home-manager programs.lazygit to use unstable lazygit
         # (home-manager overlays don't work)
         lazygit = final.unstable.lazygit;
@@ -21,7 +24,7 @@
       overlay-module = ({ config, pkgs, ... }: {
         nixpkgs.overlays = overlays;
       });
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { inherit system; };
     in
     {
       formatter.${system} = pkgs.nixpkgs-fmt;

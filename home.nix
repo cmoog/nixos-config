@@ -144,6 +144,7 @@
     unstable.deno
     unstable.go
     unstable.ipfs
+    unstable.vscode
     unzip
     youtube-dl
   ];
