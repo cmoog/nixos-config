@@ -15,6 +15,7 @@
     google-chrome
     monero-gui
     mpv
+    obsidian
     signal-desktop
     unstable.tor-browser-bundle-bin
     vscode

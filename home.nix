@@ -139,14 +139,23 @@
     ripgrep
     rnix-lsp
     sd
-    tectonic
     texlab
+    texlive.combined.scheme-medium
     unstable.deno
     unstable.go
     unstable.ipfs
     unstable.vscode
     unzip
     youtube-dl
+    (python3.withPackages (pythonPackages: with pythonPackages; [
+      ipykernel
+      jupyter
+      matplotlib
+      numpy
+      pandas
+      plotly
+      pytorch
+    ]))
   ];
 
   home.stateVersion = "21.05";

@@ -4,10 +4,10 @@
 {
   imports = [
     # ./desktop/gui.nix
+    ./hardware-configuration.nix
     ./server/gitbrowser.nix
     ./server/metrics.nix
     ./server/nginx.nix
-    ./hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
