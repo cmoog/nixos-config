@@ -6,9 +6,13 @@
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
   outputs =
-    { self, nixpkgs, home-manager, nixpkgs-unstable }:
+    { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server }:
     let
       system = "x86_64-linux";
       overlay = final: prev: {
@@ -40,6 +44,7 @@
         inherit system;
         modules = [
           overlay-module
+          vscode-server.nixosModule
           ./configuration.nix
           home-manager.nixosModule
           {

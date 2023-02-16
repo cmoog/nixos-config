@@ -104,6 +104,7 @@
       enable = true;
       port = 41641;
     };
+    vscode-server.enable = true;
   };
 
   system.stateVersion = "21.11";
