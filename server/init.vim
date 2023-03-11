@@ -53,11 +53,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Mirror the NERDTree before showing it. This makes it the same on all tabs.
 nnoremap <C-b> :NERDTreeMirror<CR>:NERDTreeToggle<CR>
 
-" color scheme
 set background=dark
-let g:gruvbox_contrast_dark='hard' " soft, medium, hard
-let g:airline_theme = 'gruvbox'
-colorscheme gruvbox
 
 lua <<EOF
   -- fzf file search

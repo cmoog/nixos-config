@@ -3,7 +3,6 @@
 
 {
   imports = [
-    # ./desktop/gui.nix
     ./hardware-configuration.nix
     ./server/gitbrowser.nix
     ./server/metrics.nix
@@ -22,7 +21,7 @@
     hostName = "charlie-nuc";
 
     useDHCP = false;
-    networkmanager.enable = false;
+    networkmanager.enable = true;
     interfaces = {
       enp5s0.useDHCP = true;
       eno1.useDHCP = false;
@@ -33,7 +32,6 @@
         address = "192.168.99.20";
         prefixLength = 24;
       }];
-
     };
 
     firewall = {

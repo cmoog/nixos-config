@@ -10,9 +10,16 @@
       url = "github:msteen/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
   outputs =
-    { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server }:
+    { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server, stylix }:
     let
       system = "x86_64-linux";
       overlay = final: prev: {
@@ -33,19 +40,18 @@
     {
       formatter.${system} = pkgs.nixpkgs-fmt;
       homeConfigurations.charlie = home-manager.lib.homeManagerConfiguration rec {
-        inherit system;
-        inherit (configuration.home) stateVersion username homeDirectory;
-        configuration = import ./home.nix rec {
-          pkgs = import nixpkgs { inherit system overlays; };
-          config = pkgs.config;
-        };
+        modules = [ stylix.nixosModules.stylix overlay-module ./home.nix ];
       };
       nixosConfigurations.charlie-nuc = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           overlay-module
+          stylix.nixosModules.stylix
           vscode-server.nixosModule
+
+          ./desktop/gui.nix
           ./configuration.nix
+
           home-manager.nixosModule
           {
             home-manager = {

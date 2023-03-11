@@ -5,11 +5,6 @@
     homeDirectory = "/home/charlie";
   };
 
-  xdg.configFile = {
-    # this should be in gui.nix, but alacritty only looks for config paths under ~/...
-    "alacritty/alacritty.yml".source = ./desktop/alacritty.yml;
-  };
-
   programs = {
     home-manager.enable = true;
     fish = {
@@ -17,6 +12,36 @@
       shellInit = builtins.readFile ./server/config.fish;
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
+      };
+    };
+
+    alacritty = {
+      enable = true;
+      settings = {
+        env.TERM = "xterm-256color";
+        working_directory = "./Code";
+        window = {
+          dimensions = {
+            columns = 115;
+            lines = 35;
+          };
+          dynamic_padding = true;
+        };
+        font = {
+          size = 14;
+          offset = {
+            x = 0;
+            y = 2;
+          };
+          glyph_offset = {
+            x = 0;
+            y = 1;
+          };
+        };
+        selection = {
+          semantic_escape_chars = ",│`|:\"' ()[]{}<>\t";
+          save_to_clipboard = true;
+        };
       };
     };
 
@@ -67,13 +92,11 @@
       extraConfig = builtins.readFile ./server/init.vim;
       plugins = with pkgs.vimPlugins; [
         fzf-vim
-        gruvbox
         lsp-colors-nvim
         nerdtree
         nvim-autopairs
         nvim-lspconfig
         toggleterm-nvim
-        vim-airline
         vim-gitgutter
         (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
       ];
@@ -144,6 +167,7 @@
     unstable.deno
     unstable.go
     unstable.ipfs
+    unstable.openai-whisper
     unstable.vscode
     unzip
     youtube-dl
