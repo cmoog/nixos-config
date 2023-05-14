@@ -13,10 +13,7 @@ fish_add_path \
 
 # convenience abbreviations
 abbr --add --global g 'git'
-abbr --add --global kube 'kubectl'
-abbr --add --global kub 'kubectl'
 abbr --add --global lg 'lazygit'
-abbr --add --global gi 'gitui'
 abbr --add --global ld 'lazydocker'
 
 if [ (uname) = "Darwin" ]

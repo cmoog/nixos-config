@@ -9,23 +9,21 @@
 
 # It goes from:
 # ┬─[charlie@mac:~]
-# ╰─>$ echo here
+# └─>$ echo here
 
 # To:
 # ┬─[charlie@mac:~/C/core]─[master↑1|●1✚1…1]─[impure]
 # │ 2       15054   0%      running sleep 100000
 # │ 1       15048   0%      running sleep 100000
-# ╰─>$ echo there
+# └─>$ echo there
 
 set -l return_color red
 test $status = 0; and set return_color green
 
-set -q __fish_git_prompt_showupstream
-or set -g __fish_git_prompt_showupstream auto
-
-set -g __fish_git_prompt_show_informative_status auto
-set -g __fish_git_prompt_showdirtystate auto
-set -g __fish_git_prompt_showuntrackedfiles auto
+set -g __fish_git_prompt_showupstream 'auto'
+set -g __fish_git_prompt_show_informative_status 'yes'
+set -g __fish_git_prompt_showdirtystate 'yes'
+set -g __fish_git_prompt_showuntrackedfiles 'yes'
 
 function _nim_prompt_wrapper
   set field_color $argv[1]
@@ -47,6 +45,7 @@ end
 
 set_color $return_color
 echo -n '┬─'
+# echo -n '╦═'
 set_color -o normal
 echo -n [
 if test "$USER" = root -o "$USER" = toor
@@ -73,7 +72,6 @@ set -l git_orange "#e25a38"
 set prompt_git (fish_git_prompt | string trim -c ' ()')
 test -n "$prompt_git"
 and _nim_prompt_wrapper $git_orange "" $prompt_git
-and _nim_prompt_wrapper $git_orange "" (git rev-parse --short HEAD)
 
 # nix shell
 if [ "$IN_NIX_SHELL" != "" ]
@@ -94,7 +92,8 @@ for job in (jobs)
 end
 set_color normal
 set_color $return_color
-echo -n '╰─>'
+echo -n '└─▷'
+# echo -n '╚═▶'
 set_color -o $return_color
 echo -n '$ '
 set_color normal

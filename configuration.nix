@@ -57,7 +57,6 @@
     deno
     git
     go
-    python310
     tailscale
     vim
     wget
@@ -68,6 +67,11 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 10d";
+    };
   };
 
   users.mutableUsers = false;

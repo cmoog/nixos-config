@@ -121,7 +121,7 @@
       enableFishIntegration = true;
     };
     gitui = {
-      enable = true;
+      enable = false;
       keyConfig = ./server/gitui_key_bindings.ron;
     };
     lazygit = {
@@ -146,7 +146,7 @@
 
   home.packages = with pkgs; [
     awscli2
-    bottom
+    btop
     dolt
     duf
     fd
@@ -156,24 +156,24 @@
     kubectl
     lazydocker
     monero-cli
+    sage
     nixpkgs-fmt
     nodePackages.wrangler
     pandoc
     ripgrep
     rnix-lsp
     sd
-    texlab
     texlive.combined.scheme-medium
     unstable.deno
     unstable.go
     unstable.ipfs
     unstable.openai-whisper
+    unstable.typst
     unstable.vscode
     unzip
     youtube-dl
     (python3.withPackages (pythonPackages: with pythonPackages; [
       ipykernel
-      jupyter
       matplotlib
       numpy
       pandas

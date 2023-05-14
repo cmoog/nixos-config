@@ -24,6 +24,8 @@ in
       };
     };
     virtualHosts."git.*" = proxyConf "8999";
-    virtualHosts."dash.*" = proxyConf (toString config.services.grafana.settings.server.http_port);
+    virtualHosts."top.*" = proxyConf "2342";
+    virtualHosts."8998.*" = proxyConf "8998";
+    virtualHosts."9000.*" = proxyConf "9000";
   };
 }
