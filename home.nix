@@ -120,10 +120,6 @@
       enable = true;
       enableFishIntegration = true;
     };
-    gitui = {
-      enable = false;
-      keyConfig = ./server/gitui_key_bindings.ron;
-    };
     lazygit = {
       enable = true;
       settings = {
@@ -163,6 +159,7 @@
     ripgrep
     rnix-lsp
     sd
+    sqlite
     texlive.combined.scheme-medium
     unstable.deno
     unstable.go
