@@ -45,7 +45,6 @@ end
 
 set_color $return_color
 echo -n '┬─'
-# echo -n '╦═'
 set_color -o normal
 echo -n [
 if test "$USER" = root -o "$USER" = toor
@@ -93,7 +92,6 @@ end
 set_color normal
 set_color $return_color
 echo -n '└─▷'
-# echo -n '╚═▶'
 set_color -o $return_color
 echo -n '$ '
 set_color normal

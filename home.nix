@@ -148,16 +148,18 @@
     fd
     gh
     gopls
+    hledger
     jq
     kubectl
     lazydocker
     monero-cli
-    sage
+    neofetch
     nixpkgs-fmt
     nodePackages.wrangler
     pandoc
     ripgrep
     rnix-lsp
+    sage
     sd
     sqlite
     texlive.combined.scheme-medium
