@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
+let
+  user = "charlie";
+in
 {
   home = {
-    username = "charlie";
-    homeDirectory = "/home/charlie";
+    username = user;
+    homeDirectory = "/home/${user}";
   };
 
   programs = {
@@ -10,6 +13,10 @@
     fish = {
       enable = true;
       shellInit = builtins.readFile ./server/config.fish;
+      shellAliases = {
+        copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
+        paste = "${pkgs.xsel}/bin/xsel --clipboard --output";
+      };
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
       };
@@ -141,7 +148,6 @@
   };
 
   home.packages = with pkgs; [
-    awscli2
     btop
     dolt
     duf
@@ -162,7 +168,6 @@
     sage
     sd
     sqlite
-    texlive.combined.scheme-medium
     unstable.deno
     unstable.go
     unstable.ipfs
@@ -179,6 +184,7 @@
       plotly
       pytorch
     ]))
+    zig
   ];
 
   home.stateVersion = "21.05";
