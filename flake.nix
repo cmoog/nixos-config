@@ -1,45 +1,25 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-server = {
       url = "github:msteen/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
-    { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server }:
+    { self, nixpkgs, home-manager, vscode-server }:
     let
-      systems = [
-        {
-          system = "x86_64-linux";
-          hostname = "charlie-nuc";
-        }
-        {
-          system = "aarch64-linux";
-          hostname = "charlie-vm";
-        }
-      ];
+      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       mkSystem = { system, hostname, modules ? [ ] }:
         let
-          overlay = final: prev: {
-            unstable = import nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-            # force home-manager programs.lazygit to use unstable lazygit
-            # (home-manager overlays don't work)
-            lazygit = final.unstable.lazygit;
-          };
-          overlays = [ overlay ];
+          overlay = final: prev: { };
           overlay-module = ({ config, pkgs, ... }: {
-            nixpkgs.overlays = overlays;
+            nixpkgs.overlays = [ overlay ];
           });
-          pkgs = import nixpkgs { inherit system; };
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -60,11 +40,13 @@
         };
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixpkgs-fmt;
-      # homeConfigurations.charlie = home-manager.lib.homeManagerConfiguration rec {
-      #   modules = [ overlay-module ./home.nix ];
-      # };
+      formatter = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: pkgs.nixpkgs-fmt);
+      packages = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: {
+        homeConfig = (home-manager.lib.homeManagerConfiguration rec {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+        }).activationPackage;
+      });
       nixosConfigurations.charlie-vm = mkSystem {
         system = "aarch64-linux";
         hostname = "charile-vm";

@@ -93,4 +93,13 @@ lua <<EOF
       enable = true
     },
   })
+  require('github-theme').setup({
+    options = {
+      styles = {
+        keywords = 'NONE'
+      }
+    }
+  })
+
+  vim.cmd('colorscheme github_dark_dimmed')
 EOF

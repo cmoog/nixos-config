@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 let
   user = "charlie";
+  github-nvim-theme = pkgs.vimUtils.buildVimPlugin {
+    name = "github-nvim-theme";
+    buildInputs = with pkgs; [ git ];
+    buildPhase = "rm Makefile";
+    src = pkgs.fetchFromGitHub {
+      owner = "projekt0n";
+      repo = "github-nvim-theme";
+      rev = "ab90dd7bd835cb90572e2d8337ff50452cdec58c";
+      hash = "sha256-6ODsunlGNNi0vlgIDpol4tDBOl1MZVsW9QoI3tHquO8=";
+    };
+  };
 in
 {
   home = {
@@ -98,6 +109,7 @@ in
       vimAlias = true;
       extraConfig = builtins.readFile ./server/init.vim;
       plugins = with pkgs.vimPlugins; [
+        github-nvim-theme
         fzf-vim
         lsp-colors-nvim
         nerdtree
@@ -149,12 +161,15 @@ in
 
   home.packages = with pkgs; [
     btop
+    deno
     dolt
     duf
     fd
     gh
+    go
     gopls
     hledger
+    ipfs
     jq
     kubectl
     lazydocker
@@ -162,20 +177,17 @@ in
     neofetch
     nixpkgs-fmt
     nodePackages.wrangler
+    openai-whisper
     pandoc
     ripgrep
     rnix-lsp
     sage
     sd
     sqlite
-    unstable.deno
-    unstable.go
-    unstable.ipfs
-    unstable.openai-whisper
-    unstable.typst
-    unstable.vscode
+    typst
     unzip
     youtube-dl
+    zig
     (python3.withPackages (pythonPackages: with pythonPackages; [
       ipykernel
       matplotlib
@@ -184,7 +196,6 @@ in
       plotly
       pytorch
     ]))
-    zig
   ];
 
   home.stateVersion = "21.05";

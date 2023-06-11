@@ -17,8 +17,8 @@
     mpv
     obsidian
     signal-desktop
-    unstable.sniffnet
-    unstable.tor-browser-bundle-bin
+    sniffnet
+    tor-browser-bundle-bin
     vscode
   ];
 
