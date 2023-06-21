@@ -1,4 +1,3 @@
-# NixOS configuration.nix
 { config, pkgs, ... }:
 
 {

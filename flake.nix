@@ -17,19 +17,16 @@
       mkSystem = { system, hostname, modules ? [ ] }:
         let
           overlay = final: prev: { };
-          overlay-module = ({ config, pkgs, ... }: {
-            nixpkgs.overlays = [ overlay ];
-          });
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            overlay-module
             vscode-server.nixosModule
             ./common.nix
             home-manager.nixosModule
             {
               networking.hostName = hostname;
+              nixpkgs.overlays = [ overlay ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

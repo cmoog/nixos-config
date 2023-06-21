@@ -3,7 +3,6 @@ let
   user = "charlie";
   github-nvim-theme = pkgs.vimUtils.buildVimPlugin {
     name = "github-nvim-theme";
-    buildInputs = with pkgs; [ git ];
     buildPhase = "rm Makefile";
     src = pkgs.fetchFromGitHub {
       owner = "projekt0n";
@@ -30,6 +29,17 @@ in
       };
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
+      };
+    };
+
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        nuc = {
+          hostname = "nuc.cmoog.io";
+          user = "charlie";
+          forwardAgent = true;
+        };
       };
     };
 
