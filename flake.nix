@@ -10,49 +10,57 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    { self, nixpkgs, home-manager, vscode-server }:
+  outputs = { self, nixpkgs, home-manager, vscode-server }:
     let
-      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
-      mkSystem = { system, hostname, modules ? [ ] }:
-        let
-          overlay = final: prev: { };
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            vscode-server.nixosModule
-            ./common.nix
-            home-manager.nixosModule
-            {
-              networking.hostName = hostname;
-              nixpkgs.overlays = [ overlay ];
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.charlie = import ./home.nix;
-              };
-            }
-          ] ++ modules;
-        };
+      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f
+        nixpkgs.legacyPackages.${system});
+      defaultModules = [
+        home-manager.nixosModule
+        vscode-server.nixosModule
+        ./common.nix
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.charlie = import
+              ./home.nix;
+          };
+        }
+      ];
     in
     {
       formatter = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: pkgs.nixpkgs-fmt);
-      packages = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: {
-        homeConfig = (home-manager.lib.homeManagerConfiguration rec {
-          inherit pkgs;
-          modules = [ ./home.nix ];
-        }).activationPackage;
-      });
-      nixosConfigurations.charlie-vm = mkSystem {
-        system = "aarch64-linux";
-        hostname = "charile-vm";
-        modules = [ ./utm-vm ];
-      };
-      nixosConfigurations.charlie-nuc = mkSystem {
-        system = "x86_64-linux";
-        hostname = "charile-nuc";
-        modules = [ ./intel-nuc ];
+      packages =
+        forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: {
+          homeConfig = (home-manager.lib.homeManagerConfiguration rec {
+            inherit pkgs;
+            modules = [
+              ./home.nix
+            ];
+          }).activationPackage;
+        });
+      nixosConfigurations = {
+        charlie-vm = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./utm-vm
+            { networking.hostName = "charile-vm"; }
+          ] ++ defaultModules;
+        };
+        charlie-nuc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./intel-nuc
+            { networking.hostName = "charile-nuc"; }
+          ] ++ defaultModules;
+        };
+        pi4 = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./pi
+            { networking.hostName = "pi"; }
+          ];
+        };
       };
     };
 }

@@ -22,24 +22,70 @@ in
     home-manager.enable = true;
     fish = {
       enable = true;
-      shellInit = builtins.readFile ./server/config.fish;
+      shellInit = ''
+        set fish_greeting ""
+
+        set --export EDITOR vim
+        set --export GOPATH ~/go
+        set --export GO111MODULE on
+
+        fish_add_path \
+          ~/bin \
+          $GOPATH/bin \
+          ~/.cargo/bin \
+          ~/.deno/bin
+      '';
       shellAliases = {
         copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
         paste = "${pkgs.xsel}/bin/xsel --clipboard --output";
+        ip = "ip --color=auto";
+        g = "git";
+        lg = "lazygit";
+        ld = "lazydocker";
+        rp = "realpath";
+        bg = "batgrep";
       };
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
-      };
-    };
-
-    ssh = {
-      enable = true;
-      matchBlocks = {
-        nuc = {
-          hostname = "nuc.cmoog.io";
-          user = "charlie";
-          forwardAgent = true;
-        };
+        groot = ''
+          set --local gitroot (${pkgs.git}/bin/git rev-parse --show-toplevel)
+          if [ "$gitroot" = "" ]
+            return -1
+          end
+          cd "$gitroot"
+        '';
+        pr = ''
+          ${pkgs.gh}/bin/gh pr create --fill
+          ${pkgs.gh}/bin/gh pr view --web
+        '';
+        fork = ''
+          set --local t $(date -d "now" +"%Y-m-%d-%H-%M-%S")
+          nohup $argv > $t.out 2> $t.err < /dev/null &
+        '';
+        nixdeps = "nix derivation show $argv[1] -r | jq \".[].outputs.out.path\" -r";
+        nixshow =
+          let
+            shallowStringer = ''
+              let
+                ident = a: a;
+                funcs = {
+                  "set" = builtins.attrNames;
+                  "list" = builtins.typeOf;
+                  "lambda" = builtins.typeOf;
+                  "path" = builtins.typeOf;
+                  "int" = ident;
+                  "null" = ident;
+                  "float" = ident;
+                  "bool" = ident;
+                  "string" = ident;
+                };
+              in a: (funcs.''${builtins.typeOf a} a)
+            '';
+          in
+          ''
+            nix eval $argv[1] --apply '${builtins.replaceStrings ["\n"] [" "] shallowStringer}' \
+              --json | ${pkgs.jq}/bin/jq
+          '';
       };
     };
 
@@ -132,7 +178,13 @@ in
     };
 
     direnv.enable = true;
-    bat.enable = true;
+    bat = {
+      enable = true;
+      config = {
+        style = "plain";
+      };
+      extraPackages = with pkgs.bat-extras; [ batman batgrep ];
+    };
 
     fzf = {
       enable = true;
@@ -140,6 +192,10 @@ in
       # respects .gitignore
       defaultCommand = "fd --type=f";
       fileWidgetCommand = "fd --type=f";
+      fileWidgetOptions = [
+        "--preview 'bat -n --color=always {}'"
+        "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
+      ];
     };
     exa = {
       enable = true;
@@ -153,6 +209,7 @@ in
       enable = true;
       settings = {
         gui.showCommandLog = false;
+        git.autoFetch = false;
         git.paging = {
           colorArg = "always";
           pager = "delta --dark --paging=never";
@@ -170,6 +227,14 @@ in
   };
 
   home.packages = with pkgs; [
+    dtc
+    hyperfine
+    nil
+    screen
+    tio
+    usbutils
+
+    broot
     btop
     deno
     dolt
@@ -179,26 +244,22 @@ in
     go
     gopls
     hledger
-    ipfs
     jq
-    kubectl
     lazydocker
-    monero-cli
     neofetch
     nixpkgs-fmt
     nodePackages.wrangler
-    openai-whisper
-    pandoc
+    procs
     ripgrep
-    rnix-lsp
     sage
     sd
     sqlite
+    tokei
     typst
     unzip
     youtube-dl
     zig
-    (python3.withPackages (pythonPackages: with pythonPackages; [
+    (python3.withPackages (pyPkgs: with pyPkgs; [
       ipykernel
       matplotlib
       numpy

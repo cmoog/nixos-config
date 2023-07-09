@@ -1,21 +1,21 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
+
+  environment.etc = {
+    "sway/config".source = ./sway.config;
+  };
+
   environment.systemPackages = with pkgs; [
+    (writeShellScriptBin "bashbar" (builtins.readFile ./swaybar.sh))
     alacritty
     firefox
-    gnome-text-editor
-    gnome.dconf-editor
     gnome.gnome-disk-utility
     gnome.nautilus
-    gnomeExtensions.gtile
-    google-chrome
-    # monero-gui
     mpv
     obsidian
-    # signal-desktop
-    # tor-browser-bundle-bin
+    pulsemixer
     vscode
   ];
 
@@ -25,19 +25,27 @@
     noto-fonts-emoji
   ];
 
-  services = {
-    gnome.core-utilities.enable = false;
-    xserver = {
+  # daemon and CLI for wifi
+  networking.wireless.iwd.enable = true;
+
+  sound.enable = true;
+
+  programs = {
+    sway = {
       enable = true;
-      desktopManager.gnome.enable = true;
-      displayManager = {
-        gdm.enable = true;
-        sessionCommands = ''
-          dconf load / << EOF
-            ${builtins.readFile ./dconf.ini}
-          EOF
-        '';
-      };
+      extraPackages = with pkgs; [
+        dmenu-wayland
+        grim
+        sway-contrib.grimshot
+        swaybg
+        swayidle
+        swaylock
+      ];
     };
+  };
+
+  services.xserver = {
+    enable = true;
+    displayManager.startx.enable = true;
   };
 }
