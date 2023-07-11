@@ -1,15 +1,15 @@
 { config, pkgs, lib, modulesPath, ... }: {
+
   imports = [
     # "${modulesPath}/installer/sd-card/sd-image-raspberrypi.nix"
     "${modulesPath}/installer/sd-card/sd-image-aarch64-installer.nix"
   ];
 
   boot = {
-    # kernelPackages = pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
-    # ttyAMA0 is the serial console broken out to the GPIO
     kernelParams = [
       "8250.nr_uarts=1"
+      # ttyAMA0 is the serial console broken out to the GPIO
       "console=ttyAMA0,115200"
       "console=tty1"
       "cma=128M"
@@ -24,6 +24,8 @@
   };
 
   sdImage.compressImage = false;
+
+  networking.hostName = "pi";
 
   networking.wireless = {
     enable = false;

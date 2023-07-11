@@ -1,21 +1,29 @@
 { config, pkgs, ... }:
-let
-  user = "charlie";
-  github-nvim-theme = pkgs.vimUtils.buildVimPlugin {
-    name = "github-nvim-theme";
-    buildPhase = "rm Makefile";
-    src = pkgs.fetchFromGitHub {
-      owner = "projekt0n";
-      repo = "github-nvim-theme";
-      rev = "ab90dd7bd835cb90572e2d8337ff50452cdec58c";
-      hash = "sha256-6ODsunlGNNi0vlgIDpol4tDBOl1MZVsW9QoI3tHquO8=";
-    };
-  };
-in
 {
   home = {
-    username = user;
-    homeDirectory = "/home/${user}";
+    username = "charlie";
+    homeDirectory = "/home/charlie";
+    sessionPath = [
+      "$HOME/bin"
+      "$HOME/go/bin"
+      "$HOME/.cargo/bin"
+      "$HOME/.deno/bin"
+    ];
+    sessionVariables = {
+      EDITOR = "vim";
+      GOPATH = "$HOME/go";
+      GO111MODULE = "on";
+    };
+    shellAliases = {
+      copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
+      paste = "${pkgs.xsel}/bin/xsel --clipboard --output";
+      ip = "ip --color=auto";
+      g = "git";
+      lg = "lazygit";
+      ld = "lazydocker";
+      rp = "realpath";
+      bg = "batgrep";
+    };
   };
 
   programs = {
@@ -24,27 +32,7 @@ in
       enable = true;
       shellInit = ''
         set fish_greeting ""
-
-        set --export EDITOR vim
-        set --export GOPATH ~/go
-        set --export GO111MODULE on
-
-        fish_add_path \
-          ~/bin \
-          $GOPATH/bin \
-          ~/.cargo/bin \
-          ~/.deno/bin
       '';
-      shellAliases = {
-        copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
-        paste = "${pkgs.xsel}/bin/xsel --clipboard --output";
-        ip = "ip --color=auto";
-        g = "git";
-        lg = "lazygit";
-        ld = "lazydocker";
-        rp = "realpath";
-        bg = "batgrep";
-      };
       functions = {
         fish_prompt = builtins.readFile ./server/fish_prompt.fish;
         groot = ''
@@ -160,22 +148,36 @@ in
       };
     };
 
-    neovim = {
-      enable = true;
-      vimAlias = true;
-      extraConfig = builtins.readFile ./server/init.vim;
-      plugins = with pkgs.vimPlugins; [
-        github-nvim-theme
-        fzf-vim
-        lsp-colors-nvim
-        nerdtree
-        nvim-autopairs
-        nvim-lspconfig
-        toggleterm-nvim
-        vim-gitgutter
-        (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
-      ];
-    };
+    neovim =
+      let
+        github-nvim-theme = pkgs.vimUtils.buildVimPlugin {
+          name = "github-nvim-theme";
+          buildPhase = "rm Makefile";
+          src = pkgs.fetchFromGitHub {
+            owner = "projekt0n";
+            repo = "github-nvim-theme";
+            rev = "ab90dd7bd835cb90572e2d8337ff50452cdec58c";
+            hash = "sha256-6ODsunlGNNi0vlgIDpol4tDBOl1MZVsW9QoI3tHquO8=";
+          };
+        };
+      in
+      {
+        enable = true;
+        vimAlias = true;
+        extraConfig = builtins.readFile ./server/init.vim;
+        plugins = with pkgs.vimPlugins; [
+          fzf-vim
+          github-nvim-theme
+          gitsigns-nvim
+          lsp-colors-nvim
+          lualine-nvim
+          nvim-autopairs
+          nvim-lspconfig
+          nvim-tree-lua
+          nvim-treesitter.withAllGrammars
+          toggleterm-nvim
+        ];
+      };
 
     direnv.enable = true;
     bat = {
@@ -227,13 +229,6 @@ in
   };
 
   home.packages = with pkgs; [
-    dtc
-    hyperfine
-    nil
-    screen
-    tio
-    usbutils
-
     broot
     btop
     deno
@@ -244,9 +239,11 @@ in
     go
     gopls
     hledger
+    hyperfine
     jq
     lazydocker
     neofetch
+    nil
     nixpkgs-fmt
     nodePackages.wrangler
     procs
@@ -254,9 +251,11 @@ in
     sage
     sd
     sqlite
+    tio
     tokei
     typst
     unzip
+    usbutils
     youtube-dl
     zig
     (python3.withPackages (pyPkgs: with pyPkgs; [

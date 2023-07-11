@@ -9,6 +9,7 @@
   };
 
   networking = {
+    hostName = "charile-nuc";
     networkmanager.enable = true;
     firewall = {
       enable = true;

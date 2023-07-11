@@ -46,29 +46,29 @@ set linebreak
 nnoremap <C-h> gT
 nnoremap <C-l> gt
 
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-  \ quit | endif
-
-" Mirror the NERDTree before showing it. This makes it the same on all tabs.
-nnoremap <C-b> :NERDTreeMirror<CR>:NERDTreeToggle<CR>
-
 set background=dark
 
 lua <<EOF
   -- fzf file search
-  vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>:FZF<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>:Files<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", "<C-m>", "<cmd>:Rg<CR>", { noremap = true, silent = true })
+  -- fzf dirty files  
+  vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>:GFiles?<CR>", { noremap = true, silent = true })
+
+  -- file explorer
+  vim.api.nvim_set_keymap("n", "<C-b>", "<cmd>:NvimTreeToggle<CR>", { noremap = true, silent = true })
 
   -- new tabs
   vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>:tabnew<CR>", { noremap = true, silent = true })
 
   require('toggleterm').setup{
     size = 15,
+    -- bottom terminal
     open_mapping = [[<C-j>]],
   }
   local Terminal  = require('toggleterm.terminal').Terminal
 
-  -- <C-\> for a floating terminal
+  -- floating terminal
   local floating = Terminal:new({ direction = "float", hidden = true })
   function _floating_toggle()
     floating:toggle()
@@ -76,7 +76,7 @@ lua <<EOF
   vim.api.nvim_set_keymap("n", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("t", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
 
-  -- <C-g> for a lazygit floating terminal
+  -- lazygit floating terminal
   local lazygit = Terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
   function _lazygit_toggle()
     lazygit:toggle()
@@ -101,5 +101,22 @@ lua <<EOF
     }
   })
 
-  vim.cmd('colorscheme github_dark_dimmed')
+  vim.cmd('colorscheme github_dark_high_contrast')
+  require('lualine').setup({
+    options = {
+      -- alacritty doesn't support ligatures
+      icons_enabled = false,
+    },
+  })
+  require('gitsigns').setup({
+    current_line_blame = true,
+    current_line_blame_opts = { delay = 2000, },
+  })
+  require("nvim-tree").setup({
+    renderer = {
+      icons = {
+        show = { file = false, folder = false, folder_arrow = false, },
+      },
+    },
+  })
 EOF

@@ -3,6 +3,8 @@
     ./hardware-configuration.nix
   ];
 
+  networking.hostName = "charile-vm";
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;

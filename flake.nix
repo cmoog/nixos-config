@@ -15,8 +15,8 @@
       forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f
         nixpkgs.legacyPackages.${system});
       defaultModules = [
-        home-manager.nixosModule
-        vscode-server.nixosModule
+        home-manager.nixosModules.default
+        vscode-server.nixosModules.default
         ./common.nix
         {
           home-manager = {
@@ -42,24 +42,15 @@
       nixosConfigurations = {
         charlie-vm = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [
-            ./utm-vm
-            { networking.hostName = "charile-vm"; }
-          ] ++ defaultModules;
+          modules = [ ./utm-vm ] ++ defaultModules;
         };
         charlie-nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            ./intel-nuc
-            { networking.hostName = "charile-nuc"; }
-          ] ++ defaultModules;
+          modules = [ ./intel-nuc ] ++ defaultModules;
         };
         pi4 = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [
-            ./pi
-            { networking.hostName = "pi"; }
-          ];
+          modules = [ ./pi ];
         };
       };
     };
