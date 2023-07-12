@@ -32,11 +32,9 @@
       formatter = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: pkgs.nixpkgs-fmt);
       packages =
         forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: {
-          homeConfig = (home-manager.lib.homeManagerConfiguration rec {
+          homeConfig = (home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [
-              ./home.nix
-            ];
+            modules = [ ./home.nix ];
           }).activationPackage;
         });
       nixosConfigurations = {

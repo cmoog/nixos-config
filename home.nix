@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home = {
     username = "charlie";
@@ -23,6 +23,7 @@
       ld = "lazydocker";
       rp = "realpath";
       bg = "batgrep";
+      clear = "clear -x";
     };
   };
 
@@ -165,11 +166,13 @@
         enable = true;
         vimAlias = true;
         extraConfig = builtins.readFile ./server/init.vim;
+        extraLuaConfig = builtins.readFile ./server/vim.lua;
         plugins = with pkgs.vimPlugins; [
           fzf-vim
           github-nvim-theme
           gitsigns-nvim
           lsp-colors-nvim
+          lualine-lsp-progress
           lualine-nvim
           nvim-autopairs
           nvim-lspconfig
@@ -244,11 +247,12 @@
     lazydocker
     neofetch
     nil
+    nix-tree
     nixpkgs-fmt
-    nodePackages.wrangler
+    nodePackages.wrangler # large, consider not including
     procs
     ripgrep
-    sage
+    sage # 4.7 GB, consider default not including
     sd
     sqlite
     tio
