@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./server
-  ];
-
   time.timeZone = "America/Chicago";
 
   environment.systemPackages = with pkgs; [
@@ -13,6 +9,9 @@
     vim
     wget
   ];
+
+  security.sudo.execWheelOnly = true;
+  programs.fish.enable = true;
 
   nix = {
     package = pkgs.nixUnstable;

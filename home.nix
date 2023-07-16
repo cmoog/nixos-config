@@ -35,7 +35,7 @@
         set fish_greeting ""
       '';
       functions = {
-        fish_prompt = builtins.readFile ./server/fish_prompt.fish;
+        fish_prompt = builtins.readFile ./modules/fish_prompt.fish;
         groot = ''
           set --local gitroot (${pkgs.git}/bin/git rev-parse --show-toplevel)
           if [ "$gitroot" = "" ]
@@ -82,7 +82,6 @@
       enable = true;
       settings = {
         env.TERM = "xterm-256color";
-        working_directory = "./Code";
         window = {
           dimensions = {
             columns = 115;
@@ -91,7 +90,8 @@
           dynamic_padding = true;
         };
         font = {
-          size = 14;
+          normal.family = "Berkeley Mono";
+          # size = 11;
           offset = {
             x = 0;
             y = 2;
@@ -104,6 +104,41 @@
         selection = {
           semantic_escape_chars = ",│`|:\"' ()[]{}<>\t";
           save_to_clipboard = true;
+        };
+        colors = {
+          primary = {
+            # '0x020409' vscode terminal background
+            background = "0x0e1116";
+            foreground = "0xb3bac3";
+          };
+          # Colors the cursor will use if `custom_cursor_colors` is true
+          cursor = {
+            text = "0x020409";
+            cursor = "0xb3bac3";
+          };
+          # Normal colors
+          normal = {
+            black = "0x020409";
+            red = "0xee8277";
+            green = "0x64b75d";
+            yellow = "0xc99b3e";
+            blue = "0x6ba3f8";
+            magenta = "0xb58ef8";
+            cyan = "0x66c2cd";
+            white = "0xb3bac3";
+          };
+
+          # Bright colors
+          bright = {
+            black = "0x494f57";
+            red = "0xf2a59b";
+            green = "0x79d071";
+            yellow = "0xdcb556";
+            blue = "0x89befa";
+            magenta = "0xcbaaf9";
+            cyan = "0x7ad1db";
+            white = "0xffffff";
+          };
         };
       };
     };
@@ -165,8 +200,8 @@
       {
         enable = true;
         vimAlias = true;
-        extraConfig = builtins.readFile ./server/init.vim;
-        extraLuaConfig = builtins.readFile ./server/vim.lua;
+        extraConfig = builtins.readFile ./modules/init.vim;
+        extraLuaConfig = builtins.readFile ./modules/vim.lua;
         plugins = with pkgs.vimPlugins; [
           fzf-vim
           github-nvim-theme

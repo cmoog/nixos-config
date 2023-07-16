@@ -9,6 +9,8 @@ vim.api.nvim_set_keymap("n", "<C-b>", "<cmd>:NvimTreeToggle<CR>", { noremap = tr
 -- new tabs
 vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>:tabnew<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<S-h>", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+
 require('toggleterm').setup{
   size = 15,
   -- bottom terminal
@@ -88,3 +90,7 @@ local lsp = require('lspconfig')
 lsp.nil_ls.setup({ capabilities = capabilities })
 lsp.rust_analyzer.setup({})
 lsp.gopls.setup({})
+lsp.hls.setup({
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+})
+

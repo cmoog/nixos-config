@@ -4,6 +4,14 @@
 inoremap jj <ESC>
 inoremap jk <ESC>
 
+" up/down navigation mapped to lines as *displayed*
+noremap <silent> k gk
+noremap <silent> j gj
+
+" switching between tabs
+nnoremap <C-h> gT
+nnoremap <C-l> gt
+
 syntax enable
 set autoindent
 set clipboard=unnamed
@@ -32,18 +40,10 @@ set timeoutlen=1000
 set ttimeoutlen=0
 set backspace=indent,eol,start
 
-" up/down navigation mapped to lines as *displayed*
-noremap <silent> k gk
-noremap <silent> j gj
-
 " wrap after col 100 for these file extensions
 au BufRead,BufNewFile *.md,*.txt,*.tex,*.cls setlocal textwidth=100
 set formatoptions+=t
 set formatoptions-=l
 set linebreak
-
-" switching between tabs
-nnoremap <C-h> gT
-nnoremap <C-l> gt
 
 set background=dark

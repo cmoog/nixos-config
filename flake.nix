@@ -17,6 +17,8 @@
       defaultModules = [
         home-manager.nixosModules.default
         vscode-server.nixosModules.default
+        ./modules/server.nix
+        ./modules/gui.nix
         ./common.nix
         {
           home-manager = {
@@ -45,6 +47,10 @@
         charlie-nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./intel-nuc ] ++ defaultModules;
+        };
+        charlie-laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./pixelbook ] ++ defaultModules;
         };
         pi4 = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";

@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "charile-vm";
+  networking.hostName = "charlie-vm";
 
   boot.loader = {
     systemd-boot.enable = true;

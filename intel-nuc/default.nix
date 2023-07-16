@@ -1,6 +1,9 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
 
   imports = [ ./hardware-configuration.nix ];
+
+  gui.enable = false;
+  server.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
@@ -9,17 +12,8 @@
   };
 
   networking = {
-    hostName = "charile-nuc";
-    networkmanager.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ 22 80 443 ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      checkReversePath = "loose";
-    };
+    hostName = "charlie-nuc";
   };
-
-  virtualisation.docker.enable = true;
 
   users.users.charlie = {
     name = "charlie";
@@ -38,20 +32,7 @@
       "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBFOAtDtX07lwPCT9mPLh3ipHupxKUotmVVyx4fmjMdUClorv/2rDXK9tfZzvlzXUFDsF/4t1q2wseqpmxp590tAAAAAEc3NoOg=="
     ];
   };
-
   users.mutableUsers = false;
-  security.sudo.execWheelOnly = true;
-
-  programs = {
-    fish.enable = true;
-  };
-
-  services = {
-    tailscale = {
-      enable = true;
-      port = 41641;
-    };
-  };
 
   system.stateVersion = "21.11";
 }
