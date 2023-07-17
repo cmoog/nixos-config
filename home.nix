@@ -111,12 +111,10 @@
             background = "0x0e1116";
             foreground = "0xb3bac3";
           };
-          # Colors the cursor will use if `custom_cursor_colors` is true
           cursor = {
             text = "0x020409";
             cursor = "0xb3bac3";
           };
-          # Normal colors
           normal = {
             black = "0x020409";
             red = "0xee8277";
@@ -127,8 +125,6 @@
             cyan = "0x66c2cd";
             white = "0xb3bac3";
           };
-
-          # Bright colors
           bright = {
             black = "0x494f57";
             red = "0xf2a59b";

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
+
+  server.enable = true;
 
   networking.hostName = "charlie-vm";
 
@@ -25,13 +25,7 @@
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBN2Ha30vOLebdfcyLZyDxYU5o8USrjyWu2DiG+ZLdJ1S1LJ95QWDcxB50pUAfOlN5NgAP8LF2QAKO3K9eZd1nnM="
     ];
   };
-
   users.mutableUsers = false;
-  security.sudo.execWheelOnly = true;
-
-  programs = {
-    fish.enable = true;
-  };
 
   system.stateVersion = "21.11";
 }
