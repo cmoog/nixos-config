@@ -57,6 +57,9 @@ require('github-theme').setup({
 
 vim.cmd('colorscheme github_dark_high_contrast')
 
+-- detect tabs/spaces indent style
+require('guess-indent').setup()
+
 -- bottom status bar
 require('lualine').setup({
   options = {

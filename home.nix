@@ -202,6 +202,7 @@
           fzf-vim
           github-nvim-theme
           gitsigns-nvim
+          guess-indent-nvim
           lsp-colors-nvim
           lualine-lsp-progress
           lualine-nvim

@@ -12,10 +12,9 @@ noremap <silent> j gj
 nnoremap <C-h> gT
 nnoremap <C-l> gt
 
-syntax enable
 set autoindent
+set backspace=indent,eol,start
 set clipboard=unnamed
-set cmdheight=1
 set conceallevel=0
 set cursorline
 set encoding=utf-8
@@ -25,20 +24,17 @@ set filetype=on
 set mouse=a
 set nocompatible
 set noshowmode
-set wrap
 set number
 set ruler
 set shiftwidth=2
-set showtabline=2
-set smartindent
-set smarttab
 set splitbelow
 set splitright
 set t_Co=256
 set tabstop=2
 set timeoutlen=1000
 set ttimeoutlen=0
-set backspace=indent,eol,start
+set wrap
+syntax enable
 
 " wrap after col 100 for these file extensions
 au BufRead,BufNewFile *.md,*.txt,*.tex,*.cls setlocal textwidth=100

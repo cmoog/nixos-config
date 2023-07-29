@@ -76,10 +76,6 @@ with lib; {
           proxyPass = "http://localhost:2342";
           proxyWebsockets = true;
         };
-        virtualHosts."kalshi.*".locations."/" = {
-          proxyPass = "http://localhost:8998";
-          proxyWebsockets = true;
-        };
       };
     };
   };
