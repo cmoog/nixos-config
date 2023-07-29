@@ -1,5 +1,5 @@
 
-date_time=$(printf '%(%Y-%m-%d %I:%M %p %Z)T')
+date_time=$(printf '%(%Y-%m-%d %a %I:%M %p %Z)T')
 network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
 load=($(cat /proc/loadavg))
 cpu_usage="${load[0]}, ${load[1]}, ${load[2]}"

@@ -90,7 +90,7 @@
           dynamic_padding = true;
         };
         font = {
-          normal.family = "Berkeley Mono";
+          normal.family = "JetBrains Mono NL";
           # size = 11;
           offset = {
             x = 0;
@@ -281,6 +281,7 @@
     nix-tree
     nixpkgs-fmt
     nodePackages.wrangler # large, consider not including
+    parted
     procs
     ripgrep
     sage # 4.7 GB, consider default not including
