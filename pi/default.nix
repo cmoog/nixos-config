@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, ... }: {
+{ modulesPath, ... }: {
 
   imports = [
     # "${modulesPath}/installer/sd-card/sd-image-raspberrypi.nix"
@@ -28,7 +28,7 @@
   networking.hostName = "pi";
 
   networking.wireless = {
-    enable = false;
+    enable = false; # this is mutually exclusive with `iwd.enable`
     iwd.enable = true;
   };
 

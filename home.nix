@@ -138,7 +138,27 @@
         };
       };
     };
+    tmux = {
+      enable = true;
+      mouse = true;
+      terminal = "xterm-256color";
+      keyMode = "vi";
+      baseIndex = 1;
+      extraConfig = ''
+        bind-key v split-window -h
+        bind-key s split-window -v
 
+        set -g status-bg black
+        set -g status-fg white
+        set -g status-left-length 0
+        set -g status-right-length 0
+        set -g status-right ' '
+
+        # Shift arrow to switch windows
+        bind -n S-Left  previous-window
+        bind -n S-Right next-window
+      '';
+    };
     git = {
       enable = true;
       lfs.enable = true;
@@ -213,7 +233,6 @@
           toggleterm-nvim
         ];
       };
-
     direnv.enable = true;
     bat = {
       enable = true;
@@ -222,7 +241,6 @@
       };
       extraPackages = with pkgs.bat-extras; [ batman batgrep ];
     };
-
     fzf = {
       enable = true;
       enableFishIntegration = true;
