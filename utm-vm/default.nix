@@ -21,8 +21,7 @@
     home = "/home/charlie";
     extraGroups = [ "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
-      # secure enclave of mac, no auth required
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBN2Ha30vOLebdfcyLZyDxYU5o8USrjyWu2DiG+ZLdJ1S1LJ95QWDcxB50pUAfOlN5NgAP8LF2QAKO3K9eZd1nnM="
+      (import ../home/ssh.nix).macNoAuth
     ];
   };
   users.mutableUsers = false;

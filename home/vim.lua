@@ -60,6 +60,13 @@ vim.cmd('colorscheme github_dark_high_contrast')
 -- detect tabs/spaces indent style
 require('guess-indent').setup()
 
+
+-- show indentation lines
+vim.opt.list = true
+require("indent_blankline").setup {
+  show_end_of_line = true,
+}
+
 -- bottom status bar
 require('lualine').setup({
   options = {

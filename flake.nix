@@ -6,14 +6,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-server = {
-      url = "github:msteen/nixos-vscode-server";
+      url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, nixpkgs, home-manager, vscode-server }:
     let
-      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f
-        nixpkgs.legacyPackages.${system});
       defaultModules = [
         home-manager.nixosModules.default
         vscode-server.nixosModules.default
@@ -24,19 +22,21 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.charlie = import
-              ./home.nix;
+            users.charlie = import ./home;
           };
         }
       ];
+      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f
+        (import nixpkgs { inherit system; }));
+      systems = [ "x86_64-linux" "aarch64-linux" ];
     in
     {
-      formatter = forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: pkgs.nixpkgs-fmt);
+      formatter = forEach systems (pkgs: pkgs.nixpkgs-fmt);
       packages =
-        forEach [ "x86_64-linux" "aarch64-linux" ] (pkgs: {
+        forEach systems (pkgs: {
           homeConfig = (home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home.nix ];
+            modules = [ ./home ];
           }).activationPackage;
         });
       nixosConfigurations = {

@@ -31,7 +31,6 @@ with lib; {
     virtualisation.docker.enable = true;
 
     networking = {
-      networkmanager.enable = true;
       firewall = {
         enable = true;
         allowedTCPPorts = [ 22 80 443 ];

@@ -35,7 +35,7 @@
         set fish_greeting ""
       '';
       functions = {
-        fish_prompt = builtins.readFile ./modules/fish_prompt.fish;
+        fish_prompt = builtins.readFile ./fish_prompt.fish;
         groot = ''
           set --local gitroot (${pkgs.git}/bin/git rev-parse --show-toplevel)
           if [ "$gitroot" = "" ]
@@ -216,13 +216,14 @@
       {
         enable = true;
         vimAlias = true;
-        extraConfig = builtins.readFile ./modules/init.vim;
-        extraLuaConfig = builtins.readFile ./modules/vim.lua;
+        extraConfig = builtins.readFile ./init.vim;
+        extraLuaConfig = builtins.readFile ./vim.lua;
         plugins = with pkgs.vimPlugins; [
           fzf-vim
           github-nvim-theme
           gitsigns-nvim
           guess-indent-nvim
+          indent-blankline-nvim
           lsp-colors-nvim
           lualine-lsp-progress
           lualine-nvim
@@ -245,8 +246,8 @@
       enable = true;
       enableFishIntegration = true;
       # respects .gitignore
-      defaultCommand = "fd --type=f";
-      fileWidgetCommand = "fd --type=f";
+      defaultCommand = "fd --type=f --hidden --exclude=.git";
+      fileWidgetCommand = "fd --type=f --hidden --exclude=.git";
       fileWidgetOptions = [
         "--preview 'bat -n --color=always {}'"
         "--bind 'ctrl-/:change-preview-window(down|hidden|)'"

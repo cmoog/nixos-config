@@ -37,7 +37,8 @@ set wrap
 syntax enable
 
 " wrap after col 100 for these file extensions
-au BufRead,BufNewFile *.md,*.txt,*.tex,*.cls setlocal textwidth=100
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.cls,*.typ setlocal textwidth=100 spell spelllang=en_us
+autocmd FileType tex,gitcommit setlocal spell spelllang=en_us
 set formatoptions+=t
 set formatoptions-=l
 set linebreak

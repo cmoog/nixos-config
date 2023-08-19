@@ -11,27 +11,28 @@ with lib; {
       default = "sway";
     };
   };
-  config = mkIf cfg.enable (mkMerge [{
-    environment.systemPackages = with pkgs; [
-      alacritty
-      chromium
-      firefox
-      gnome.gnome-disk-utility
-      gnome.nautilus
-      mpv
-      tor-browser-bundle-bin
-      wireshark
-    ];
+  config = mkIf cfg.enable (mkMerge [
+    {
+      environment.systemPackages = with pkgs; [
+        alacritty
+        chromium
+        firefox
+        gnome.gnome-disk-utility
+        gnome.nautilus
+        mpv
+        tor-browser-bundle-bin
+        wireshark
+      ];
 
-    fonts.fonts = with pkgs; [
-      inter
-      jetbrains-mono
-      noto-fonts-emoji
-    ];
-    programs = {
-      wireshark.enable = true;
-    };
-  }
+      fonts.fonts = with pkgs; [
+        inter
+        jetbrains-mono
+        noto-fonts-emoji
+      ];
+      programs = {
+        wireshark.enable = true;
+      };
+    }
     (mkIf (cfg.variant == "gnome") {
       networking.wireless.enable = true;
       networking.wireless.iwd.enable = false;
@@ -47,7 +48,7 @@ with lib; {
       environment.etc = {
         "sway/config".source = ./sway.config;
       };
-      environment.systemPackages = [
+      environment.systemPackages = with pkgs; [
         (writeShellScriptBin "bashbar" (builtins.readFile ./swaybar.sh))
       ];
 
@@ -84,5 +85,6 @@ with lib; {
           default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd sway";
         };
       };
-    })]);
+    })
+  ]);
 }
