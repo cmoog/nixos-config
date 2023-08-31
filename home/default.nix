@@ -179,7 +179,7 @@
         tag.gpgsign = true;
         diff.colorMoved = "default";
       };
-      ignores = [ "result" "/.vscode" "/.direnv" ];
+      ignores = [ "result" "/.vscode" "/.direnv" "/.envrc" ];
       aliases = {
         ca = "commit --amend --verbose";
         a = "add --all";
