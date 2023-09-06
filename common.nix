@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   time.timeZone = "America/Chicago";
@@ -15,6 +15,11 @@
 
   nix = {
     package = pkgs.nixUnstable;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      unstable.flake = inputs.nixpkgs-unstable;
+    };
+    channel.enable = false;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;

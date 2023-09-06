@@ -10,6 +10,12 @@ vim.api.nvim_set_keymap("n", "<C-b>", "<cmd>:NvimTreeToggle<CR>", { noremap = tr
 -- new tabs
 vim.keymap.set("n", "<C-t>", "<cmd>:tabnew<CR>")
 
+-- set LSP floating window styles
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0e1116", fg = "#FFFFFF" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "None", fg = "#FFFFFF" })
+vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+
 -- LSP bindings
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -17,11 +23,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		local opts = { buffer = ev.buf }
 		vim.keymap.set("i", "<C-l>", "<C-x><C-o>", { buffer = true })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<space>f", function()
@@ -42,8 +47,8 @@ local floating = Terminal:new({ direction = "float", hidden = true })
 function _floating_toggle()
 	floating:toggle()
 end
-vim.api.nvim_set_keymap("n", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-\\>", "<cmd>lua _floating_toggle()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-\\>", _floating_toggle)
+vim.keymap.set("t", "<C-\\>", _floating_toggle)
 
 -- lazygit floating terminal
 local lazygit = Terminal:new({
@@ -54,10 +59,11 @@ local lazygit = Terminal:new({
 function _lazygit_toggle()
 	lazygit:toggle()
 end
-vim.api.nvim_set_keymap("n", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-g>", _lazygit_toggle)
+vim.keymap.set("t", "<C-g>", _lazygit_toggle)
 
-require("nvim-autopairs").setup({})
+-- bracket/brace matching
+require("nvim-autopairs").setup()
 
 -- highlight with treesitter semantics
 require("nvim-treesitter.configs").setup({
@@ -91,7 +97,7 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_c = { "filename", "lsp_progress" },
-		-- 'hostname' instead of default that shows 'unix'
+		-- "hostname" instead of default that shows "unix"
 		lualine_x = { "hostname", "encoding", "filetype" },
 	},
 })

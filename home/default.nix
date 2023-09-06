@@ -253,10 +253,6 @@
         "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
       ];
     };
-    exa = {
-      enable = true;
-      enableAliases = true;
-    };
     zoxide = {
       enable = true;
       enableFishIntegration = true;
@@ -286,13 +282,11 @@
     broot
     btop
     deno
-    dolt
     duf
     fd
     gh
     go
     gopls
-    hledger
     hyperfine
     jq
     lazydocker
