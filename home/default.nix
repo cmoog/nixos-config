@@ -219,12 +219,13 @@
         extraConfig = builtins.readFile ./init.vim;
         extraLuaConfig = builtins.readFile ./vim.lua;
         plugins = with pkgs.vimPlugins; [
-          fzf-vim
+          fzf-lua
           github-nvim-theme
           gitsigns-nvim
           guess-indent-nvim
           indent-blankline-nvim
           lsp-colors-nvim
+          lsp_lines-nvim
           lualine-lsp-progress
           lualine-nvim
           nvim-autopairs
@@ -232,6 +233,12 @@
           nvim-tree-lua
           nvim-treesitter.withAllGrammars
           toggleterm-nvim
+
+          # autocomplete
+          cmp-buffer
+          cmp-nvim-lsp
+          luasnip
+          nvim-cmp
         ];
       };
     direnv.enable = true;
