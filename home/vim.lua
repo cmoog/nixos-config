@@ -110,8 +110,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local opts = {buffer = ev.buf}
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<space>f",

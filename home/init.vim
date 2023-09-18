@@ -36,6 +36,9 @@ set ttimeoutlen=0
 set wrap
 syntax enable
 
+" prefer to keep cursor in middle of buffer
+set so=999
+
 " wrap after col 100 for these file extensions
 autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.cls,*.typ setlocal textwidth=100 spell spelllang=en_us
 autocmd FileType tex,gitcommit setlocal spell spelllang=en_us
