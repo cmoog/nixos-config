@@ -13,6 +13,9 @@
   security.sudo.execWheelOnly = true;
   programs.fish.enable = true;
 
+  # for easy reference to generation source
+  environment.etc."current-nixos".source = ./.;
+
   nix = {
     package = pkgs.nixUnstable;
     registry = {

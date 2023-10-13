@@ -178,10 +178,12 @@
         commit.gpgsign = true;
         tag.gpgsign = true;
         diff.colorMoved = "default";
+        init.defaultBranch = "master";
       };
       ignores = [ "result" "/.vscode" "/.direnv" "/.envrc" ];
       aliases = {
         ca = "commit --amend --verbose";
+        ce = "commit --allow-empty-message -m ''";
         a = "add --all";
         c = "commit --verbose";
         cb = "checkout -b";
@@ -286,12 +288,10 @@
   };
 
   home.packages = with pkgs; [
-    broot
     btop
     deno
     duf
     fd
-    gh
     go
     gopls
     hyperfine
@@ -301,9 +301,9 @@
     nil
     nix-tree
     nixpkgs-fmt
-    nodePackages.wrangler # large, consider not including
     parted
     procs
+    pyright
     ripgrep
     sage # 4.7 GB, consider default not including
     sd
@@ -313,9 +313,7 @@
     typst
     unzip
     usbutils
-    youtube-dl
-    zig
-    (python3.withPackages (pyPkgs: with pyPkgs; [
+    (python3.withPackages (p: with p; [
       ipykernel
       matplotlib
       numpy
