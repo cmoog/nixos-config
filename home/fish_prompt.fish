@@ -25,6 +25,9 @@ set -g __fish_git_prompt_show_informative_status 'yes'
 set -g __fish_git_prompt_showdirtystate 'yes'
 set -g __fish_git_prompt_showuntrackedfiles 'yes'
 
+# blinking bar cursor
+echo -ne "\e[5 q"
+
 function _nim_prompt_wrapper
   set field_color $argv[1]
   set field_name $argv[2]

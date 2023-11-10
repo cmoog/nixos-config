@@ -23,7 +23,7 @@
       "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
     extraGroups = [ "wheel" "docker" ];
-    openssh.authorizedKeys.keys = builtins.attrNames (import ../home/ssh.nix);
+    openssh.authorizedKeys.keys = builtins.attrValues (import ../home/ssh.nix);
   };
   users.mutableUsers = false;
 
