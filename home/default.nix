@@ -162,13 +162,6 @@
     git = {
       enable = true;
       lfs.enable = true;
-      delta = {
-        enable = true;
-        options = {
-          line-numbers = true;
-          navigate = true;
-        };
-      };
       userName = "Charlie Moog";
       userEmail = "moogcharlie@gmail.com";
       extraConfig = {
@@ -271,10 +264,7 @@
       settings = {
         gui.showCommandLog = false;
         git.autoFetch = false;
-        git.paging = {
-          colorArg = "always";
-          pager = "delta --dark --paging=never";
-        };
+        git.paging.colorArg = "always";
         customCommands = [{
           key = "f";
           command = "git f";
