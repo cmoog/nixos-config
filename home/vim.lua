@@ -147,6 +147,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lsp = require("lspconfig")
 lsp.nil_ls.setup({capabilities = capabilities})
 lsp.rust_analyzer.setup({capabilities = capabilities})
+lsp.typst_lsp.setup({capabilities = capabilities})
 lsp.gopls.setup({capabilities = capabilities})
 lsp.pyright.setup({capabilities = capabilities})
 lsp.hls.setup({

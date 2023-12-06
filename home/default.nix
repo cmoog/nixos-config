@@ -301,6 +301,7 @@
     tio
     tokei
     typst
+    typst-lsp
     unzip
     usbutils
     (python3.withPackages (p: with p; [

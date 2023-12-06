@@ -40,7 +40,8 @@ syntax enable
 set so=999
 
 " wrap after col 100 for these file extensions
-autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.cls,*.typ setlocal textwidth=100 spell spelllang=en_us
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.cls setlocal textwidth=100 spell spelllang=en_us
+autocmd BufRead,BufNewFile *.typ setlocal textwidth=100 filetype=typst
 autocmd FileType tex,gitcommit setlocal spell spelllang=en_us
 set formatoptions+=t
 set formatoptions-=l
