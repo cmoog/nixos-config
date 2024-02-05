@@ -275,6 +275,15 @@
         }];
       };
     };
+    atuin = {
+      enable = true;
+      # keep bash minimal
+      enableBashIntegration = false;
+      settings = {
+        auto_sync = false;
+        update_check = false;
+      };
+    };
   };
 
   home.packages = with pkgs; [
