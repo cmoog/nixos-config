@@ -291,6 +291,7 @@
     deno
     duf
     fd
+    gh
     go
     gopls
     hyperfine

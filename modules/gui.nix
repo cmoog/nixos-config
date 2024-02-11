@@ -24,7 +24,7 @@ with lib; {
         wireshark
       ];
 
-      fonts.fonts = with pkgs; [
+      fonts.packages = with pkgs; [
         inter
         jetbrains-mono
         noto-fonts-emoji
