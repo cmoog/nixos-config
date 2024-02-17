@@ -77,6 +77,10 @@
           '';
       };
     };
+    eza = {
+      enable = true;
+      enableAliases = true;
+    };
 
     alacritty = {
       enable = true;
@@ -279,6 +283,7 @@
       enable = true;
       # keep bash minimal
       enableBashIntegration = false;
+      flags = [ "--disable-up-arrow" ];
       settings = {
         auto_sync = false;
         update_check = false;
