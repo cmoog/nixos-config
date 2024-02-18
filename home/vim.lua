@@ -92,7 +92,8 @@ require("gitsigns").setup({
 require("nvim-tree").setup({
     renderer = {
         icons = {show = {file = false, folder = false, folder_arrow = false}}
-    }
+    },
+    update_focused_file = {enable = true},
 })
 
 -- set LSP floating window styles

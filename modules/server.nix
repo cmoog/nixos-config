@@ -38,8 +38,6 @@ with lib; {
           PasswordAuthentication = false;
         };
       };
-
-      vscode-server.enable = true;
     };
   };
 }

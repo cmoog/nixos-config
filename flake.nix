@@ -6,16 +6,11 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
-  outputs = { self, nixpkgs, home-manager, vscode-server, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       defaultModules = [
         home-manager.nixosModules.default
-        vscode-server.nixosModules.default
         ./modules/server.nix
         ./modules/gui.nix
         ./common.nix
