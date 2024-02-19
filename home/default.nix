@@ -29,6 +29,10 @@
 
   programs = {
     home-manager.enable = true;
+    gitui = {
+      enable = true;
+      keyConfig = builtins.readFile "${pkgs.gitui.src}/vim_style_key_config.ron";
+    };
     fish = {
       enable = true;
       shellInit = ''
