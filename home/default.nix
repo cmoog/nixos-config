@@ -5,14 +5,19 @@
     homeDirectory = "/home/charlie";
     sessionPath = [
       "$HOME/bin"
-      "$HOME/go/bin"
-      "$HOME/.cargo/bin"
+      "$GOPATH/bin"
+      "$CARGO_HOME/bin"
       "$HOME/.deno/bin"
     ];
-    sessionVariables = {
+    sessionVariables = rec {
       EDITOR = "vim";
-      GOPATH = "$HOME/go";
       GO111MODULE = "on";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      GOPATH = "${XDG_DATA_HOME}/go";
+      CARGO_HOME = "${XDG_DATA_HOME}/cargo";
     };
     shellAliases = {
       copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
