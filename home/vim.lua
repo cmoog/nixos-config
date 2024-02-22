@@ -64,8 +64,7 @@ require("ibl").setup()
 -- bottom status bar
 require("lualine").setup({
     options = {
-        -- alacritty doesn't support ligatures
-        icons_enabled = false
+        icons_enabled = true
     },
     sections = {
         lualine_c = {"filename", "lsp_progress"},
@@ -150,8 +149,10 @@ lsp.nil_ls.setup({capabilities = capabilities})
 lsp.rust_analyzer.setup({capabilities = capabilities})
 lsp.typst_lsp.setup({capabilities = capabilities})
 lsp.gopls.setup({capabilities = capabilities})
+lsp.zls.setup({capabilities = capabilities})
 lsp.pyright.setup({capabilities = capabilities})
 lsp.hls.setup({
     filetypes = {"haskell", "lhaskell", "cabal"},
     capabilities = capabilities
 })
+require("typescript-tools").setup({})

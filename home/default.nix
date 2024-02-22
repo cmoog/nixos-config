@@ -25,7 +25,6 @@
       ip = "ip --color=auto";
       g = "git";
       lg = "lazygit";
-      ld = "lazydocker";
       rp = "realpath";
       bg = "batgrep";
       clear = "clear -x";
@@ -91,66 +90,6 @@
       enableAliases = true;
     };
 
-    alacritty = {
-      enable = true;
-      settings = {
-        env.TERM = "xterm-256color";
-        window = {
-          dimensions = {
-            columns = 115;
-            lines = 35;
-          };
-          dynamic_padding = true;
-        };
-        font = {
-          normal.family = "JetBrains Mono NL";
-          # size = 11;
-          offset = {
-            x = 0;
-            y = 2;
-          };
-          glyph_offset = {
-            x = 0;
-            y = 1;
-          };
-        };
-        selection = {
-          semantic_escape_chars = ",│`|:\"' ()[]{}<>\t";
-          save_to_clipboard = true;
-        };
-        colors = {
-          primary = {
-            # '0x020409' vscode terminal background
-            background = "0x0e1116";
-            foreground = "0xb3bac3";
-          };
-          cursor = {
-            text = "0x020409";
-            cursor = "0xb3bac3";
-          };
-          normal = {
-            black = "0x020409";
-            red = "0xee8277";
-            green = "0x64b75d";
-            yellow = "0xc99b3e";
-            blue = "0x6ba3f8";
-            magenta = "0xb58ef8";
-            cyan = "0x66c2cd";
-            white = "0xb3bac3";
-          };
-          bright = {
-            black = "0x494f57";
-            red = "0xf2a59b";
-            green = "0x79d071";
-            yellow = "0xdcb556";
-            blue = "0x89befa";
-            magenta = "0xcbaaf9";
-            cyan = "0x7ad1db";
-            white = "0xffffff";
-          };
-        };
-      };
-    };
     tmux = {
       enable = true;
       mouse = true;
@@ -241,6 +180,9 @@
           nvim-tree-lua
           nvim-treesitter.withAllGrammars
           toggleterm-nvim
+
+          typescript-tools-nvim
+          plenary-nvim # required by typescript-tools
 
           # autocomplete
           cmp-buffer
