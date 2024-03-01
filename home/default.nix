@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./nvim.nix
+  ];
   home = {
     username = "charlie";
     homeDirectory = "/home/charlie";
@@ -146,51 +149,6 @@
         sm = "submodule update --init --recursive";
       };
     };
-
-    neovim =
-      let
-        github-nvim-theme = pkgs.vimUtils.buildVimPlugin {
-          name = "github-nvim-theme";
-          buildPhase = "rm Makefile";
-          src = pkgs.fetchFromGitHub {
-            owner = "projekt0n";
-            repo = "github-nvim-theme";
-            rev = "ab90dd7bd835cb90572e2d8337ff50452cdec58c";
-            hash = "sha256-6ODsunlGNNi0vlgIDpol4tDBOl1MZVsW9QoI3tHquO8=";
-          };
-        };
-      in
-      {
-        enable = true;
-        vimAlias = true;
-        extraConfig = builtins.readFile ./init.vim;
-        extraLuaConfig = builtins.readFile ./vim.lua;
-        plugins = with pkgs.vimPlugins; [
-          fzf-lua
-          github-nvim-theme
-          gitsigns-nvim
-          guess-indent-nvim
-          indent-blankline-nvim
-          lsp-colors-nvim
-          lsp_lines-nvim
-          lualine-lsp-progress
-          lualine-nvim
-          nvim-autopairs
-          nvim-lspconfig
-          nvim-tree-lua
-          nvim-treesitter.withAllGrammars
-          toggleterm-nvim
-
-          typescript-tools-nvim
-          plenary-nvim # required by typescript-tools
-
-          # autocomplete
-          cmp-buffer
-          cmp-nvim-lsp
-          luasnip
-          nvim-cmp
-        ];
-      };
     direnv.enable = true;
     bat = {
       enable = true;

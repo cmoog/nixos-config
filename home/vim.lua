@@ -1,99 +1,5 @@
--- fzf file search
-local fzf = require("fzf-lua")
-vim.keymap.set("n", "<C-p>", fzf.files)
-vim.keymap.set("n", "<C-r>", fzf.git_status)
-vim.keymap.set("n", "<C-f>", fzf.grep)
-
--- file explorer
-vim.api.nvim_set_keymap("n", "<C-b>", "<cmd>:NvimTreeToggle<CR>",
-                        {noremap = true, silent = true})
-
 -- new tabs
 vim.keymap.set("n", "<C-t>", "<cmd>:tabnew<CR>")
-
-require("toggleterm").setup({
-    size = 15,
-    -- bottom terminal
-    open_mapping = [[<C-j>]]
-})
-local Terminal = require("toggleterm.terminal").Terminal
-
--- floating terminal
-local floating = Terminal:new({direction = "float", hidden = true})
-function _floating_toggle() floating:toggle() end
-vim.keymap.set("n", "<C-\\>", _floating_toggle)
-vim.keymap.set("t", "<C-\\>", _floating_toggle)
-
--- lazygit floating terminal
-local lazygit = Terminal:new({
-    cmd = "lazygit",
-    direction = "float",
-    hidden = true
-})
-function _lazygit_toggle() lazygit:toggle() end
-vim.keymap.set("n", "<C-g>", _lazygit_toggle)
-vim.keymap.set("t", "<C-g>", _lazygit_toggle)
-
--- bracket/brace matching
-require("nvim-autopairs").setup()
-
--- highlight with treesitter semantics
-require("nvim-treesitter.configs").setup({
-    highlight = {enable = true},
-    indent = {enable = true}
-})
-
-require("github-theme").setup({
-    options = {
-        styles = {
-            -- disable italic keywords
-            keywords = "NONE"
-        }
-    }
-})
-
-vim.cmd("colorscheme github_dark_high_contrast")
-
--- detect tabs/spaces indent style
-require("guess-indent").setup()
-
--- show indentation lines
-vim.opt.list = true
-require("ibl").setup()
-
--- bottom status bar
-require("lualine").setup({
-    options = {
-        icons_enabled = true
-    },
-    sections = {
-        lualine_c = {"filename", "lsp_progress"},
-        -- "hostname" instead of default that shows "unix"
-        lualine_x = {"hostname", "encoding", "filetype"}
-    }
-})
-
--- render errors
-local lsp_lines = require("lsp_lines")
-lsp_lines.setup({})
-vim.diagnostic.config({virtual_text = false})
-vim.keymap.set("n", "<C-d>", lsp_lines.toggle)
-lsp_lines.toggle() -- disable by default
-
--- git status in gutter
-require("gitsigns").setup({
-    numhl = true,
-    current_line_blame = true,
-    current_line_blame_opts = {delay = 2000}
-})
-
--- file explorer
-require("nvim-tree").setup({
-    renderer = {
-        icons = {show = {file = false, folder = false, folder_arrow = false}}
-    },
-    update_focused_file = {enable = true},
-})
 
 -- set LSP floating window styles
 vim.api.nvim_set_hl(0, "NormalFloat", {bg = "#0e1116", fg = "#FFFFFF"})
@@ -114,8 +20,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "K", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<space>f",
-                       function() vim.lsp.buf.format({async = true}) end, opts)
+        vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format({async = true}) end, opts)
     end
 })
 
@@ -152,7 +57,7 @@ lsp.gopls.setup({capabilities = capabilities})
 lsp.zls.setup({capabilities = capabilities})
 lsp.pyright.setup({capabilities = capabilities})
 lsp.hls.setup({
-    filetypes = {"haskell", "lhaskell", "cabal"},
-    capabilities = capabilities
+    capabilities = capabilities,
+    filetypes = {"haskell", "lhaskell", "cabal"}
 })
 require("typescript-tools").setup({})
