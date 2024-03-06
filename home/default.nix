@@ -149,7 +149,10 @@
         sm = "submodule update --init --recursive";
       };
     };
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     bat = {
       enable = true;
       config = {
