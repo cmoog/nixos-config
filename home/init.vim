@@ -36,6 +36,9 @@ set ttimeoutlen=0
 set wrap
 syntax enable
 
+" error color for tailing whitespace
+match errorMsg /\s\+$/
+
 " prefer to keep cursor in middle of buffer
 set so=999
 

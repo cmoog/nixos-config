@@ -31,15 +31,13 @@
       rp = "realpath";
       bg = "batgrep";
       clear = "clear -x";
+      stui = "systemctl-tui";
+      fileserver = "python3 -m http.server --bind 127.0.0.1 $argv";
     };
   };
 
   programs = {
     home-manager.enable = true;
-    gitui = {
-      enable = true;
-      keyConfig = builtins.readFile "${pkgs.gitui.src}/vim_style_key_config.ron";
-    };
     fish = {
       enable = true;
       shellInit = ''
@@ -63,29 +61,6 @@
           nohup $argv > $t.out 2> $t.err < /dev/null &
         '';
         nixdeps = "nix derivation show $argv[1] -r | jq \".[].outputs.out.path\" -r";
-        nixshow =
-          let
-            shallowStringer = ''
-              let
-                ident = a: a;
-                funcs = {
-                  "set" = builtins.attrNames;
-                  "list" = builtins.typeOf;
-                  "lambda" = builtins.typeOf;
-                  "path" = builtins.typeOf;
-                  "int" = ident;
-                  "null" = ident;
-                  "float" = ident;
-                  "bool" = ident;
-                  "string" = ident;
-                };
-              in a: (funcs.''${builtins.typeOf a} a)
-            '';
-          in
-          ''
-            nix eval $argv[1] --apply '${builtins.replaceStrings ["\n"] [" "] shallowStringer}' \
-              --json | ${pkgs.jq}/bin/jq
-          '';
       };
     };
     eza = {
@@ -128,7 +103,7 @@
         diff.colorMoved = "default";
         init.defaultBranch = "master";
       };
-      ignores = [ "result" "/.vscode" "/.direnv" "/.envrc" ];
+      ignores = [ "result" "/.vscode" ".direnv" ".envrc" ];
       aliases = {
         ca = "commit --amend --verbose";
         ce = "commit --allow-empty-message -m ''";
@@ -160,6 +135,10 @@
       };
       extraPackages = with pkgs.bat-extras; [ batman batgrep ];
     };
+    btop = {
+      enable = true;
+      settings.rounded_corners = true;
+    };
     fzf = {
       enable = true;
       enableFishIntegration = true;
@@ -177,18 +156,12 @@
     };
     lazygit = {
       enable = true;
+      package = pkgs.unstable.lazygit;
       settings = {
         gui.showCommandLog = false;
         git.autoFetch = false;
         git.paging.colorArg = "always";
-        customCommands = [{
-          key = "f";
-          command = "git f";
-          subprocess = true;
-          loadingText = "applying fixup...";
-          description = "fixup previous commit";
-          context = "files";
-        }];
+        os.editPreset = "nvim-remote"; # open files as new tab of parent nvim session
       };
     };
     atuin = {
@@ -204,31 +177,26 @@
   };
 
   home.packages = with pkgs; [
-    btop
     deno
     duf
     fd
     gh
     go
-    gopls
-    hyperfine
     jq
     lazydocker
     neofetch
-    nil
     nix-tree
     nixpkgs-fmt
     parted
     procs
-    pyright
     ripgrep
     sage # 4.7 GB, consider default not including
     sd
     sqlite
+    systemctl-tui
     tio
     tokei
     typst
-    typst-lsp
     unzip
     usbutils
     (python3.withPackages (p: with p; [

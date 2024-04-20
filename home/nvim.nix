@@ -12,6 +12,16 @@ let
   };
 in
 {
+  home.packages = with pkgs.unstable; [
+    dhall-lsp-server
+    gopls
+    haskell-language-server
+    hyperfine
+    nil
+    pyright
+    rust-analyzer
+    typst-lsp
+  ];
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -37,7 +47,7 @@ in
           local fzf = require("fzf-lua")
           vim.keymap.set("n", "<C-p>", fzf.files)
           vim.keymap.set("n", "<C-r>", fzf.git_status)
-          vim.keymap.set("n", "<C-f>", fzf.grep)
+          vim.keymap.set("n", "<C-f>", fzf.live_grep)
         '';
       }
       {

@@ -12,6 +12,17 @@
 
   virtualisation.docker.enable = true;
 
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [{
+      hostName = "nuc.cmoog.io";
+      protocol = "ssh-ng";
+      system = "x86_64-linux";
+      sshUser = "charlie";
+      maxJobs = 100;
+    }];
+  };
+
   users.users.charlie = {
     name = "charlie";
     shell = pkgs.fish;

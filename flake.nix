@@ -9,33 +9,40 @@
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
+      overlays = [
+        (final: prev: {
+          unstable = import inputs.nixpkgs-unstable { system = prev.system; };
+        })
+      ];
       defaultModules = [
         home-manager.nixosModules.default
-        ./modules/server.nix
-        ./modules/gui.nix
+        ./modules
         ./common.nix
         {
+          nixpkgs.overlays = overlays;
           _module.args = { inherit inputs; };
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            extraSpecialArgs = { inherit inputs; };
             users.charlie = import ./home;
           };
         }
       ];
-      forEach = systems: f: nixpkgs.lib.genAttrs systems (system: f
-        (import nixpkgs { inherit system; }));
+      forEach = systems: f:
+        nixpkgs.lib.genAttrs systems
+          (system: f (import nixpkgs { inherit system overlays; }));
       systems = [ "x86_64-linux" "aarch64-linux" ];
     in
     {
       formatter = forEach systems (pkgs: pkgs.nixpkgs-fmt);
-      packages =
-        forEach systems (pkgs: {
-          homeConfig = (home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home ];
-          }).activationPackage;
-        });
+      packages = forEach systems (pkgs: {
+        homeConfig = (home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home ];
+          extraSpecialArgs = { inherit inputs; };
+        }).activationPackage;
+      });
       nixosConfigurations = {
         charlie-vm = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
