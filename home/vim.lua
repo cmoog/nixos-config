@@ -7,7 +7,7 @@ vim.api.nvim_set_hl(0, "FloatBorder", {bg = "None", fg = "#FFFFFF"})
 vim.api.nvim_set_hl(0, "LspInfoBorder", {link = "FloatBorder"})
 vim.lsp.handlers["textDocument/hover"] =
     vim.lsp.with(vim.lsp.handlers.hover, {border = "single"})
-vim.opt.listchars = {trail = '·', nbsp = '␣'}
+vim.opt.listchars = {trail = '·', nbsp = '␣', tab = "» "}
 
 -- LSP bindings
 vim.api.nvim_create_autocmd("LspAttach", {

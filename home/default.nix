@@ -33,6 +33,7 @@
       clear = "clear -x";
       stui = "systemctl-tui";
       fileserver = "python3 -m http.server --bind 127.0.0.1 $argv";
+      v = "vim";
     };
   };
 
@@ -156,12 +157,20 @@
     };
     lazygit = {
       enable = true;
-      package = pkgs.unstable.lazygit;
+      package = pkgs.unstable.lazygit.overrideAttrs {
+        src = pkgs.fetchFromGitHub {
+          owner = "cmoog";
+          repo = "lazygit";
+          rev = "aa1194a533d494a8f48e3eeaedcba984a5c0b901";
+          hash = "sha256-O/mM5y9apgQXl+qlJR3R8HGbsV6ut8qAK3SdESUQMRI=";
+        };
+      };
       settings = {
-        gui.showCommandLog = false;
         git.autoFetch = false;
         git.paging.colorArg = "always";
-        os.editPreset = "nvim-remote"; # open files as new tab of parent nvim session
+        gui.showCommandLog = false;
+        notARepository = "quit";
+        os.editPreset = "nvim-remote";
       };
     };
     atuin = {
