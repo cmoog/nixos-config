@@ -2,8 +2,8 @@
 
   imports = [ ./hardware-configuration.nix ];
 
-  gui.enable = false;
-  server.enable = true;
+  moog.gui.enable = false;
+  moog.server.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {

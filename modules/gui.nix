@@ -1,10 +1,10 @@
 { pkgs, lib, config, ... }:
 
 let
-  cfg = config.gui;
+  cfg = config.moog.gui;
 in
 with lib; {
-  options.gui = {
+  options.moog.gui = {
     enable = mkEnableOption "Enable a user GUI.";
     variant = mkOption {
       type = types.enum [ "sway" "gnome" ];
@@ -34,9 +34,6 @@ with lib; {
       };
     }
     (mkIf (cfg.variant == "gnome") {
-      networking.wireless.enable = true;
-      networking.wireless.iwd.enable = false;
-
       services.gnome.core-utilities.enable = false;
       services.xserver = {
         enable = true;
@@ -51,10 +48,6 @@ with lib; {
       environment.systemPackages = with pkgs; [
         (writeShellScriptBin "bashbar" (builtins.readFile ./swaybar.sh))
       ];
-
-      # daemon and CLI for wifi
-      networking.wireless.iwd.enable = true;
-      networking.wireless.enable = false;
 
       programs = {
         sway = {

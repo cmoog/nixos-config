@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  gui.enable = true;
+  moog.gui.enable = true;
 
   networking = {
     hostName = "charlie-laptop";

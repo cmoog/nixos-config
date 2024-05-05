@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  server.enable = true;
+  moog.server.enable = true;
 
   networking.hostName = "charlie-vm";
 

@@ -23,8 +23,6 @@
       CARGO_HOME = "${XDG_DATA_HOME}/cargo";
     };
     shellAliases = {
-      copy = "${pkgs.xsel}/bin/xsel --clipboard --input";
-      paste = "${pkgs.xsel}/bin/xsel --clipboard --output";
       ip = "ip --color=auto";
       g = "git";
       lg = "lazygit";
@@ -34,6 +32,8 @@
       stui = "systemctl-tui";
       fileserver = "python3 -m http.server --bind 127.0.0.1 $argv";
       v = "vim";
+      pr = "gh pr create --draft --fill";
+      prs = "gh search prs --state=open --involves=@me --updated=2024";
     };
   };
 
@@ -46,16 +46,12 @@
       '';
       functions = {
         fish_prompt = builtins.readFile ./fish_prompt.fish;
-        groot = ''
+        gr = ''
           set --local gitroot (${pkgs.git}/bin/git rev-parse --show-toplevel)
           if [ "$gitroot" = "" ]
             return -1
           end
           cd "$gitroot"
-        '';
-        pr = ''
-          ${pkgs.gh}/bin/gh pr create --fill
-          ${pkgs.gh}/bin/gh pr view --web
         '';
         fork = ''
           set --local t $(date -d "now" +"%Y-m-%d-%H-%M-%S")
@@ -138,7 +134,7 @@
     };
     btop = {
       enable = true;
-      settings.rounded_corners = true;
+      settings.rounded_corners = false;
     };
     fzf = {
       enable = true;
@@ -194,6 +190,7 @@
     jq
     lazydocker
     neofetch
+    nix-output-monitor
     nix-tree
     nixpkgs-fmt
     parted
@@ -216,6 +213,10 @@
       plotly
       pytorch
     ]))
+    (pkgs.writeShellScriptBin "copy" ''
+      DATA=$(</dev/stdin)
+      printf "\033]52;c;$(printf %s "$DATA" | base64 | tr -d '\n\r')\a"
+    '')
   ];
 
   home.stateVersion = "21.05";

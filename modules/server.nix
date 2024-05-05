@@ -1,9 +1,9 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.server;
+  cfg = config.moog.server;
 in
 with lib; {
-  options.server = {
+  options.moog.server = {
     enable = mkEnableOption "Enable a server configuration.";
   };
   config = mkIf cfg.enable {

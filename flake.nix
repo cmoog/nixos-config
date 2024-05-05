@@ -43,6 +43,7 @@
           extraSpecialArgs = { inherit inputs; };
         }).activationPackage;
       });
+      nixosModules.default = ./modules;
       nixosConfigurations = {
         charlie-vm = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
@@ -58,7 +59,7 @@
         };
         pi4 = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [ ./pi ];
+          modules = [ ./pi { _module.args = { inherit inputs; }; } ];
         };
       };
     };
