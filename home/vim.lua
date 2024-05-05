@@ -208,6 +208,11 @@ require("gitsigns").setup({
   current_line_blame_opts = { delay = 2000 }
 })
 
+require('lint').linters_by_ft = {
+  sh = { 'shellcheck' },
+}
+vim.cmd([[autocmd BufWritePost *.sh,*.bash lua require('lint').try_lint()]])
+
 local function copy(lines, _)
   require('osc52').copy(table.concat(lines, '\n'))
 end

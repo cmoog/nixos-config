@@ -13,10 +13,11 @@ let
 in
 {
   home.packages = with pkgs.unstable; [
+    (builtins.getFlake "github:nix-community/nixd/a8fdfea4fd1b1156611d4396c7e99229d5b36243").packages.${pkgs.system}.nixd
     gopls
     haskell-language-server
     lua-language-server
-    (builtins.getFlake "github:nix-community/nixd/a8fdfea4fd1b1156611d4396c7e99229d5b36243").packages.${pkgs.system}.nixd
+    shellcheck
     pyright
     rust-analyzer
     typst-lsp
@@ -33,6 +34,7 @@ in
       lualine-lsp-progress # adds lsp loading indicator to status bar
       lualine-nvim
       nvim-autopairs
+      nvim-lint
       nvim-lspconfig
       nvim-osc52
       nvim-treesitter.withAllGrammars
