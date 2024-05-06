@@ -196,7 +196,7 @@
     parted
     procs
     ripgrep
-    sage # 4.7 GB, consider default not including
+    # sage # 4.7 GB, consider default not including
     sd
     sqlite
     systemctl-tui
@@ -210,8 +210,7 @@
       matplotlib
       numpy
       pandas
-      plotly
-      pytorch
+      # pytorch
     ]))
     (pkgs.writeShellScriptBin "copy" ''
       DATA=$(</dev/stdin)

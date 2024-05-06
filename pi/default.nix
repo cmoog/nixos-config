@@ -23,10 +23,12 @@
   hardware.bluetooth.enable = false;
 
   security.sudo.wheelNeedsPassword = false;
+  users.mutableUsers = false;
   users.users.cmoog = {
     isNormalUser = true;
-    openssh.authorizedKeys.keys = [
-      (import ../home/ssh.nix).macNoAuth
+    openssh.authorizedKeys.keys = with (import ../home/ssh.nix); [
+      macNoAuth
+      vm
     ];
     hashedPassword = null;
     extraGroups = [ "wheel" ];
