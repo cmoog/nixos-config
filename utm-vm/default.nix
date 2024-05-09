@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   moog.server.enable = true;
@@ -9,8 +9,6 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
-  virtualisation.docker.enable = true;
 
   nix = {
     distributedBuilds = true;
@@ -36,6 +34,7 @@
     ];
   };
   users.mutableUsers = false;
+  services.tailscale.enable = lib.mkForce false;
 
   system.stateVersion = "21.11";
 }

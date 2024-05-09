@@ -15,6 +15,8 @@
     hostName = "charlie-nuc";
   };
 
+  virtualisation.docker.enable = true;
+
   users.users.charlie = {
     name = "charlie";
     shell = pkgs.fish;

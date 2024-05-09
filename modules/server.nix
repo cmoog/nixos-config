@@ -15,8 +15,6 @@ with lib; {
       hybrid-sleep.enable = false;
     };
 
-    virtualisation.docker.enable = true;
-
     networking = {
       firewall = {
         enable = true;

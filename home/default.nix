@@ -188,7 +188,6 @@
     gh
     go
     jq
-    lazydocker
     neofetch
     nix-output-monitor
     nix-tree
