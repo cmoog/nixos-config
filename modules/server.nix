@@ -2,11 +2,11 @@
 let
   cfg = config.moog.server;
 in
-with lib; {
+{
   options.moog.server = {
-    enable = mkEnableOption "Enable a server configuration.";
+    enable = lib.mkEnableOption "Enable a server configuration.";
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.targets = {
       # do not sleep after inactivity
       sleep.enable = false;
@@ -18,8 +18,6 @@ with lib; {
     networking = {
       firewall = {
         enable = true;
-        allowedTCPPorts = [ 22 80 443 ];
-        allowedUDPPorts = [ config.services.tailscale.port ];
         checkReversePath = "loose";
       };
     };
@@ -28,11 +26,11 @@ with lib; {
       tailscale = {
         enable = true;
         port = 41641;
+        openFirewall = true;
       };
       openssh = {
         enable = true;
         settings = {
-          PermitRootLogin = "no";
           PasswordAuthentication = false;
         };
       };

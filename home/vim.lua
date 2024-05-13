@@ -52,6 +52,16 @@ vim.cmd([[match errorMsg /\s\+$/]])
 vim.diagnostic.config { float = { border = "rounded" } }
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
+require('telescope').setup({
+  pickers = {
+    live_grep = {
+      additional_args = function(_)
+        return { "--hidden" }
+      end
+    }
+  }
+})
+
 local telescope = require('telescope.builtin')
 vim.keymap.set("n", "<leader>d", telescope.diagnostics, { desc = "[d]iagnostics picker" })
 vim.keymap.set("n", "<leader>s", telescope.lsp_workspace_symbols, { desc = "[s]ymbols picker" })
@@ -60,10 +70,15 @@ vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "[g]o to [d]efinit
 vim.keymap.set("n", "gr", telescope.lsp_references, { desc = "[g]o to [r]eferences picker" })
 vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, { desc = "goto next diagnostic" })
 vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, { desc = "goto prev diagnostic" })
-vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { buffer = 0, desc = "code [a]ction" })
 vim.keymap.set('n', '<C-p>', telescope.git_files, { desc = "git files picker" })
 vim.keymap.set('n', '<C-f>', telescope.live_grep, { desc = "live grep picker" })
 vim.keymap.set('n', '<C-r>', telescope.git_status, { desc = "git status picker" })
+vim.keymap.set('n', '<leader>l', function() require('gitsigns').nav_hunk('next') end, { desc = "next git hunk" })
+vim.keymap.set('n', '<leader>h', function() require('gitsigns').nav_hunk('prev') end, { desc = "prev git hunk" })
+
+vim.keymap.set('n', '<leader>i', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+  { desc = "[i]nlay hints toggle" })
+
 vim.keymap.set('n', '<leader>km', telescope.keymaps, { desc = "[k]ey [m]aps picker" })
 
 -- LSP bindings
@@ -73,6 +88,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.hover, { desc = "[h]over symbol", buffer = ev.buf })
     vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "[r]e[n]ame symbol", buffer = ev.buf })
+    vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "[c]ode [a]ction", buffer = ev.buf })
     vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end,
       { desc = "[f]ormat buffer", buffer = ev.buf })
   end
@@ -121,10 +137,7 @@ lsp.nixd.setup({
   }
 })
 lsp.pyright.setup({ capabilities = capabilities })
-lsp.hls.setup({
-  capabilities = capabilities,
-  filetypes = { "haskell", "lhaskell", "cabal" }
-})
+require("haskell-tools")
 require("typescript-tools").setup({})
 
 -- special config for using lua to configure nvim

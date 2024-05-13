@@ -30,7 +30,6 @@
       bg = "batgrep";
       clear = "clear -x";
       stui = "systemctl-tui";
-      fileserver = "python3 -m http.server --bind 127.0.0.1 $argv";
       v = "vim";
       pr = "gh pr create --draft --fill";
       prs = "gh search prs --state=open --involves=@me --updated=2024";
@@ -127,14 +126,16 @@
     };
     bat = {
       enable = true;
-      config = {
-        style = "plain";
-      };
+      config.style = "plain";
       extraPackages = with pkgs.bat-extras; [ batman batgrep ];
     };
     btop = {
       enable = true;
-      settings.rounded_corners = false;
+      settings = {
+        color_theme = "matcha-dark-sea";
+        rounded_corners = false;
+        vim_keys = true;
+      };
     };
     fzf = {
       enable = true;
@@ -153,14 +154,7 @@
     };
     lazygit = {
       enable = true;
-      package = pkgs.unstable.lazygit.overrideAttrs {
-        src = pkgs.fetchFromGitHub {
-          owner = "cmoog";
-          repo = "lazygit";
-          rev = "aa1194a533d494a8f48e3eeaedcba984a5c0b901";
-          hash = "sha256-O/mM5y9apgQXl+qlJR3R8HGbsV6ut8qAK3SdESUQMRI=";
-        };
-      };
+      package = pkgs.unstable.lazygit;
       settings = {
         git.autoFetch = false;
         git.paging.colorArg = "always";
@@ -194,6 +188,7 @@
     nixpkgs-fmt
     parted
     procs
+    pv
     ripgrep
     # sage # 4.7 GB, consider default not including
     sd
@@ -204,6 +199,7 @@
     typst
     unzip
     usbutils
+    zellij
     (python3.withPackages (p: with p; [
       ipykernel
       matplotlib

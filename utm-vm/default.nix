@@ -5,6 +5,8 @@
 
   networking.hostName = "charlie-vm";
 
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -28,7 +30,7 @@
     hashedPassword =
       "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
       (import ../home/ssh.nix).macNoAuth
     ];

@@ -15,8 +15,6 @@
     hostName = "charlie-nuc";
   };
 
-  virtualisation.docker.enable = true;
-
   users.users.charlie = {
     name = "charlie";
     shell = pkgs.fish;
@@ -24,7 +22,7 @@
     hashedPassword =
       "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = builtins.attrValues (import ../home/ssh.nix);
   };
   users.mutableUsers = false;

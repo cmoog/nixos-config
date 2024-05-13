@@ -3,20 +3,19 @@
 let
   cfg = config.moog.gui;
 in
-with lib; {
+{
   options.moog.gui = {
-    enable = mkEnableOption "Enable a user GUI.";
-    variant = mkOption {
-      type = types.enum [ "sway" "gnome" ];
+    enable = lib.mkEnableOption "Enable a user GUI.";
+    variant = lib.mkOption {
+      type = lib.types.enum [ "sway" "gnome" ];
       default = "sway";
     };
   };
-  config = mkIf cfg.enable (mkMerge [
+  config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       environment.systemPackages = with pkgs; [
         alacritty
         chromium
-        firefox
         gnome.gnome-disk-utility
         gnome.nautilus
         mpv
@@ -33,7 +32,7 @@ with lib; {
         wireshark.enable = true;
       };
     }
-    (mkIf (cfg.variant == "gnome") {
+    (lib.mkIf (cfg.variant == "gnome") {
       services.gnome.core-utilities.enable = false;
       services.xserver = {
         enable = true;
@@ -41,12 +40,13 @@ with lib; {
         desktopManager.gnome.enable = true;
       };
     })
-    (mkIf (cfg.variant == "sway") {
+    (lib.mkIf (cfg.variant == "sway") {
       environment.etc = {
         "sway/config".source = ./sway.config;
       };
-      environment.systemPackages = with pkgs; [
-        (writeShellScriptBin "bashbar" (builtins.readFile ./swaybar.sh))
+      networking.wireless.iwd.enable = true;
+      environment.systemPackages = [
+        (pkgs.writeShellScriptBin "bashbar" (builtins.readFile ./swaybar.sh))
       ];
 
       programs = {

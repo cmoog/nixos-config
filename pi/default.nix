@@ -56,6 +56,7 @@
     git
     vim
   ];
+  environment.shellAliases = { "ip" = "ip --color=auto"; };
 
   services.openssh.enable = true;
   services.tailscale.enable = true;

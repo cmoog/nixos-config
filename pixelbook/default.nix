@@ -5,15 +5,12 @@
 
   networking = {
     hostName = "charlie-laptop";
-    wireless.iwd.enable = true;
   };
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
-  virtualisation.docker.enable = true;
 
   hardware = {
     opengl.enable = true;
@@ -26,7 +23,7 @@
     hashedPassword =
       "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
-    extraGroups = [ "wheel" "docker" "wireshark" ];
+    extraGroups = [ "wheel" "wireshark" ];
   };
   users.mutableUsers = true;
   security.sudo.execWheelOnly = true;
