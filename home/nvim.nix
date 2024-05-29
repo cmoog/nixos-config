@@ -13,12 +13,9 @@ let
 in
 {
   home.packages = with pkgs.unstable; [
-    # haskell-language-server # ~5 GB
     gopls
     lua-language-server
     nixd
-    pyright
-    rust-analyzer
     shellcheck
     typst-lsp
   ];

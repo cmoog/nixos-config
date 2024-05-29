@@ -20,6 +20,7 @@ in
         gnome.nautilus
         mpv
         tor-browser-bundle-bin
+        usbutils
         wireshark
       ];
 

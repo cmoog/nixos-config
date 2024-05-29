@@ -136,6 +136,10 @@ lsp.nixd.setup({
     ]]
   }
 })
+lsp.denols.setup({
+  capabilities = capabilities,
+  root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+})
 lsp.pyright.setup({ capabilities = capabilities })
 require("haskell-tools")
 require("typescript-tools").setup({})

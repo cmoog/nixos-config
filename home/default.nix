@@ -182,7 +182,6 @@
     gh
     go
     jq
-    neofetch
     nix-output-monitor
     nix-tree
     nixpkgs-fmt
@@ -198,16 +197,7 @@
     tokei
     typst
     unzip
-    usbutils
-    zellij
-    (python3.withPackages (p: with p; [
-      ipykernel
-      matplotlib
-      numpy
-      pandas
-      # pytorch
-    ]))
-    (pkgs.writeShellScriptBin "copy" ''
+    (writeShellScriptBin "copy" ''
       DATA=$(</dev/stdin)
       printf "\033]52;c;$(printf %s "$DATA" | base64 | tr -d '\n\r')\a"
     '')
