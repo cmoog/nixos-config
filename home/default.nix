@@ -56,12 +56,11 @@
           set --local t $(date -d "now" +"%Y-m-%d-%H-%M-%S")
           nohup $argv > $t.out 2> $t.err < /dev/null &
         '';
-        nixdeps = "nix derivation show $argv[1] -r | jq \".[].outputs.out.path\" -r";
       };
     };
     eza = {
       enable = true;
-      enableAliases = true;
+      enableFishIntegration = true;
     };
 
     tmux = {
@@ -91,11 +90,6 @@
       userName = "Charlie Moog";
       userEmail = "moogcharlie@gmail.com";
       extraConfig = {
-        # stored in secure enclave on macbook-air with auth required
-        user.signingKey = "key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGxStcvVFF2s/4GFuLj8ehTzzD1B8Ct9Ntds1G1WONyEUShl8oHoZiByjObeX2wyfJx3ZpzhJ/A7Wa73bTL85Yk= ecdsa-sha2-nistp256";
-        gpg.format = "ssh";
-        commit.gpgsign = true;
-        tag.gpgsign = true;
         diff.colorMoved = "default";
         init.defaultBranch = "master";
       };
@@ -154,7 +148,6 @@
     };
     lazygit = {
       enable = true;
-      package = pkgs.unstable.lazygit;
       settings = {
         git.autoFetch = false;
         git.paging.colorArg = "always";
@@ -189,8 +182,8 @@
     procs
     pv
     ripgrep
-    # sage # 4.7 GB, consider default not including
     sd
+    socat
     sqlite
     systemctl-tui
     tio

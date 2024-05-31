@@ -6,8 +6,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "projekt0n";
       repo = "github-nvim-theme";
-      rev = "7b97aa55ef9dabce479f74f86b8c61c1464c9d2e";
-      hash = "sha256-DQH+U2jMi80jZYNdnjdXoeYwJY7y1WtpS/w+DMIN6FY=";
+      rev = "d832925e77cef27b16011a8dfd8835f49bdcd055";
+      hash = "sha256-vsIr3UrnajxixDo0cp+6GoQfmO0KDkPX8jw1e0fPHo4=";
     };
   };
 in
