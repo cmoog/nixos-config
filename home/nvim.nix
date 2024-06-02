@@ -15,7 +15,6 @@
     plugins = with pkgs.vimPlugins; [
       (pkgs.vimUtils.buildVimPlugin {
         name = "github-nvim-theme";
-        buildPhase = "rm Makefile";
         src = inputs.github-nvim-theme;
       })
       haskell-tools-nvim

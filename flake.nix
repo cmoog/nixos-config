@@ -9,11 +9,11 @@
     github-nvim-theme.url = "github:projekt0n/github-nvim-theme";
     github-nvim-theme.flake = false;
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
       overlays = [
         (final: prev: {
-          unstable = import inputs.nixpkgs-unstable { system = prev.system; };
+          unstable = import nixpkgs-unstable { system = prev.system; };
         })
       ];
       defaultModules = [

@@ -73,15 +73,12 @@
         bind-key v split-window -h
         bind-key s split-window -v
 
-        set -g status-bg black
-        set -g status-fg white
         set -g status-left-length 0
         set -g status-right-length 0
         set -g status-right ' '
-
-        # Shift arrow to switch windows
-        bind -n S-Left  previous-window
-        bind -n S-Right next-window
+        set -g set-clipboard on
+        bind -n C-[ previous-window
+        bind -n C-] next-window
       '';
     };
     git = {
@@ -92,6 +89,7 @@
       extraConfig = {
         diff.colorMoved = "default";
         init.defaultBranch = "master";
+        rerere.enabled = true;
       };
       ignores = [ "result" "/.vscode" ".direnv" ".envrc" ];
       aliases = {
