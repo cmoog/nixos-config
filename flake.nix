@@ -6,14 +6,15 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    github-nvim-theme.url = "github:projekt0n/github-nvim-theme";
-    github-nvim-theme.flake = false;
+    helix.url = "github:helix-editor/helix";
+    helix.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, helix, ... }@inputs:
     let
       overlays = [
         (final: prev: {
           unstable = import nixpkgs-unstable { system = prev.system; };
+          helix = helix.packages.${prev.system}.helix;
         })
       ];
       defaultModules = [

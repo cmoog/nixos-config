@@ -5,14 +5,13 @@
     "${modulesPath}/profiles/minimal.nix"
   ];
 
-  environment.systemPackages = with pkgs; [ git curl ];
+  environment.systemPackages = with pkgs; [ git curl vim ];
 
   security.sudo.execWheelOnly = true;
   security.sudo.wheelNeedsPassword = false;
 
   programs.fish.enable = true;
   programs.nano.enable = false;
-  programs.vim.defaultEditor = true;
 
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

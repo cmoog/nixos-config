@@ -4,7 +4,6 @@
   moog.server.enable = true;
 
   networking.hostName = "charlie-vm";
-
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   boot.loader = {
@@ -15,7 +14,7 @@
   nix = {
     distributedBuilds = true;
     buildMachines = [{
-      hostName = "nuc.cmoog.io";
+      hostName = "charlie-nuc";
       protocol = "ssh-ng";
       system = "x86_64-linux";
       sshUser = "charlie";

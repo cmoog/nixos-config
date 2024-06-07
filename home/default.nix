@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
-    ./nvim.nix
+    ./helix.nix
   ];
   home = {
     username = "charlie";
@@ -13,7 +13,7 @@
       "$HOME/.deno/bin"
     ];
     sessionVariables = rec {
-      EDITOR = "vim";
+      EDITOR = "hx";
       GO111MODULE = "on";
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
@@ -61,25 +61,6 @@
     eza = {
       enable = true;
       enableFishIntegration = true;
-    };
-
-    tmux = {
-      enable = true;
-      mouse = true;
-      terminal = "xterm-256color";
-      keyMode = "vi";
-      baseIndex = 1;
-      extraConfig = ''
-        bind-key v split-window -h
-        bind-key s split-window -v
-
-        set -g status-left-length 0
-        set -g status-right-length 0
-        set -g status-right ' '
-        set -g set-clipboard on
-        bind -n C-[ previous-window
-        bind -n C-] next-window
-      '';
     };
     git = {
       enable = true;
@@ -151,7 +132,18 @@
         git.paging.colorArg = "always";
         gui.showCommandLog = false;
         notARepository = "quit";
-        os.editPreset = "nvim-remote";
+        os = rec {
+          edit = lib.strings.concatStringsSep " && " [
+            "zellij action toggle-floating-panes"
+            "zellij action write 27"
+            "zellij action write-chars ':o {{filename}}'"
+            "zellij action write 13"
+            "zellij action toggle-floating-panes"
+            "zellij action close-pane"
+          ];
+          editAtLine = edit;
+          editInTerminal = false;
+        };
       };
     };
     atuin = {
@@ -162,6 +154,18 @@
       settings = {
         auto_sync = false;
         update_check = false;
+      };
+    };
+    zellij = {
+      enable = true;
+      enableFishIntegration = true;
+      settings = {
+        default_layout = "compact";
+        default_mode = "locked";
+        keybinds.unbind = "Ctrl g";
+        pane_frames = false;
+        plugins = [ "compact-bar" ];
+        simplified_ui = true;
       };
     };
   };

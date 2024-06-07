@@ -1,0 +1,104 @@
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    gopls
+    lua-language-server
+    nixd
+    nodePackages.bash-language-server
+    nodePackages.typescript-language-server
+    shellcheck
+    typst-lsp
+  ];
+  programs.helix = {
+    enable = true;
+    languages = {
+      language-server = {
+        haskell-language-server.command = "haskell-language-server"; # defaults to `haskell-language-server-wrapper`
+        haskell-language-server.config.haskell = {
+          formattingProvider = "fourmolu";
+          plugin.fourmolu.config.external = true;
+        };
+        nil.command = "nixd";
+      };
+    };
+    settings = {
+      theme = "gruvbox_dark_hard"; # ghdark_moog "github_dark_high_contrast"; # modus_vivendi, github_dark_high_contrast, autumn_night
+      editor = {
+        auto-format = false;
+        auto-save = true;
+        bufferline = "always";
+        color-modes = true;
+        completion-replace = true;
+        completion-timeout = 100;
+        completion-trigger-len = 1;
+        cursorline = true;
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
+        file-picker.hidden = false;
+        indent-guides = {
+          render = true;
+          skip-levels = 1;
+          character = "┊";
+        };
+        line-number = "relative";
+        lsp = {
+          display-messages = true;
+          display-inlay-hints = true;
+        };
+        popup-border = "all";
+        scrolloff = 10;
+        shell = [ "fish" "-c" ];
+        statusline.center = [ "workspace-diagnostics" ];
+        statusline.right = [
+          "version-control"
+          "spacer"
+          "diagnostics"
+          "selections"
+          "register"
+          "position"
+          "position-percentage"
+        ];
+        true-color = true;
+      };
+      keys.insert = {
+        C-t = [ ":new" "file_picker" ];
+        j.k = "normal_mode";
+        j.j = "normal_mode";
+      };
+      keys.select = {
+        y = "yank_to_clipboard";
+      };
+      keys.normal = {
+        space = {
+          f = ":fmt";
+          p = "file_picker";
+          w = ":write-all";
+          q = ":quit-all";
+          k = "expand_selection";
+          m = "shrink_selection";
+        };
+        C-h = "goto_previous_buffer";
+        C-l = "goto_next_buffer";
+        C-t = [ ":new" "file_picker" ];
+        C-g = ":sh zellij run --floating --close-on-exit --width 90% --height 90% -x 5% -y 5% -- lazygit";
+        D = "kill_to_line_end";
+        d = [ "yank_to_clipboard" "delete_selection" ];
+        esc = [ "collapse_selection" "keep_primary_selection" ];
+        "}" = "goto_next_paragraph";
+        "{" = "goto_prev_paragraph";
+        K = "hover";
+        p = "paste_clipboard_after";
+        X = "extend_line_above";
+        y = "yank_to_clipboard";
+      };
+    };
+    themes = {
+      ghdark_moog = {
+        inherits = "github_dark_high_contrast";
+        comment = { modifiers = [ "dim" ]; };
+      };
+    };
+  };
+}

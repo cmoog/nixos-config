@@ -19,7 +19,6 @@ in
         gnome.gnome-disk-utility
         gnome.nautilus
         mpv
-        tor-browser-bundle-bin
         usbutils
         wireshark
       ];
@@ -27,7 +26,6 @@ in
       fonts.packages = with pkgs; [
         inter
         jetbrains-mono
-        noto-fonts-emoji
       ];
       programs = {
         wireshark.enable = true;
