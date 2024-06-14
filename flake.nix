@@ -15,6 +15,7 @@
         (final: prev: {
           unstable = import nixpkgs-unstable { system = prev.system; };
           helix = helix.packages.${prev.system}.helix;
+          machineinfo = prev.callPackage ./pkgs/machineinfo { };
         })
       ];
       defaultModules = [
@@ -39,6 +40,7 @@
     in
     {
       formatter = forEach systems (pkgs: pkgs.nixpkgs-fmt);
+      legacyPackages = forEach systems (pkgs: pkgs);
       packages = forEach systems (pkgs: {
         homeConfig = (home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
