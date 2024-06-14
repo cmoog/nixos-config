@@ -11,8 +11,14 @@
     efi.canTouchEfiVariables = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    compsize
+  ];
+
+  virtualisation.rosetta.enable = true;
+
   nix = {
-    distributedBuilds = true;
+    distributedBuilds = false;
     buildMachines = [{
       hostName = "charlie-nuc";
       protocol = "ssh-ng";

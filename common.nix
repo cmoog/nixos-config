@@ -5,7 +5,17 @@
     "${modulesPath}/profiles/minimal.nix"
   ];
 
-  environment.systemPackages = with pkgs; [ git curl vim ];
+  environment.systemPackages = with pkgs; [
+    curl
+    git
+    machineinfo
+    vim
+  ];
+
+  services.timesyncd.enable = false;
+  services.chrony.enable = true;
+
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   security.sudo.execWheelOnly = true;
   security.sudo.wheelNeedsPassword = false;

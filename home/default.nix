@@ -67,6 +67,7 @@
         diff.colorMoved = "default";
         init.defaultBranch = "master";
         rerere.enabled = true;
+        push.autoSetupRemote = true;
       };
       ignores = [ "result" "/.vscode" ".direnv" ".envrc" ];
       aliases = {
