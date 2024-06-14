@@ -12,7 +12,6 @@
     enable = true;
     languages = {
       language-server = {
-        haskell-language-server.command = "haskell-language-server"; # defaults to `haskell-language-server-wrapper`
         haskell-language-server.config.haskell = {
           formattingProvider = "fourmolu";
           plugin.fourmolu.config.external = true;
@@ -48,7 +47,6 @@
           display-inlay-hints = true;
         };
         popup-border = "all";
-        scrolloff = 10;
         shell = [ "fish" "-c" ];
         statusline.center = [ "workspace-diagnostics" ];
         statusline.right = [
@@ -82,7 +80,7 @@
         C-h = "goto_previous_buffer";
         C-l = "goto_next_buffer";
         C-t = [ ":new" "file_picker" ];
-        C-g = ":sh zellij run --floating --close-on-exit --width 90% --height 90% -x 5% -y 5% -- lazygit";
+        C-g = [ ":new" ":insert-output lazygit" ":redraw" ":buffer-close!" ":redraw" ];
         D = "kill_to_line_end";
         d = [ "yank_to_clipboard" "delete_selection" ];
         esc = [ "collapse_selection" "keep_primary_selection" ];

@@ -46,15 +46,11 @@
       functions = {
         fish_prompt = builtins.readFile ./fish_prompt.fish;
         gr = ''
-          set --local gitroot (${pkgs.git}/bin/git rev-parse --show-toplevel)
+          set --local gitroot (git rev-parse --show-toplevel)
           if [ "$gitroot" = "" ]
             return -1
           end
           cd "$gitroot"
-        '';
-        fork = ''
-          set --local t $(date -d "now" +"%Y-m-%d-%H-%M-%S")
-          nohup $argv > $t.out 2> $t.err < /dev/null &
         '';
       };
     };
@@ -75,7 +71,6 @@
       ignores = [ "result" "/.vscode" ".direnv" ".envrc" ];
       aliases = {
         ca = "commit --amend --verbose";
-        ce = "commit --allow-empty-message -m ''";
         a = "add --all";
         c = "commit --verbose";
         cb = "checkout -b";
@@ -132,18 +127,7 @@
         git.paging.colorArg = "always";
         gui.showCommandLog = false;
         notARepository = "quit";
-        os = rec {
-          edit = lib.strings.concatStringsSep " && " [
-            "zellij action toggle-floating-panes"
-            "zellij action write 27"
-            "zellij action write-chars ':o {{filename}}'"
-            "zellij action write 13"
-            "zellij action toggle-floating-panes"
-            "zellij action close-pane"
-          ];
-          editAtLine = edit;
-          editInTerminal = false;
-        };
+        os.editPreset = "helix (hx)";
       };
     };
     atuin = {
@@ -154,18 +138,6 @@
       settings = {
         auto_sync = false;
         update_check = false;
-      };
-    };
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-      settings = {
-        default_layout = "compact";
-        default_mode = "locked";
-        keybinds.unbind = "Ctrl g";
-        pane_frames = false;
-        plugins = [ "compact-bar" ];
-        simplified_ui = true;
       };
     };
   };
