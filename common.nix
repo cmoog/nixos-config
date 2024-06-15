@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     curl
     git
+    helix
     machineinfo
     vim
   ];

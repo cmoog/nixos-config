@@ -64,7 +64,11 @@
         };
         pi4 = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [ ./pi { _module.args = { inherit inputs; }; } ];
+          modules = [
+            ./pi
+            ./common.nix
+            { _module.args = { inherit inputs; }; nixpkgs.overlays = overlays; }
+          ];
         };
       };
     };

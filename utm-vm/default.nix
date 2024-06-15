@@ -4,6 +4,8 @@
   moog.server.enable = true;
 
   networking.hostName = "charlie-vm";
+  # allow access to all ports from host via bridge network
+  networking.firewall.enable = lib.mkForce false;
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   boot.loader = {
@@ -14,6 +16,13 @@
   environment.systemPackages = with pkgs; [
     compsize
   ];
+
+  systemd.oomd = {
+    enable = true;
+    enableSystemSlice = true;
+    enableRootSlice = true;
+    enableUserSlices = true;
+  };
 
   virtualisation.rosetta.enable = true;
 
@@ -36,9 +45,9 @@
       "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      (import ../home/ssh.nix).macNoAuth
-    ];
+    openssh.authorizedKeys.keys =
+      let keys = import ../home/ssh.nix; in
+      [ keys.macSecEnc keys.mac ];
   };
   users.mutableUsers = false;
   services.tailscale.enable = lib.mkForce false;

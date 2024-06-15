@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     gopls
-    lua-language-server
     nixd
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
@@ -66,6 +65,7 @@
         j.j = "normal_mode";
       };
       keys.select = {
+        d = [ "yank_to_clipboard" "delete_selection" ];
         y = "yank_to_clipboard";
       };
       keys.normal = {

@@ -27,7 +27,8 @@
   users.users.cmoog = {
     isNormalUser = true;
     openssh.authorizedKeys.keys = with (import ../home/ssh.nix); [
-      macNoAuth
+      macSecEnc
+      mac
       vm
     ];
     hashedPassword = null;

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./helix.nix
@@ -23,16 +23,14 @@
       CARGO_HOME = "${XDG_DATA_HOME}/cargo";
     };
     shellAliases = {
-      ip = "ip --color=auto";
-      g = "git";
-      lg = "lazygit";
-      rp = "realpath";
       bg = "batgrep";
       clear = "clear -x";
-      stui = "systemctl-tui";
-      v = "vim";
+      g = "git";
+      ip = "ip --color=auto";
+      lg = "lazygit";
       pr = "gh pr create --draft --fill";
       prs = "gh search prs --state=open --involves=@me --updated=2024";
+      rp = "realpath";
     };
   };
 
@@ -96,12 +94,13 @@
     bat = {
       enable = true;
       config.style = "plain";
+      config.theme = "gruvbox-dark";
       extraPackages = with pkgs.bat-extras; [ batman batgrep ];
     };
     btop = {
       enable = true;
       settings = {
-        color_theme = "matcha-dark-sea";
+        color_theme = "TTY";
         rounded_corners = false;
         vim_keys = true;
       };
@@ -144,15 +143,13 @@
   };
 
   home.packages = with pkgs; [
-    deno
-    duf
     fd
     gh
     go
     jq
     nix-output-monitor
     nix-tree
-    nixpkgs-fmt
+    nixfmt-rfc-style
     parted
     procs
     pv
@@ -160,11 +157,8 @@
     sd
     socat
     sqlite
-    systemctl-tui
     tio
-    tokei
     typst
-    unzip
     (writeShellScriptBin "copy" ''
       DATA=$(</dev/stdin)
       printf "\033]52;c;$(printf %s "$DATA" | base64 | tr -d '\n\r')\a"
