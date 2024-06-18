@@ -9,7 +9,14 @@
     helix.url = "github:helix-editor/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, helix, ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      helix,
+      ...
+    }@inputs:
     let
       overlays = [
         (final: prev: {
@@ -24,29 +31,38 @@
         ./common.nix
         {
           nixpkgs.overlays = overlays;
-          _module.args = { inherit inputs; };
+          _module.args = {
+            inherit inputs;
+          };
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {
+              inherit inputs;
+            };
             users.charlie = import ./home;
           };
         }
       ];
-      forEach = systems: f:
-        nixpkgs.lib.genAttrs systems
-          (system: f (import nixpkgs { inherit system overlays; }));
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      forEach =
+        systems: f: nixpkgs.lib.genAttrs systems (system: f (import nixpkgs { inherit system overlays; }));
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
     in
     {
-      formatter = forEach systems (pkgs: pkgs.nixpkgs-fmt);
+      formatter = forEach systems (pkgs: pkgs.nixfmt-rfc-style);
       legacyPackages = forEach systems (pkgs: pkgs);
       packages = forEach systems (pkgs: {
-        homeConfig = (home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home ];
-          extraSpecialArgs = { inherit inputs; };
-        }).activationPackage;
+        homeConfig =
+          (home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home ];
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+          }).activationPackage;
       });
       nixosModules.default = ./modules;
       nixosConfigurations = {
@@ -67,7 +83,12 @@
           modules = [
             ./pi
             ./common.nix
-            { _module.args = { inherit inputs; }; nixpkgs.overlays = overlays; }
+            {
+              _module.args = {
+                inherit inputs;
+              };
+              nixpkgs.overlays = overlays;
+            }
           ];
         };
       };

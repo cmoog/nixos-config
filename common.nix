@@ -1,9 +1,13 @@
-{ pkgs, inputs, config, modulesPath, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  modulesPath,
+  ...
+}:
 
 {
-  imports = [
-    "${modulesPath}/profiles/minimal.nix"
-  ];
+  imports = [ "${modulesPath}/profiles/minimal.nix" ];
 
   environment.systemPackages = with pkgs; [
     curl

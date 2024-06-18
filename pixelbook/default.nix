@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [ ./hardware-configuration.nix ];
 
   moog.gui.enable = true;
@@ -20,10 +21,12 @@
     name = "charlie";
     shell = pkgs.fish;
     isNormalUser = true;
-    hashedPassword =
-      "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
+    hashedPassword = "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
-    extraGroups = [ "wheel" "wireshark" ];
+    extraGroups = [
+      "wheel"
+      "wireshark"
+    ];
   };
   users.mutableUsers = true;
   security.sudo.execWheelOnly = true;

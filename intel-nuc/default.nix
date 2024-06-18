@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   imports = [ ./hardware-configuration.nix ];
 
@@ -19,8 +20,7 @@
     name = "charlie";
     shell = pkgs.fish;
     isNormalUser = true;
-    hashedPassword =
-      "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
+    hashedPassword = "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = builtins.attrValues (import ../home/ssh.nix);

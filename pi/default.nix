@@ -1,11 +1,19 @@
-{ modulesPath, lib, inputs, pkgs, ... }: {
+{
+  modulesPath,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+{
 
-  imports = [
-    "${modulesPath}/installer/sd-card/sd-image-aarch64-installer.nix"
-  ];
+  imports = [ "${modulesPath}/installer/sd-card/sd-image-aarch64-installer.nix" ];
 
   boot = {
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "usbhid"
+      "usb_storage"
+    ];
     kernelParams = [
       "8250.nr_uarts=1"
       # ttyAMA0 is the serial console broken out to the GPIO
@@ -45,10 +53,12 @@
   };
 
   networking.interfaces.end0.useDHCP = false;
-  networking.interfaces.end0.ipv4.addresses = [{
-    address = "169.254.74.161";
-    prefixLength = 24;
-  }];
+  networking.interfaces.end0.ipv4.addresses = [
+    {
+      address = "169.254.74.161";
+      prefixLength = 24;
+    }
+  ];
 
   environment.systemPackages = with pkgs; [
     btop
@@ -57,7 +67,9 @@
     git
     vim
   ];
-  environment.shellAliases = { "ip" = "ip --color=auto"; };
+  environment.shellAliases = {
+    "ip" = "ip --color=auto";
+  };
 
   services.openssh.enable = true;
   services.tailscale.enable = true;
@@ -67,7 +79,10 @@
     registry.nixpkgs.flake = inputs.nixpkgs;
     channel.enable = false;
     settings = {
-      experimental-features = [ "flakes" "nix-command" ];
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
       trusted-users = [ "@wheel" ];
       builders-use-substitutes = true;
     };

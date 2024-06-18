@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [ ./hardware-configuration.nix ];
 
   moog.server.enable = true;
@@ -13,9 +14,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    compsize
-  ];
+  environment.systemPackages = with pkgs; [ compsize ];
 
   systemd.oomd = {
     enable = true;
@@ -28,26 +27,32 @@
 
   nix = {
     distributedBuilds = false;
-    buildMachines = [{
-      hostName = "charlie-nuc";
-      protocol = "ssh-ng";
-      system = "x86_64-linux";
-      sshUser = "charlie";
-      maxJobs = 100;
-    }];
+    buildMachines = [
+      {
+        hostName = "charlie-nuc";
+        protocol = "ssh-ng";
+        system = "x86_64-linux";
+        sshUser = "charlie";
+        maxJobs = 100;
+      }
+    ];
   };
 
   users.users.charlie = {
     name = "charlie";
     shell = pkgs.fish;
     isNormalUser = true;
-    hashedPassword =
-      "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
+    hashedPassword = "$6$31S1yCMSMoOOfGxQ$E9ApKvVw3C/E5Qe.lIF1TlsagFkzeNsxN/o0kfnB0QA.787omwkQLfpvdMclsL3oeFFun0ixP1VpNzMkDHPj81";
     home = "/home/charlie";
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys =
-      let keys = import ../home/ssh.nix; in
-      [ keys.macSecEnc keys.mac ];
+      let
+        keys = import ../home/ssh.nix;
+      in
+      [
+        keys.macSecEnc
+        keys.mac
+      ];
   };
   users.mutableUsers = false;
   services.tailscale.enable = lib.mkForce false;

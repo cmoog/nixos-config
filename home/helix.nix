@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     gopls
     nixd
@@ -10,12 +11,19 @@
   programs.helix = {
     enable = true;
     languages = {
+      language = [
+        {
+          name = "nix";
+          formatter.command = "nixfmt";
+          language-servers = [ "nixd" ];
+        }
+      ];
       language-server = {
         haskell-language-server.config.haskell = {
           formattingProvider = "fourmolu";
           plugin.fourmolu.config.external = true;
         };
-        nil.command = "nixd";
+        nixd.command = "nixd";
       };
     };
     settings = {
@@ -46,7 +54,10 @@
           display-inlay-hints = true;
         };
         popup-border = "all";
-        shell = [ "fish" "-c" ];
+        shell = [
+          "fish"
+          "-c"
+        ];
         statusline.center = [ "workspace-diagnostics" ];
         statusline.right = [
           "version-control"
@@ -60,12 +71,18 @@
         true-color = true;
       };
       keys.insert = {
-        C-t = [ ":new" "file_picker" ];
+        C-t = [
+          ":new"
+          "file_picker"
+        ];
         j.k = "normal_mode";
         j.j = "normal_mode";
       };
       keys.select = {
-        d = [ "yank_to_clipboard" "delete_selection" ];
+        d = [
+          "yank_to_clipboard"
+          "delete_selection"
+        ];
         y = "yank_to_clipboard";
       };
       keys.normal = {
@@ -79,11 +96,26 @@
         };
         C-h = "goto_previous_buffer";
         C-l = "goto_next_buffer";
-        C-t = [ ":new" "file_picker" ];
-        C-g = [ ":new" ":insert-output lazygit" ":redraw" ":buffer-close!" ":redraw" ];
+        C-t = [
+          ":new"
+          "file_picker"
+        ];
+        C-g = [
+          ":new"
+          ":insert-output lazygit"
+          ":redraw"
+          ":buffer-close!"
+          ":redraw"
+        ];
         D = "kill_to_line_end";
-        d = [ "yank_to_clipboard" "delete_selection" ];
-        esc = [ "collapse_selection" "keep_primary_selection" ];
+        d = [
+          "yank_to_clipboard"
+          "delete_selection"
+        ];
+        esc = [
+          "collapse_selection"
+          "keep_primary_selection"
+        ];
         "}" = "goto_next_paragraph";
         "{" = "goto_prev_paragraph";
         K = "hover";
@@ -95,7 +127,9 @@
     themes = {
       ghdark_moog = {
         inherits = "github_dark_high_contrast";
-        comment = { modifiers = [ "dim" ]; };
+        comment = {
+          modifiers = [ "dim" ];
+        };
       };
     };
   };

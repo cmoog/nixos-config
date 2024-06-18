@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./helix.nix
-  ];
+  imports = [ ./helix.nix ];
   home = {
     username = "charlie";
     homeDirectory = "/home/charlie";
@@ -67,7 +65,12 @@
         rerere.enabled = true;
         push.autoSetupRemote = true;
       };
-      ignores = [ "result" "/.vscode" ".direnv" ".envrc" ];
+      ignores = [
+        "result"
+        "/.vscode"
+        ".direnv"
+        ".envrc"
+      ];
       aliases = {
         ca = "commit --amend --verbose";
         a = "add --all";
@@ -80,7 +83,8 @@
         s = "status";
         last = "log -1";
         releasenotes = "log --no-merges --pretty=format:\"- %h %s\"";
-        m = ''!
+        m = ''
+          !
           if git rev-parse --verify master >/dev/null 2>/dev/null; \
           then git checkout master; else git checkout main; fi
         '';
@@ -95,7 +99,10 @@
       enable = true;
       config.style = "plain";
       config.theme = "gruvbox-dark";
-      extraPackages = with pkgs.bat-extras; [ batman batgrep ];
+      extraPackages = with pkgs.bat-extras; [
+        batman
+        batgrep
+      ];
     };
     btop = {
       enable = true;
