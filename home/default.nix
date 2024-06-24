@@ -154,9 +154,9 @@
     gh
     go
     jq
+    nixfmt-rfc-style
     nix-output-monitor
     nix-tree
-    nixfmt-rfc-style
     parted
     procs
     pv
@@ -164,6 +164,7 @@
     sd
     socat
     sqlite
+    static-web-server
     tio
     typst
     (writeShellScriptBin "copy" ''

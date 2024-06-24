@@ -107,7 +107,11 @@
           ":buffer-close!"
           ":redraw"
         ];
-        D = "kill_to_line_end";
+        D = [
+          "extend_to_line_end"
+          "yank_to_clipboard"
+          "delete_selection"
+        ];
         d = [
           "yank_to_clipboard"
           "delete_selection"

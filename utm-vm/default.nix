@@ -7,7 +7,6 @@
   networking.hostName = "charlie-vm";
   # allow access to all ports from host via bridge network
   networking.firewall.enable = lib.mkForce false;
-  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -24,6 +23,12 @@
   };
 
   virtualisation.rosetta.enable = true;
+
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
 
   nix = {
     distributedBuilds = false;
