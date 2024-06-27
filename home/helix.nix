@@ -27,7 +27,7 @@
       };
     };
     settings = {
-      theme = "gruvbox_dark_hard"; # ghdark_moog "github_dark_high_contrast"; # modus_vivendi, github_dark_high_contrast, autumn_night
+      theme = "gruvbox_moog";
       editor = {
         auto-format = false;
         auto-save = true;
@@ -129,6 +129,13 @@
       };
     };
     themes = {
+      gruvbox_moog = {
+        inherits = "gruvbox_dark_hard";
+        "variable.builtin".modifiers = [ ];
+        "variable.parameter".modifiers = [ ];
+        "type.enum.variant".modifiers = [ ];
+        "attribute".modifiers = [ ];
+      };
       ghdark_moog = {
         inherits = "github_dark_high_contrast";
         comment = {
