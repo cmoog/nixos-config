@@ -27,7 +27,7 @@
       };
     };
     settings = {
-      theme = "gruvbox_moog";
+      theme = "iroaseta";
       editor = {
         auto-format = false;
         auto-save = true;
@@ -63,8 +63,6 @@
           "version-control"
           "spacer"
           "diagnostics"
-          "selections"
-          "register"
           "position"
           "position-percentage"
         ];
@@ -89,8 +87,10 @@
         space = {
           f = ":fmt";
           p = "file_picker";
-          w = ":write-all";
-          q = ":quit-all";
+          q = [
+            ":write-all"
+            ":quit-all"
+          ];
           k = "expand_selection";
           m = "shrink_selection";
         };
@@ -99,13 +99,6 @@
         C-t = [
           ":new"
           "file_picker"
-        ];
-        C-g = [
-          ":new"
-          ":insert-output lazygit"
-          ":redraw"
-          ":buffer-close!"
-          ":redraw"
         ];
         D = [
           "extend_to_line_end"

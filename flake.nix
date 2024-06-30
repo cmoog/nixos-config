@@ -22,7 +22,6 @@
         (final: prev: {
           unstable = import nixpkgs-unstable { system = prev.system; };
           helix = helix.packages.${prev.system}.helix;
-          machineinfo = prev.callPackage ./pkgs/machineinfo { };
         })
       ];
       defaultModules = [

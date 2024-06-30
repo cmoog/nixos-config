@@ -13,7 +13,6 @@
     curl
     git
     helix
-    machineinfo
     vim
   ];
 
