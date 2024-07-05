@@ -150,6 +150,7 @@
   };
 
   home.packages = with pkgs; [
+    dhall
     fd
     gh
     go
@@ -167,6 +168,7 @@
     static-web-server
     tio
     typst
+    viu
     (writeShellScriptBin "copy" ''
       DATA=$(</dev/stdin)
       printf "\033]52;c;$(printf %s "$DATA" | base64 | tr -d '\n\r')\a"

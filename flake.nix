@@ -22,6 +22,14 @@
         (final: prev: {
           unstable = import nixpkgs-unstable { system = prev.system; };
           helix = helix.packages.${prev.system}.helix;
+          viu = prev.viu.overrideAttrs (old: {
+            buildInputs = old.buildInputs ++ [ final.makeWrapper ];
+            # `viu` doesn't know that xterm-ghostty supports kitty graphics
+            postInstall = ''
+              ${old.postInstall or ""}
+              wrapProgram "$out/bin/viu" --set TERM xterm-kitty
+            '';
+          });
         })
       ];
       defaultModules = [

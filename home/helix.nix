@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    dhall-lsp-server
     gopls
     nixd
     nodePackages.bash-language-server
