@@ -7,6 +7,7 @@
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
     shellcheck
+    typstfmt
     typst-lsp
   ];
   programs.helix = {
@@ -17,6 +18,10 @@
           name = "nix";
           formatter.command = "nixfmt";
           language-servers = [ "nixd" ];
+        }
+        {
+          name = "typst";
+          formatter.command = "typstfmt";
         }
       ];
       language-server = {
@@ -49,6 +54,8 @@
           skip-levels = 1;
           character = "┊";
         };
+        inline-diagnostics.cursor-line = "warning";
+        end-of-line-diagnostics = "hint";
         line-number = "relative";
         lsp = {
           display-messages = true;
