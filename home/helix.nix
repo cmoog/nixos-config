@@ -33,7 +33,7 @@
       };
     };
     settings = {
-      theme = "iroaseta";
+      theme = "ayu_evolve";
       editor = {
         auto-format = false;
         auto-save = true;
