@@ -107,7 +107,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "TTY";
+        color_theme = "default";
         rounded_corners = false;
         vim_keys = true;
       };

@@ -3,6 +3,8 @@
   imports = [ ./hardware-configuration.nix ];
 
   moog.server.enable = true;
+  moog.gui.enable = true;
+  moog.gui.variant = "gnome";
 
   networking.hostName = "charlie-vm";
   # allow access to all ports from host via bridge network

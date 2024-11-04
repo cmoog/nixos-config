@@ -30,6 +30,7 @@ in
           mpv
           usbutils
           wireshark
+          gnuradio
         ];
 
         fonts.packages = with pkgs; [
@@ -39,6 +40,7 @@ in
         programs = {
           wireshark.enable = true;
         };
+        environment.noXlibs = false;
       }
       (lib.mkIf (cfg.variant == "gnome") {
         services.gnome.core-utilities.enable = false;
