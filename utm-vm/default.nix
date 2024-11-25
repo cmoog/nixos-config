@@ -3,7 +3,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   moog.server.enable = true;
-  moog.gui.enable = true;
+  moog.gui.enable = false;
   moog.gui.variant = "gnome";
 
   networking.hostName = "charlie-vm";

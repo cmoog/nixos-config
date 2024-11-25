@@ -6,7 +6,9 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:helix-editor/helix";
+    # https://github.com/helix-editor/helix/pull/12098
+    # Fork of helix for dark/light theme detection
+    helix.url = "github:helix-editor/helix/30da0f94a625b8660990239285f940f38247c758";
     helix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =

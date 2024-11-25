@@ -20,6 +20,13 @@
           language-servers = [ "nixd" ];
         }
         {
+          name = "futhark";
+          scope = "source.futhark";
+          language-servers = [ "futhark" ];
+          comment-tokens = "--";
+          file-types = [ "fut" ];
+        }
+        {
           name = "typst";
           formatter.command = "typstfmt";
         }
@@ -30,10 +37,17 @@
           plugin.fourmolu.config.external = true;
         };
         nixd.command = "nixd";
+        futhark = {
+          command = "futhark";
+          args = [ "lsp" ];
+        };
       };
     };
     settings = {
-      theme = "ayu_evolve";
+      theme = {
+        dark = "gruvbox_dark_hard";
+        light = "flexoki_light";
+      };
       editor = {
         auto-format = false;
         auto-save = true;
