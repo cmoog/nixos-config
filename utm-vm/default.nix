@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -17,11 +22,24 @@
 
   environment.systemPackages = with pkgs; [ compsize ];
 
+  system.build.isoInstaller = import ./iso.nix {
+    device = "/dev/vda";
+    systemToInstall = config.system.build.toplevel;
+    inherit lib;
+    system = pkgs.system;
+  };
+
   systemd.oomd = {
     enable = true;
     enableSystemSlice = true;
     enableRootSlice = true;
     enableUserSlices = true;
+  };
+
+  services.chrony = {
+    extraConfig = ''
+      server 3.nixos.pool.ntp.org iburst minpoll 6 maxpoll 7 maxsources 3
+    '';
   };
 
   virtualisation.rosetta.enable = true;
@@ -33,7 +51,7 @@
   };
 
   nix = {
-    distributedBuilds = false;
+    distributedBuilds = true;
     buildMachines = [
       {
         hostName = "charlie-nuc";
