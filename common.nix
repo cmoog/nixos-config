@@ -7,8 +7,6 @@
 }:
 
 {
-  imports = [ "${modulesPath}/profiles/minimal.nix" ];
-
   environment.systemPackages = with pkgs; [
     curl
     git

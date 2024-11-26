@@ -42,7 +42,7 @@
     '';
   };
 
-  virtualisation.rosetta.enable = true;
+  virtualisation.rosetta.enable = pkgs.system == "aarch64-linux";
 
   services.btrfs.autoScrub = {
     enable = true;

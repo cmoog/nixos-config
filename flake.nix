@@ -79,6 +79,13 @@
           system = "aarch64-linux";
           modules = [ ./utm-vm ] ++ defaultModules;
         };
+        charlie-vm-x86 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./utm-vm
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
+          ] ++ defaultModules;
+        };
         charlie-nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./intel-nuc ] ++ defaultModules;

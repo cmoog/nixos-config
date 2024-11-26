@@ -98,13 +98,6 @@
         j.k = "normal_mode";
         j.j = "normal_mode";
       };
-      keys.select = {
-        d = [
-          "yank_to_clipboard"
-          "delete_selection"
-        ];
-        y = "yank_to_clipboard";
-      };
       keys.normal = {
         space = {
           f = ":fmt";
@@ -122,15 +115,6 @@
           ":new"
           "file_picker"
         ];
-        D = [
-          "extend_to_line_end"
-          "yank_to_clipboard"
-          "delete_selection"
-        ];
-        d = [
-          "yank_to_clipboard"
-          "delete_selection"
-        ];
         esc = [
           "collapse_selection"
           "keep_primary_selection"
@@ -138,9 +122,7 @@
         "}" = "goto_next_paragraph";
         "{" = "goto_prev_paragraph";
         K = "hover";
-        p = "paste_clipboard_after";
         X = "extend_line_above";
-        y = "yank_to_clipboard";
       };
     };
     themes = {
