@@ -38,7 +38,9 @@
 
   services.chrony = {
     extraConfig = ''
-      server 3.nixos.pool.ntp.org iburst minpoll 6 maxpoll 7 maxsources 3
+      makestep 1 -1
+      maxupdateskew 100
+      maxslewrate 100
     '';
   };
 
