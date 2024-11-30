@@ -1,14 +1,14 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # https://github.com/helix-editor/helix/pull/12098
     # Fork of helix for dark/light theme detection
-    helix.url = "github:helix-editor/helix/30da0f94a625b8660990239285f940f38247c758";
+    helix.url = "github:cmoog/helix/2cc210d40be6868c80b6588c6fc5bb2a675e583b";
     helix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
@@ -62,7 +62,6 @@
     in
     {
       formatter = forEach systems (pkgs: pkgs.nixfmt-rfc-style);
-      legacyPackages = forEach systems (pkgs: pkgs);
       packages = forEach systems (pkgs: {
         homeConfig =
           (home-manager.lib.homeManagerConfiguration {

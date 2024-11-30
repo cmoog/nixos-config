@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   config,
-  modulesPath,
   ...
 }:
 
@@ -24,6 +23,7 @@
 
   programs.fish.enable = true;
   programs.nano.enable = false;
+  programs.command-not-found.enable = false;
 
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -40,7 +40,6 @@
         "fetch-closure"
         "flakes"
         "nix-command"
-        "repl-flake"
       ];
       trusted-users = [ "@wheel" ];
       auto-optimise-store = false; # don't optimise during builds

@@ -107,7 +107,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "default";
+        color_theme = "monokai";
         rounded_corners = false;
         vim_keys = true;
       };
