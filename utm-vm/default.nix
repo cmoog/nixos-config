@@ -82,7 +82,6 @@
       ];
   };
   users.mutableUsers = false;
-  services.tailscale.enable = lib.mkForce false;
 
   home-manager.users.charlie = {
     programs.git.extraConfig = {

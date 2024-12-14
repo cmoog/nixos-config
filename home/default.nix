@@ -98,7 +98,6 @@
     bat = {
       enable = true;
       config.style = "plain";
-      config.theme = "gruvbox-dark";
       extraPackages = with pkgs.bat-extras; [
         batman
         batgrep

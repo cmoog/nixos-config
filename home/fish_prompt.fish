@@ -56,7 +56,7 @@ else
   set_color -o yellow
 end
 echo -n $USER
-set_color -o white
+set_color -o normal
 echo -n @
 if [ -z "$SSH_CLIENT" ]
   set_color -o blue
@@ -64,7 +64,7 @@ else
   set_color -o cyan
 end
 echo -n (prompt_hostname)
-set_color -o white
+set_color -o normal
 echo -n :(prompt_pwd)
 set_color -o normal
 echo -n ']'

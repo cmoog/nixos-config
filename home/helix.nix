@@ -99,9 +99,10 @@
         j.j = "normal_mode";
       };
       keys.normal = {
+        K = "hover";
         space = {
-          f = ":fmt";
           p = "file_picker";
+          f = ":format";
           q = [
             ":write-all"
             ":quit-all"
@@ -121,8 +122,6 @@
         ];
         "}" = "goto_next_paragraph";
         "{" = "goto_prev_paragraph";
-        K = "hover";
-        X = "extend_line_above";
       };
     };
     themes = {
