@@ -25,12 +25,12 @@ in
         environment.systemPackages = with pkgs; [
           alacritty
           chromium
-          gnome.gnome-disk-utility
-          gnome.nautilus
+          gnome-disk-utility
+          nautilus
           mpv
           usbutils
           wireshark
-          gnuradio
+          # gnuradio
         ];
 
         fonts.packages = with pkgs; [
@@ -40,7 +40,6 @@ in
         programs = {
           wireshark.enable = true;
         };
-        environment.noXlibs = false;
       }
       (lib.mkIf (cfg.variant == "gnome") {
         services.gnome.core-utilities.enable = false;

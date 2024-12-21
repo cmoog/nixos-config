@@ -72,7 +72,6 @@
   };
 
   services.openssh.enable = true;
-  services.tailscale.enable = true;
   hardware.enableRedistributableFirmware = true;
 
   nix = {

@@ -8,7 +8,7 @@
     };
     # https://github.com/helix-editor/helix/pull/12098
     # Fork of helix for dark/light theme detection
-    helix.url = "github:cmoog/helix/2cc210d40be6868c80b6588c6fc5bb2a675e583b";
+    helix.url = "github:cmoog/helix/5afac1a35ddb95df74fd150b6ee1c76f10aeda44";
     helix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
@@ -24,14 +24,6 @@
         (final: prev: {
           unstable = import nixpkgs-unstable { system = prev.system; };
           helix = helix.packages.${prev.system}.helix;
-          viu = prev.viu.overrideAttrs (old: {
-            buildInputs = old.buildInputs ++ [ final.makeWrapper ];
-            # `viu` doesn't know that xterm-ghostty supports kitty graphics
-            postInstall = ''
-              ${old.postInstall or ""}
-              wrapProgram "$out/bin/viu" --set TERM xterm-kitty
-            '';
-          });
         })
       ];
       defaultModules = [

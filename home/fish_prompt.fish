@@ -4,7 +4,7 @@
 # - hostname, in cyan if ssh or blue otherwise
 # - the current path (with prompt_pwd)
 # - the current git status, if any, with fish_git_prompt
-# - the nix shell state, impure or pure
+# - the nix shell state
 # - current background jobs, if any
 
 # It goes from:
@@ -12,7 +12,7 @@
 # └─>$ echo here
 
 # To:
-# ┬─[charlie@mac:~/C/core]─[master↑1|●1✚1…1]─[impure]
+# ┬─[charlie@mac:~/C/core]─[master↑1|●1✚1…1]─[nix]
 # │ 2       15054   0%      running sleep 100000
 # │ 1       15048   0%      running sleep 100000
 # └─>$ echo there
@@ -24,9 +24,6 @@ set -g __fish_git_prompt_showupstream 'auto'
 set -g __fish_git_prompt_show_informative_status 'yes'
 set -g __fish_git_prompt_showdirtystate 'yes'
 set -g __fish_git_prompt_showuntrackedfiles 'yes'
-
-# blinking bar cursor
-echo -ne "\e[5 q"
 
 function _nim_prompt_wrapper
   set field_color $argv[1]
