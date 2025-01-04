@@ -65,6 +65,7 @@
     curl
     fish
     git
+    helix
     vim
   ];
   environment.shellAliases = {

@@ -45,18 +45,17 @@
     };
     settings = {
       theme = {
-        dark = "gruvbox_dark_hard";
+        dark = "gruvbox_moog";
         light = "flexoki_light";
       };
       editor = {
         auto-format = false;
-        auto-save = true;
+        auto-save.focus-lost = true;
         bufferline = "always";
         color-modes = true;
         completion-replace = true;
         completion-timeout = 100;
         completion-trigger-len = 1;
-        cursorline = true;
         cursor-shape = {
           insert = "bar";
           normal = "block";
@@ -65,10 +64,12 @@
         file-picker.hidden = false;
         indent-guides = {
           render = true;
-          skip-levels = 1;
           character = "┊";
         };
-        inline-diagnostics.cursor-line = "warning";
+        inline-diagnostics = {
+          cursor-line = "warning";
+          other-lines = "warning";
+        };
         end-of-line-diagnostics = "hint";
         line-number = "relative";
         lsp = {

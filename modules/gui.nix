@@ -23,7 +23,7 @@ in
     lib.mkMerge [
       {
         environment.systemPackages = with pkgs; [
-          alacritty
+          unstable.ghostty
           chromium
           gnome-disk-utility
           nautilus
