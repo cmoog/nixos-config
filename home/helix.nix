@@ -68,7 +68,6 @@
         };
         inline-diagnostics = {
           cursor-line = "warning";
-          other-lines = "warning";
         };
         end-of-line-diagnostics = "hint";
         line-number = "relative";

@@ -8,7 +8,7 @@
     };
     # https://github.com/helix-editor/helix/pull/12098
     # Fork of helix for dark/light theme detection
-    helix.url = "github:cmoog/helix/bab895e11a0a8c85dbace2a6e5fa2466f305c8d5";
+    helix.url = "github:helix-editor/helix/0caa2fe9bebf09b265d00c342d40424c176e7836";
     helix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =

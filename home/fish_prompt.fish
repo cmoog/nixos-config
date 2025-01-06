@@ -95,3 +95,6 @@ echo -n '└─▷'
 set_color -o $return_color
 echo -n '$ '
 set_color normal
+
+# blinking cursor
+printf '\e[?12h'

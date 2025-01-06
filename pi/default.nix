@@ -1,6 +1,5 @@
 {
   modulesPath,
-  lib,
   inputs,
   pkgs,
   ...
@@ -52,13 +51,7 @@
     iwd.enable = true;
   };
 
-  networking.interfaces.end0.useDHCP = false;
-  networking.interfaces.end0.ipv4.addresses = [
-    {
-      address = "169.254.74.161";
-      prefixLength = 24;
-    }
-  ];
+  networking.interfaces.end0.useDHCP = true;
 
   environment.systemPackages = with pkgs; [
     btop
