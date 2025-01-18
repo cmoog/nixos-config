@@ -97,8 +97,9 @@
     };
     bat = {
       enable = true;
+      package = pkgs.unstable.bat;
       config.style = "plain";
-      extraPackages = with pkgs.bat-extras; [
+      extraPackages = with pkgs.unstable.bat-extras; [
         batman
         batgrep
       ];
@@ -106,8 +107,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "monokai";
-        rounded_corners = false;
+        color_theme = "HotPurpleTrafficLight";
         vim_keys = true;
       };
     };

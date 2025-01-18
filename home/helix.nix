@@ -35,6 +35,7 @@
         haskell-language-server.config.haskell = {
           formattingProvider = "fourmolu";
           plugin.fourmolu.config.external = true;
+          plugin.rename.config.crossModule = true;
         };
         nixd.command = "nixd";
         futhark = {
@@ -45,7 +46,7 @@
     };
     settings = {
       theme = {
-        dark = "gruvbox_moog";
+        dark = "flexoki_dark";
         light = "flexoki_light";
       };
       editor = {
@@ -70,7 +71,6 @@
           cursor-line = "warning";
         };
         end-of-line-diagnostics = "hint";
-        line-number = "relative";
         lsp = {
           display-messages = true;
           display-inlay-hints = true;
@@ -84,7 +84,6 @@
         statusline.right = [
           "version-control"
           "spacer"
-          "diagnostics"
           "position"
           "position-percentage"
         ];
@@ -115,10 +114,6 @@
         C-t = [
           ":new"
           "file_picker"
-        ];
-        esc = [
-          "collapse_selection"
-          "keep_primary_selection"
         ];
         "}" = "goto_next_paragraph";
         "{" = "goto_prev_paragraph";
