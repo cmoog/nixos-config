@@ -1,15 +1,14 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # https://github.com/helix-editor/helix/pull/12098
-    # Fork of helix for dark/light theme detection
-    helix.url = "github:helix-editor/helix/0caa2fe9bebf09b265d00c342d40424c176e7836";
-    helix.inputs.nixpkgs.follows = "nixpkgs";
+    # helix.url = "github:helix-editor/helix/a238b9457ba761fc1423dc35119eef76d01a3a5c";
+    helix.url = "github:helix-editor/helix";
   };
   outputs =
     {
@@ -75,7 +74,8 @@
           modules = [
             ./utm-vm
             { nixpkgs.hostPlatform = "x86_64-linux"; }
-          ] ++ defaultModules;
+          ]
+          ++ defaultModules;
         };
         charlie-nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

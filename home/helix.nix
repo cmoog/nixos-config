@@ -8,7 +8,6 @@
     nodePackages.typescript-language-server
     shellcheck
     typstfmt
-    typst-lsp
   ];
   programs.helix = {
     enable = true;
@@ -45,10 +44,8 @@
       };
     };
     settings = {
-      theme = {
-        dark = "flexoki_dark";
-        light = "flexoki_light";
-      };
+      theme.dark = "flexoki_dark";
+      theme.light = "flexoki_light";
       editor = {
         auto-format = false;
         auto-save.focus-lost = true;
@@ -63,6 +60,7 @@
           select = "underline";
         };
         file-picker.hidden = false;
+        # inline-blame.enable = true;
         indent-guides = {
           render = true;
           character = "┊";

@@ -86,8 +86,8 @@
       # stored in secure enclave on macbook-air with auth required
       user.signingKey = "key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGxStcvVFF2s/4GFuLj8ehTzzD1B8Ct9Ntds1G1WONyEUShl8oHoZiByjObeX2wyfJx3ZpzhJ/A7Wa73bTL85Yk= ecdsa-sha2-nistp256";
       gpg.format = "ssh";
-      commit.gpgsign = true;
-      tag.gpgsign = true;
+      # commit.gpgsign = true;
+      # tag.gpgsign = true;
     };
   };
 
