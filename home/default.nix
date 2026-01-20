@@ -6,9 +6,7 @@
     homeDirectory = "/home/charlie";
     sessionPath = [
       "$HOME/bin"
-      "$GOPATH/bin"
       "$CARGO_HOME/bin"
-      "$HOME/.deno/bin"
     ];
     sessionVariables = rec {
       EDITOR = "hx";
@@ -57,38 +55,38 @@
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "Charlie Moog";
-      userEmail = "moogcharlie@gmail.com";
-      extraConfig = {
-        diff.colorMoved = "default";
-        init.defaultBranch = "master";
-        rerere.enabled = true;
-        push.autoSetupRemote = true;
-      };
       ignores = [
         "result"
         "/.vscode"
         ".direnv"
         ".envrc"
       ];
-      aliases = {
-        ca = "commit --amend --verbose";
-        a = "add --all";
-        c = "commit --verbose";
-        cb = "checkout -b";
-        f = "! git commit --fixup $(git log --pretty='%H' -1 --invert-grep --grep 'fixup! ')";
-        rb = "rebase --autostash --autosquash --interactive";
-        d = "diff";
-        pushf = "push --force-with-lease";
-        s = "status";
-        last = "log -1";
-        releasenotes = "log --no-merges --pretty=format:\"- %h %s\"";
-        m = ''
-          !
-          if git rev-parse --verify master >/dev/null 2>/dev/null; \
-          then git checkout master; else git checkout main; fi
-        '';
-        sm = "submodule update --init --recursive";
+      settings = {
+        user.name = "Charlie Moog";
+        user.email = "moogcharlie@gmail.com";
+        aliases = {
+          ca = "commit --amend --verbose";
+          a = "add --all";
+          c = "commit --verbose";
+          cb = "checkout -b";
+          f = "! git commit --fixup $(git log --pretty='%H' -1 --invert-grep --grep 'fixup! ')";
+          rb = "rebase --autostash --autosquash --interactive";
+          d = "diff";
+          pushf = "push --force-with-lease";
+          s = "status";
+          last = "log -1";
+          releasenotes = "log --no-merges --pretty=format:\"- %h %s\"";
+          m = ''
+            !
+            if git rev-parse --verify master >/dev/null 2>/dev/null; \
+            then git checkout master; else git checkout main; fi
+          '';
+          sm = "submodule update --init --recursive";
+        };
+        diff.colorMoved = "default";
+        init.defaultBranch = "master";
+        rerere.enabled = true;
+        push.autoSetupRemote = true;
       };
     };
     direnv = {
@@ -107,7 +105,6 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "HotPurpleTrafficLight";
         vim_keys = true;
       };
     };
@@ -130,7 +127,6 @@
       enable = true;
       settings = {
         git.autoFetch = false;
-        git.paging.colorArg = "always";
         gui.showCommandLog = false;
         notARepository = "quit";
         os.editPreset = "helix (hx)";

@@ -7,7 +7,6 @@
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
     shellcheck
-    typstfmt
   ];
   programs.helix = {
     enable = true;
@@ -25,10 +24,6 @@
           comment-tokens = "--";
           file-types = [ "fut" ];
         }
-        {
-          name = "typst";
-          formatter.command = "typstfmt";
-        }
       ];
       language-server = {
         haskell-language-server.config.haskell = {
@@ -44,8 +39,9 @@
       };
     };
     settings = {
-      theme.dark = "flexoki_dark";
-      theme.light = "flexoki_light";
+      theme = "papercolor-dark";
+      # theme.dark = "papercolor-dark";
+      # theme.light = "flexoki_light";
       editor = {
         auto-format = false;
         auto-save.focus-lost = true;
@@ -60,7 +56,6 @@
           select = "underline";
         };
         file-picker.hidden = false;
-        # inline-blame.enable = true;
         indent-guides = {
           render = true;
           character = "┊";

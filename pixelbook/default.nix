@@ -36,7 +36,7 @@
   };
 
   home-manager.users.charlie = {
-    programs.git.extraConfig = {
+    programs.git.settings = {
       commit.gpgsign = lib.mkForce false;
       tag.gpgsign = lib.mkForce false;
     };
