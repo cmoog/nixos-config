@@ -4,8 +4,8 @@
     dhall-lsp-server
     gopls
     nixd
-    nodePackages.bash-language-server
-    nodePackages.typescript-language-server
+    bash-language-server
+    typescript-language-server
     shellcheck
   ];
   programs.helix = {

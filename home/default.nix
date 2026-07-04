@@ -150,7 +150,7 @@
     gh
     go
     jq
-    nixfmt-rfc-style
+    nixfmt
     nix-output-monitor
     nix-tree
     parted
