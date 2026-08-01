@@ -44,6 +44,8 @@
 
   virtualisation.rosetta.enable = pkgs.system == "aarch64-linux";
 
+  services.tailscale.enable = true;
+
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
